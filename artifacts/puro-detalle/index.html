@@ -22,7 +22,12 @@
     </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="static-loading" style="position:fixed;inset:0;background:#0a0a0a;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:serif;z-index:9999;">
+        <div style="color:#D4AF37;font-size:2rem;letter-spacing:0.3em;font-weight:600;">PURO DETALLE</div>
+        <div style="color:#888;font-size:0.9rem;letter-spacing:0.1em;">Cargando...</div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
