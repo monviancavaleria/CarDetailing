@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Puro Detalle"
+version = "1.0.0"
+id = "artifacts/puro-detalle"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21875
+
+[services.development]
+run = "pnpm --filter @workspace/puro-detalle run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/puro-detalle", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/puro-detalle/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21875"
+BASE_PATH = "/"
