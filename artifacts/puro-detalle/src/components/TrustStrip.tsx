@@ -5,13 +5,13 @@ import { ShieldCheck, Sparkles, Award, MapPin } from 'lucide-react';
 const benefits = [
   {
     icon: ShieldCheck,
-    title: "Certificados y profesionales",
-    description: "Personal altamente cualificado en detailing."
+    title: "Personal Certificado",
+    description: "Deja tu coche en las mejores manos."
   },
   {
     icon: Sparkles,
     title: "Productos premium",
-    description: "Químicos de importación y marcas líderes."
+    description: "Marcas líderes altamente cualificadas."
   },
   {
     icon: Award,
@@ -20,8 +20,8 @@ const benefits = [
   },
   {
     icon: MapPin,
-    title: "A tu puerta",
-    description: "Servicio a domicilio sin desplazamientos."
+    title: "A domicilio",
+    description: "Porque tu comodidad es primordial."
   }
 ];
 
