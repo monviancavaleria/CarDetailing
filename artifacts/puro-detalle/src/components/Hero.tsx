@@ -23,12 +23,12 @@ export default function Hero() {
           className="max-w-4xl"
         >
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white leading-tight md:leading-[1.1] mb-6">
-            El lujo que tu coche merece, <br className="hidden md:block" />
+            El cuidado que tu coche se merece, <br className="hidden md:block" />
             <span className="text-primary italic">sin moverte de casa.</span>
           </h1>
           
           <p className="text-base md:text-lg lg:text-xl text-muted-foreground font-light mx-auto mb-10 max-w-[60ch] leading-relaxed">
-            En Puro Detalle elevamos el cuidado automotriz al siguiente nivel con nuestro servicio de detailing premium a domicilio. Disfruta de un acabado de exposición con la máxima comodidad.
+            En Puro Detalle ofrecemos un servicio exclusivo y de alta calidad, mediante el uso de los mejores productos del mercado para garantizar un acabo perfecto.
           </p>
           
           <div className="flex flex-col items-center gap-6">
@@ -46,7 +46,7 @@ export default function Hero() {
             
             <div className="flex items-center gap-2 text-sm text-muted-foreground font-light tracking-wide">
               <span className="w-8 h-[1px] bg-primary/50"></span>
-              <p>Desde 35€ &middot; A domicilio &middot; Barcelona y alrededores</p>
+              <p>Desde 35€ &middot; A domicilio &middot; Madrid</p>
               <span className="w-8 h-[1px] bg-primary/50"></span>
             </div>
           </div>
