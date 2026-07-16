@@ -28,7 +28,7 @@ export default function Hero() {
           </h1>
           
           <p className="text-base md:text-lg lg:text-xl text-muted-foreground font-light mx-auto mb-10 max-w-[60ch] leading-relaxed">
-            En Puro Detalle ofrecemos un servicio exclusivo y de alta calidad, mediante el uso de los mejores productos del mercado para garantizar un acabo perfecto.
+            En Puro Detalle ofrecemos un servicio exclusivo y de alta calidad hasta la comodidad de tu hogar, mediante el uso de los mejores productos del mercado para garantizar un acabado perfecto.
           </p>
           
           <div className="flex flex-col items-center gap-6">
