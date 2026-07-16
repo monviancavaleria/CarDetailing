@@ -27,7 +27,7 @@ export default function Hero() {
             <span className="text-primary italic">sin moverte de casa.</span>
           </h1>
           
-          <p className="text-base md:text-lg lg:text-xl text-muted-foreground font-light mx-auto mb-10 max-w-[60ch] leading-relaxed">
+          <p className="text-sm md:text-base lg:text-lg text-muted-foreground font-light mx-auto mb-10 max-w-[60ch] leading-relaxed">
             En Puro Detalle ofrecemos un servicio exclusivo y de alta calidad hasta la comodidad de tu hogar, mediante el uso de los mejores productos del mercado para garantizar un acabado perfecto.
           </p>
           
