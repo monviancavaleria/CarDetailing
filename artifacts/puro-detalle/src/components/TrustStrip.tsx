@@ -27,7 +27,7 @@ const benefits = [
 
 export default function TrustStrip() {
   return (
-    <section className="bg-gradient-to-b from-[#2a2a38] to-[#1e1e2a] border-y border-white/10 py-16">
+    <section className="bg-gradient-to-b from-[#e8e8ed] to-[#d4d4db] border-y border-[#b0b0bc]/40 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {benefits.map((benefit, index) => (
@@ -39,11 +39,11 @@ export default function TrustStrip() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex flex-col items-center text-center group"
             >
-              <div className="mb-6 p-4 rounded-full bg-background border border-white/5 group-hover:border-primary/50 transition-colors duration-500">
+              <div className="mb-6 p-4 rounded-full bg-white/80 border border-[#c0c0cc] group-hover:border-primary/60 transition-colors duration-500 shadow-sm">
                 <benefit.icon className="w-6 h-6 text-primary stroke-[1.5]" />
               </div>
-              <h3 className="text-lg font-serif text-white mb-2">{benefit.title}</h3>
-              <p className="text-sm text-muted-foreground font-light leading-relaxed">
+              <h3 className="text-lg font-serif text-gray-900 mb-2">{benefit.title}</h3>
+              <p className="text-sm text-gray-500 font-light leading-relaxed">
                 {benefit.description}
               </p>
             </motion.div>
