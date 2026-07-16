@@ -194,7 +194,7 @@ export default function Packages() {
           </div>
           
           <div className="mt-12 text-center">
-            <p className="text-xs text-muted-foreground/50 italic">
+            <p className="text-sm text-muted-foreground/80 italic">
               * Los precios varían según el tamaño del vehículo: S/M &middot; L &middot; XL. Consulta sin compromiso.
             </p>
           </div>
