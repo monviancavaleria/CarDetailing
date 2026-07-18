@@ -153,8 +153,8 @@ export default function Packages() {
               onClick={() => switchTab('mantenimiento')}
               className={`px-6 sm:px-10 py-3 rounded-full text-sm font-semibold tracking-widest uppercase font-sans transition-all duration-300 ${
                 activeTab === 'mantenimiento'
-                  ? 'bg-gradient-to-r from-[#B8912F] to-[#D4AF37] text-[#15181D] shadow-[0_4px_20px_rgba(212,175,55,0.40)]'
-                  : 'text-[#8F6D1F] hover:bg-[#D4AF37]/10'
+                  ? 'bg-gradient-to-r from-[#C9CED6] to-[#E8ECF1] text-[#15181D] shadow-[0_4px_20px_rgba(140,150,163,0.45)]'
+                  : 'text-[#5B6470] hover:bg-[#C9CED6]/15'
               }`}
             >
               Mantenimiento
@@ -189,12 +189,12 @@ export default function Packages() {
                       }`}
                     >
                       {pkg.popular && (
-                        <div className="absolute top-0 right-8 -translate-y-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white text-[10px] font-bold tracking-widest uppercase font-sans shadow-[0_4px_14px_rgba(0,119,214,0.35)]">
+                        <div className="absolute top-4 right-4 px-4 py-1 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white text-[10px] font-bold tracking-widest uppercase font-sans shadow-[0_4px_14px_rgba(0,119,214,0.35)]">
                         ⭐ Más Popular
                         </div>
                       )}
 
-                      <h4 className="text-2xl font-serif text-foreground mb-2 uppercase tracking-wider">{pkg.name}</h4>
+                      <h4 className="text-2xl font-serif text-outline-blue mb-2 uppercase tracking-wider">{pkg.name}</h4>
                       <div className="text-muted-foreground text-sm mb-2 flex items-baseline gap-2 font-sans">
                         <span>Desde</span>
                         <span className="text-4xl text-[#0077D6] font-light">{pkg.price}</span>
@@ -207,7 +207,7 @@ export default function Packages() {
                         {pkg.features.map((feature, j) => (
                           <li key={j} className="flex items-start gap-3">
                             <Check className="w-5 h-5 text-[#0077D6] shrink-0" />
-                            <span className="text-sm text-muted-foreground font-sans">{feature}</span>
+                            <span className="text-sm font-serif text-outline tracking-wide">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -245,21 +245,21 @@ export default function Packages() {
                   {mantenimiento.map((pkg, i) => (
                     <div
                       key={i}
-                      className="glass-gold rounded-2xl p-8 lg:p-10 flex flex-col hover:border-[#D4AF37]/45 hover:shadow-[0_12px_45px_rgba(212,175,55,0.14)] transition-all duration-500"
+                      className="glass-silver rounded-2xl p-8 lg:p-10 flex flex-col hover:border-[#8C96A3]/60 hover:shadow-[0_12px_45px_rgba(90,100,112,0.16)] transition-all duration-500"
                     >
                       <h4 className="text-2xl font-serif text-foreground mb-2 uppercase tracking-wider">{pkg.name}</h4>
                       <div className="text-muted-foreground text-sm mb-6 flex items-baseline gap-2 font-sans">
                         <span>Desde</span>
-                        <span className="text-3xl text-[#A8862B] font-light">{pkg.price}</span>
+                        <span className="text-3xl text-[#4A5462] font-light">{pkg.price}</span>
                       </div>
 
-                      <div className="h-[1px] w-full bg-[#D4AF37]/15 mb-8"></div>
+                      <div className="h-[1px] w-full bg-[#8C96A3]/25 mb-8"></div>
 
                       <ul className="space-y-4 mb-10 flex-1">
                         {pkg.features.map((feature, j) => (
                           <li key={j} className="flex items-start gap-3">
-                            <Check className="w-5 h-5 text-[#A8862B] shrink-0" />
-                            <span className="text-sm text-muted-foreground font-sans">{feature}</span>
+                            <Check className="w-5 h-5 text-[#5B6470] shrink-0" />
+                            <span className="text-sm font-serif text-outline tracking-wide">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -268,7 +268,7 @@ export default function Packages() {
                         href="https://wa.me/34603533624"
                         target="_blank"
                         rel="noreferrer"
-                        className="w-full text-center py-3 rounded-full border border-[#D4AF37]/40 text-[#8F6D1F] hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans"
+                        className="w-full text-center py-3 rounded-full border border-[#8C96A3]/50 text-[#4A5462] hover:border-[#5B6470] hover:bg-[#C9CED6]/15 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans"
                       >
                         Reservar
                       </a>

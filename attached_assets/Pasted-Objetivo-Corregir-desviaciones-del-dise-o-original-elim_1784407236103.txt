@@ -1,0 +1,26 @@
+Objetivo: Corregir desviaciones del diseño original, eliminar paletas de color no autorizadas (dorados) y elevar la sofisticación de los componentes de la interfaz.
+
+1. Cabecera (Hero Section) y Branding principal
+Sustitución de Logo: El logotipo implementado es incorrecto. Se debe insertar estrictamente el archivo original proporcionado (el diseño circular con el texto interior).
+
+Estilo Tipográfico "Puro DETALLE" (Si se renderiza en CSS): Eliminar el color de relleno negro. Las letras deben tener un relleno plateado (silver), rodeadas por un contorno/resplandor azul eléctrico y finalizadas con un borde negro sólido. (Usar -webkit-text-stroke combinado con text-shadow para lograr el efecto volumétrico).
+
+Animación de Brillo: Eliminar por completo el efecto de brillo dorado sobre la palabra "DETALLE". La pasada de luz debe ser exclusivamente en tonos plateados/blancos puros.
+
+Actualización de Copy y Tipografía:
+
+Sustituir el texto "Con un click y estamos en tu casa" por: "A un click del cuidado de tu coche."
+
+Cambiar la fuente de este texto: Aumentar el font-size y aplicar un color de relleno blanco (#FFFFFF) con un borde exterior negro (-webkit-text-stroke: 1px #000000;) para garantizar el máximo contraste y legibilidad sobre el fondo.
+
+2. Interfaz de Navegación (Tabs de Servicios)
+Corrección Cromática: En el botón de la pestaña "MANTENIMIENTO", eliminar el color de fondo y texto dorado. Cambiar la paleta a tonos plateados para mantener la consistencia corporativa.
+
+3. Tarjetas de Precios (Pricing Cards) - Estructura y Estilos
+Refactorización de Layout (Cajas): El diseño actual es excesivamente básico y presenta errores de contención. Corregir el posicionamiento absoluto del badge "MÁS POPULAR"; actualmente se sale del contenedor padre. Debe integrarse de forma limpia dentro del perímetro de la tarjeta.
+
+Títulos de Servicios ("BOUTIQUE INTEGRAL" y "PLATINUM"): Replicar exactamente el estilo de la palabra "Puro" del logo principal: Color de relleno azul eléctrico con un borde negro.
+
+Tipografía de Descripciones (Checklists): Todos los textos que describen lo que incluye cada servicio (ej: "Lavado exterior premium") deben renderizarse utilizando la tipografía gruesa especificada en las referencias. Aplicar estilo de relleno blanco con borde negro, idéntico al de la referencia visual de la palabra "DETALLE".
+
+Tarjetas de Mantenimiento: Eliminar cualquier acento visual dorado (precios, líneas, botones) en la vista de Mantenimiento. Toda la paleta de esta sección debe virar a la escala de grises/plateados y azules.

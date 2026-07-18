@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const logoUrl = `${import.meta.env.BASE_URL}logo-puro-detalle.webp`;
+const logoUrl = `${import.meta.env.BASE_URL}logo-insignia.webp`;
 
 export default function Hero() {
   return (
@@ -10,23 +10,23 @@ export default function Hero() {
       <div aria-hidden className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full bg-[#8CE8FF]/30 blur-[120px]" />
         <div className="absolute top-1/3 -right-32 w-[450px] h-[450px] rounded-full bg-[#37B6FF]/20 blur-[130px]" />
-        <div className="absolute -bottom-20 left-1/4 w-[400px] h-[400px] rounded-full bg-[#D4AF37]/15 blur-[120px]" />
+        <div className="absolute -bottom-20 left-1/4 w-[400px] h-[400px] rounded-full bg-[#C9CED6]/25 blur-[120px]" />
       </div>
 
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center pt-32 pb-20">
-        {/* Logotipo oficial con barrido de luz sobre la propia silueta */}
+        {/* Insignia circular oficial con barrido de luz sobre la propia silueta */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12"
         >
-          <div className="relative w-[320px] sm:w-[430px] md:w-[560px] max-w-full">
+          <div className="relative w-[240px] sm:w-[300px] md:w-[340px] max-w-full">
             <img
               src={logoUrl}
-              alt="Puro Detalle — Detailing · Mantenimiento"
-              width={1200}
-              height={388}
+              alt="Puro Detalle — Cada detalle cuenta"
+              width={800}
+              height={800}
               fetchPriority="high"
               decoding="async"
               className="w-full h-auto drop-shadow-[0_12px_35px_rgba(15,30,50,0.16)]"
@@ -72,8 +72,8 @@ export default function Hero() {
               </span>
             </a>
 
-            <p className="font-script text-lg md:text-xl text-[#0077D6]">
-              Con un click y estamos en tu casa
+            <p className="font-script text-2xl md:text-4xl text-outline">
+              A un click del cuidado de tu coche.
             </p>
 
             <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground font-light tracking-wide">

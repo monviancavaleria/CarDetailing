@@ -209,7 +209,7 @@ export default function InfoHub() {
                         {testimonial.quote}
                       </p>
                       <div className="mt-auto">
-                        <div className="h-[1px] w-12 bg-gradient-to-r from-[#0077D6]/50 to-[#D4AF37]/50 mb-4"></div>
+                        <div className="h-[1px] w-12 bg-gradient-to-r from-[#0077D6]/50 to-[#C9CED6]/70 mb-4"></div>
                         <h5 className="text-foreground font-medium text-sm">{testimonial.author}</h5>
                         <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
                           Cliente {testimonial.car}
