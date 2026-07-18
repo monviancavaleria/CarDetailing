@@ -1,0 +1,36 @@
+Objetivo del rediseño:
+Realizar un cambio radical en la estética y la estructura técnica de la Landing Page principal. El objetivo es elevar el posicionamiento de la marca hacia un sector premium y exclusivo. Se eliminará cualquier estrategia de captación basada en "precio bajo" para centrarnos en la calidad, la comodidad y el lujo del servicio a domicilio.
+
+1. Estilo Visual y Fondo (Background)
+Paleta y Textura: Reemplazar el fondo actual por un diseño basado en una escala de grises y blancos.
+
+Efecto visual: El fondo debe incorporar un efecto o textura estilo "liquid glass" (cristal líquido) que aporte un aspecto limpio, moderno y reflectante, sin robar protagonismo al contenido.
+
+2. Sección Hero (Primer impacto visual)
+Logotipo principal: Mantener el diseño del logo proporcionado en el centro de la pantalla superior.
+
+Animación CSS del Logo: Implementar un efecto de iluminación dinámica (un barrido de luz constante) que atraviese el logo. Este haz de luz debe comenzar en la letra "P" con un brillo en azul corporativo y transicionar a un brillo dorado al pasar por la palabra "DETALLE".
+
+Tipografía y animaciones de texto: La frase "El cuidado que tu coche se merece..." y la continuación en tipografía cursiva azul "sin moverte de casa" deben mantener su jerarquía, pero se les debe aplicar el mismo efecto de barrido de luz dinámico que al logotipo principal.
+
+3. Llamada a la Acción (CTA) y Ajustes de Conversión
+Botón de WhatsApp: El botón "RESERVAR POR WHATSAPP" debe destacar mediante una animación CSS de pulso (pulsating glow). El botón debe oscilar suavemente entre su tono azul natural y un brillo sutil que invite al clic continuo.
+
+Eliminación de anclaje de precio: Eliminar el texto "Desde 35€". La captación de clientes se basará en el valor del servicio premium, no en el coste mínimo.
+
+Nuevo micro-copy: Justo debajo del botón de WhatsApp, añadir la frase persuasiva: "Con un click y estamos en tu casa".
+
+Limpieza de la interfaz: Eliminar (ocultar en esta fase del desarrollo) la sección inmediatamente inferior que contiene los iconos de "Personal Certificado", "Productos premium", "Resultados garantizados", etc.
+
+4. Sección de Servicios (Reestructuración UI/UX)
+Encabezado (Heading): Mantener el título "NUESTROS SERVICIOS" y añadir justo debajo (como subtítulo de gancho) la frase: "Lo que tu coche te pide".
+
+Sistema de Navegación por Pestañas (Tabs): Reemplazar el layout actual vertical por un sistema de pestañas horizontales para optimizar el espacio (ahorro de scroll vertical).
+
+Botón 1 (Izquierda): Texto "DETALLADO" (en mayúsculas, color azul corporativo).
+
+Botón 2 (Derecha): Texto "MANTENIMIENTO" (en mayúsculas, color dorado).
+
+Transición (Swipe/Slide Effect): Al hacer clic entre "Detallado" y "Mantenimiento", el contenido inferior debe cambiar con una transición fluida de izquierda a derecha (efecto de pasar página u hoja deslizante).
+
+Requisito Tipográfico estricto: El texto de condiciones, específicamente "Servicio a domicilio mínimo 2 vehículos por servicio de mantenimiento", debe renderizarse utilizando exactamente la misma familia tipográfica (o fuente custom) que la utilizada en el logotipo principal del negocio.
