@@ -17,3 +17,8 @@ Background removal (removeImageBackground) can leave faint semi-transparent remn
 **Why:** Happened with the circular badge for the hero (July 2026): screenshots showed pale rectangles around the badge; alpha extract looked clean at a glance, but low-alpha junk remained inside the bbox.
 
 **How to apply:** After any bg removal, run `magick in.png -channel A -level 15%,100% +channel ...` before trim/resize, then verify by compositing the result over a flat saturated color (`magick -size WxH xc:"#cfe2f0" img -gravity center -composite`) — never judge transparency on a white preview alone.
+
+## Hero wordmark: bg removal eats thin details + glint technique
+AI background removal (removeImageBackground) deleted the thin blue speed lines at the left of the wordmark entirely (kept the thicker gray right-side ones). Border-connected floodfill (`-alpha set -channel RGBA -fuzz 9% -fill none -draw "alpha 0,0 floodfill"` from all 4 corners) preserves thin lines but leaves the original gray inside enclosed letter counters. Working recipe: use the AI result as base (clean bg + cleared counters + feathered shadows) and composite the floodfill version's line-only rectangle back over it, then alpha-clean/trim/resize.
+
+**Never use CSS `mask-image: url(asset)` for logo glint overlays.** It intermittently paints the overlay UNMASKED (a semi-transparent rectangle "plate" behind the logo) — seen in headless captures even with a perfectly clean asset. Use the mask-free pattern instead: duplicate `<img aria-hidden>` of the same asset with `filter: brightness(...)`, clipped by an animated `clip-path` polygon band whose base (non-animated) position is fully off-canvas. Glow then physically cannot escape the logo pixels and reduced-motion degrades to invisible.

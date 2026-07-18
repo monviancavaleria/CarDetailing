@@ -232,54 +232,115 @@
   animation-delay: 0.45s;
 }
 
-/* ---------- Pulso luminoso del CTA ---------- */
-@keyframes pulse-glow {
+/* Oro metálico: letras doradas con brillo dorado al iluminarse (titular del hero).
+   Contorno carbón fino (como el logo y los checklists) para garantizar contraste
+   sobre fondo claro incluso en el punto álgido del destello. */
+.sweep-gold {
+  background-image:
+    linear-gradient(
+      105deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(244, 222, 136, 0.85) 47%,
+      rgba(255, 246, 200, 0.98) 50%,
+      rgba(244, 222, 136, 0.85) 53%,
+      transparent 60%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      #d4af37 0%,
+      #b8912f 38%,
+      #8f6d1f 52%,
+      #c9a23b 72%,
+      #94741f 100%
+    );
+  background-size: 300% 100%, 100% 100%;
+  -webkit-text-stroke: 1px #15181d;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 2px 5px rgba(143, 109, 31, 0.3));
+}
+
+/* ---------- CTA burbuja Liquid Glass: la luz vive DENTRO de la burbuja ---------- */
+@keyframes bubble-glow {
   0%,
   100% {
     box-shadow:
-      0 0 0 0 rgba(0, 119, 214, 0.35),
-      0 10px 30px -5px rgba(0, 119, 214, 0.35);
-    filter: brightness(1);
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -10px 22px rgba(55, 182, 255, 0.28),
+      inset 0 0 18px rgba(140, 232, 255, 0.35),
+      0 10px 28px -14px rgba(15, 30, 50, 0.18);
   }
   50% {
     box-shadow:
-      0 0 0 14px rgba(0, 119, 214, 0),
-      0 10px 45px -5px rgba(55, 182, 255, 0.55);
-    filter: brightness(1.07);
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      inset 0 -12px 30px rgba(55, 182, 255, 0.52),
+      inset 0 0 36px rgba(160, 238, 255, 0.9),
+      0 10px 28px -14px rgba(15, 30, 50, 0.18);
   }
 }
 
-.pulse-glow {
-  animation: pulse-glow 2.4s ease-in-out infinite;
+.btn-bubble {
+  background:
+    radial-gradient(130% 170% at 30% 16%, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0) 55%),
+    linear-gradient(135deg, rgba(140, 232, 255, 0.6), rgba(111, 216, 255, 0.48) 45%, rgba(55, 182, 255, 0.4));
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -10px 22px rgba(55, 182, 255, 0.28),
+    inset 0 0 18px rgba(140, 232, 255, 0.35),
+    0 10px 28px -14px rgba(15, 30, 50, 0.18);
+  animation: bubble-glow 2.6s ease-in-out infinite;
 }
 
-/* ---------- Barrido de luz sobre el logo (imagen enmascarada) ---------- */
-.img-sweep {
+/* Destello líquido que recorre el interior de la burbuja */
+.btn-bubble::before {
+  content: '';
   position: absolute;
   inset: 0;
+  border-radius: inherit;
   pointer-events: none;
   background-image: linear-gradient(
     105deg,
     transparent 0%,
     transparent 40%,
-    rgba(201, 206, 214, 0.55) 47%,
-    rgba(255, 255, 255, 0.95) 50%,
-    rgba(201, 206, 214, 0.55) 53%,
+    rgba(255, 255, 255, 0.5) 47%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.5) 53%,
     transparent 60%,
     transparent 100%
   );
   background-size: 300% 100%;
   background-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
   animation: light-sweep 3.6s ease-in-out infinite;
 }
 
-/* Sin soporte de máscara, el overlay sería un rectángulo animado: se oculta */
-@supports not ((-webkit-mask-image: linear-gradient(#000, #000)) or (mask-image: linear-gradient(#000, #000))) {
-  .img-sweep {
+/* ---------- Destello sobre el logo (copia recortada con clip-path: sin máscaras CSS) ---------- */
+@keyframes logo-glint {
+  0% {
+    clip-path: polygon(108% 0, 128% 0, 108% 100%, 88% 100%);
+  }
+  60% {
+    clip-path: polygon(-28% 0, -8% 0, -28% 100%, -48% 100%);
+  }
+  100% {
+    clip-path: polygon(-28% 0, -8% 0, -28% 100%, -48% 100%);
+  }
+}
+
+.logo-glint {
+  pointer-events: none;
+  /* Banda fuera del lienzo por defecto: si no hay animación, no se ve */
+  clip-path: polygon(108% 0, 128% 0, 108% 100%, 88% 100%);
+  filter: brightness(1.9) saturate(1.15) drop-shadow(0 0 14px rgba(255, 255, 255, 0.55));
+  animation: logo-glint 3.6s ease-in-out infinite;
+}
+
+/* Sin soporte de clip-path, la copia abrillantada cubriría el logo entero: se oculta */
+@supports not (clip-path: polygon(0 0, 100% 0, 100% 100%)) {
+  .logo-glint {
     display: none;
   }
 }
@@ -319,12 +380,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sweep,
-  .pulse-glow,
-  .img-sweep {
+  .btn-bubble,
+  .btn-bubble::before,
+  .logo-glint {
     animation: none;
   }
-  /* Sin animación no debe quedar un brillo estático sobre el logo */
-  .img-sweep {
+  /* Sin animación no debe quedar un brillo estático sobre el logo ni la burbuja */
+  .logo-glint,
+  .btn-bubble::before {
     opacity: 0;
   }
 }

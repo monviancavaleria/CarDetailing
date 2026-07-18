@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const logoUrl = `${import.meta.env.BASE_URL}logo-insignia.webp`;
+const logoUrl = `${import.meta.env.BASE_URL}logo-hero.webp`;
 
 export default function Hero() {
   return (
@@ -14,27 +14,31 @@ export default function Hero() {
       </div>
 
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center pt-32 pb-20">
-        {/* Insignia circular oficial con barrido de luz sobre la propia silueta */}
+        {/* Logotipo oficial (sin fondo) con barrido de luz sobre la propia silueta */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12"
         >
-          <div className="relative w-[240px] sm:w-[300px] md:w-[340px] max-w-full">
+          <div className="relative w-[300px] sm:w-[420px] md:w-[520px] max-w-full">
             <img
               src={logoUrl}
-              alt="Puro Detalle — Cada detalle cuenta"
-              width={800}
-              height={800}
+              alt="Puro Detalle — Detailing y mantenimiento a domicilio"
+              width={1600}
+              height={486}
               fetchPriority="high"
               decoding="async"
               className="w-full h-auto drop-shadow-[0_12px_35px_rgba(15,30,50,0.16)]"
             />
-            <div
+            <img
+              src={logoUrl}
+              alt=""
               aria-hidden
-              className="img-sweep"
-              style={{ WebkitMaskImage: `url(${logoUrl})`, maskImage: `url(${logoUrl})` }}
+              width={1600}
+              height={486}
+              decoding="async"
+              className="logo-glint absolute inset-0 w-full h-auto"
             />
           </div>
           <div className="mt-6 h-[2px] w-full bg-gradient-to-r from-transparent via-[#0077D6]/50 to-transparent" />
@@ -47,7 +51,7 @@ export default function Hero() {
           className="max-w-4xl"
         >
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif leading-tight md:leading-[1.12] mb-6 uppercase tracking-wide">
-            <span className="sweep sweep-dark">
+            <span className="sweep sweep-gold">
               El cuidado que tu coche se merece,
             </span>{' '}
             <br className="hidden md:block" />
@@ -65,7 +69,7 @@ export default function Hero() {
               href="https://wa.me/34603533624"
               target="_blank"
               rel="noreferrer"
-              className="pulse-glow group relative inline-flex items-center justify-center px-10 py-4 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white overflow-hidden transition-transform duration-300 active:scale-95 hover:scale-[1.03]"
+              className="btn-bubble group relative inline-flex items-center justify-center px-10 py-4 rounded-full overflow-hidden text-[#075A9E] transition-transform duration-300 active:scale-95 hover:scale-[1.03]"
             >
               <span className="relative font-sans font-semibold tracking-widest uppercase text-sm">
                 Reservar por WhatsApp
