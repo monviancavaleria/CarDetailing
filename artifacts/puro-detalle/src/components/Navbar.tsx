@@ -2,6 +2,8 @@ import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
+const logoUrl = `${import.meta.env.BASE_URL}logo-puro-detalle.webp`;
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const { scrollY } = useScroll();
@@ -41,11 +43,13 @@ export default function Navbar() {
             className="flex-shrink-0 cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <div className="flex items-end gap-1.5 leading-none">
-              <span className="font-script text-3xl text-[#0077D6] leading-none">Puro</span>
-              <span className="font-serif text-xl tracking-[0.2em] text-foreground uppercase leading-none mb-0.5">Detalle</span>
-            </div>
-            <div className="h-[1px] w-full bg-gradient-to-r from-[#0077D6]/60 via-[#D4AF37]/50 to-transparent mt-1"></div>
+            <img
+              src={logoUrl}
+              alt="Puro Detalle"
+              width={1200}
+              height={388}
+              className="h-11 md:h-12 w-auto"
+            />
           </div>
 
           {/* Desktop nav */}

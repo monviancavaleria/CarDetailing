@@ -267,6 +267,37 @@
   animation: pulse-glow 2.4s ease-in-out infinite;
 }
 
+/* ---------- Barrido de luz sobre el logo (imagen enmascarada) ---------- */
+.img-sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(140, 232, 255, 0.5) 47%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(140, 232, 255, 0.5) 53%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: light-sweep 3.6s ease-in-out infinite;
+}
+
+/* Sin soporte de máscara, el overlay sería un rectángulo animado: se oculta */
+@supports not ((-webkit-mask-image: linear-gradient(#000, #000)) or (mask-image: linear-gradient(#000, #000))) {
+  .img-sweep {
+    display: none;
+  }
+}
+
 /* ---------- Módulo dinámico 2x2 ---------- */
 /* Texto blanco con contorno negro para máxima legibilidad */
 .text-outline {
@@ -289,7 +320,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sweep,
-  .pulse-glow {
+  .pulse-glow,
+  .img-sweep {
     animation: none;
+  }
+  /* Sin animación no debe quedar un brillo estático sobre el logo */
+  .img-sweep {
+    opacity: 0;
   }
 }

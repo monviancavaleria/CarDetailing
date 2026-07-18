@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+const logoUrl = `${import.meta.env.BASE_URL}logo-puro-detalle.webp`;
+
 export default function Hero() {
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden w-full">
@@ -12,22 +14,30 @@ export default function Hero() {
       </div>
 
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center pt-32 pb-20">
-        {/* Logotipo con barrido de luz: azul en la "P" → dorado en DETALLE */}
+        {/* Logotipo oficial con barrido de luz sobre la propia silueta */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="mb-12"
         >
-          <div className="flex items-end justify-center gap-2 md:gap-4">
-            <span className="sweep sweep-blue font-script text-6xl md:text-8xl leading-none pr-2 pb-1">
-              Puro
-            </span>
-            <span className="sweep sweep-gold sweep-delay font-serif text-5xl md:text-7xl uppercase tracking-[0.12em] leading-none">
-              Detalle
-            </span>
+          <div className="relative w-[320px] sm:w-[430px] md:w-[560px] max-w-full">
+            <img
+              src={logoUrl}
+              alt="Puro Detalle — Detailing · Mantenimiento"
+              width={1200}
+              height={388}
+              fetchPriority="high"
+              decoding="async"
+              className="w-full h-auto drop-shadow-[0_12px_35px_rgba(15,30,50,0.16)]"
+            />
+            <div
+              aria-hidden
+              className="img-sweep"
+              style={{ WebkitMaskImage: `url(${logoUrl})`, maskImage: `url(${logoUrl})` }}
+            />
           </div>
-          <div className="mt-4 h-[2px] w-full bg-gradient-to-r from-transparent via-[#0077D6]/50 to-transparent" />
+          <div className="mt-6 h-[2px] w-full bg-gradient-to-r from-transparent via-[#0077D6]/50 to-transparent" />
         </motion.div>
 
         <motion.div
