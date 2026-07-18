@@ -51,7 +51,7 @@ export default function Hero() {
           className="max-w-4xl"
         >
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif leading-tight md:leading-[1.12] mb-6 uppercase tracking-wide">
-            <span className="sweep sweep-gold">
+            <span className="sweep sweep-silver">
               El cuidado que tu coche se merece,
             </span>{' '}
             <br className="hidden md:block" />
