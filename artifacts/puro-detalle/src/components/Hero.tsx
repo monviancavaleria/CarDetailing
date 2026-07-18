@@ -14,7 +14,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center pt-32 pb-20">
-        {/* Logotipo oficial (sin fondo) con barrido de luz sobre la propia silueta */}
+        {/* Logotipo oficial (sin fondo ni lema) con barrido de luz sobre la propia silueta */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -26,7 +26,7 @@ export default function Hero() {
               src={logoUrl}
               alt="Puro Detalle — Detailing y mantenimiento a domicilio"
               width={1600}
-              height={486}
+              height={408}
               fetchPriority="high"
               decoding="async"
               className="w-full h-auto drop-shadow-[0_12px_35px_rgba(15,30,50,0.16)]"
@@ -36,7 +36,7 @@ export default function Hero() {
               alt=""
               aria-hidden
               width={1600}
-              height={486}
+              height={408}
               decoding="async"
               className="logo-glint absolute inset-0 w-full h-auto"
             />
@@ -51,7 +51,7 @@ export default function Hero() {
           className="max-w-4xl"
         >
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif leading-tight md:leading-[1.12] mb-6 uppercase tracking-wide">
-            <span className="sweep sweep-silver">
+            <span className="sweep sweep-gold">
               El cuidado que tu coche se merece,
             </span>{' '}
             <br className="hidden md:block" />
@@ -76,8 +76,8 @@ export default function Hero() {
               </span>
             </a>
 
-            <p className="font-script text-2xl md:text-4xl text-outline">
-              A un click del cuidado de tu coche.
+            <p className="font-script text-2xl md:text-4xl text-[#0077D6]">
+              A un click de tu hogar.
             </p>
 
             <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground font-light tracking-wide">

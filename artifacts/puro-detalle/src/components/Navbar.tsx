@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
-const logoUrl = `${import.meta.env.BASE_URL}logo-puro-detalle.webp`;
+const logoUrl = `${import.meta.env.BASE_URL}logo-hero.webp`;
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -46,8 +46,8 @@ export default function Navbar() {
             <img
               src={logoUrl}
               alt="Puro Detalle"
-              width={1200}
-              height={388}
+              width={1600}
+              height={408}
               className="h-11 md:h-12 w-auto"
             />
           </div>

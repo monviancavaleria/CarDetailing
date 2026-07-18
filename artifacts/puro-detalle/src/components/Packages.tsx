@@ -194,7 +194,7 @@ export default function Packages() {
                         </div>
                       )}
 
-                      <h4 className="text-2xl font-serif text-outline-blue mb-2 uppercase tracking-wider">{pkg.name}</h4>
+                      <h4 className="text-2xl font-serif text-[#075A9E] mb-2 uppercase tracking-wider">{pkg.name}</h4>
                       <div className="text-muted-foreground text-sm mb-2 flex items-baseline gap-2 font-sans">
                         <span>Desde</span>
                         <span className="text-4xl text-[#0077D6] font-light">{pkg.price}</span>
@@ -207,7 +207,7 @@ export default function Packages() {
                         {pkg.features.map((feature, j) => (
                           <li key={j} className="flex items-start gap-3">
                             <Check className="w-5 h-5 text-[#0077D6] shrink-0" />
-                            <span className="text-sm font-serif text-outline tracking-wide">{feature}</span>
+                            <span className="text-sm font-serif text-[#075A9E] tracking-wide">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -247,7 +247,7 @@ export default function Packages() {
                       key={i}
                       className="glass-silver rounded-2xl p-8 lg:p-10 flex flex-col hover:border-[#8C96A3]/60 hover:shadow-[0_12px_45px_rgba(90,100,112,0.16)] transition-all duration-500"
                     >
-                      <h4 className="text-2xl font-serif text-foreground mb-2 uppercase tracking-wider">{pkg.name}</h4>
+                      <h4 className="text-2xl font-serif text-[#4A5462] mb-2 uppercase tracking-wider">{pkg.name}</h4>
                       <div className="text-muted-foreground text-sm mb-6 flex items-baseline gap-2 font-sans">
                         <span>Desde</span>
                         <span className="text-3xl text-[#4A5462] font-light">{pkg.price}</span>
@@ -259,7 +259,7 @@ export default function Packages() {
                         {pkg.features.map((feature, j) => (
                           <li key={j} className="flex items-start gap-3">
                             <Check className="w-5 h-5 text-[#5B6470] shrink-0" />
-                            <span className="text-sm font-serif text-outline tracking-wide">{feature}</span>
+                            <span className="text-sm font-serif text-[#4A5462] tracking-wide">{feature}</span>
                           </li>
                         ))}
                       </ul>
