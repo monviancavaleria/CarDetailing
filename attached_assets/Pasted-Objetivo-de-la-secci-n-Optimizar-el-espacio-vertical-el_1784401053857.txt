@@ -1,0 +1,27 @@
+Objetivo de la sección:
+Optimizar el espacio vertical eliminando el scroll excesivo y unificando la información secundaria (extras, reseñas, contacto y zonas de servicio) en un único módulo de visualización dinámica de alta conversión.
+
+1. Limpieza y Reestructuración del DOM (Layout)
+Eliminación de bloques estáticos: Suprimir el formato actual apilado donde aparecían de forma consecutiva "Extras a la carta", "Testimonios" y "Hablemos/Contacto".
+
+Nuevo Módulo Dinámico: Inmediatamente debajo de la sección de "Nuestros Servicios" (y sus pestañas), implementar un contenedor interactivo dividido en dos partes: un menú de navegación en cuadrícula (2x2) y un área de visualización de contenido justo debajo.
+
+2. UI del Menú de Cuadrícula (4 Botones/Iconos)
+Disposición: Crear un grid de 4 elementos distribuidos en 2 filas y 2 columnas (dos a la izquierda, dos a la derecha). Debe contar con un padding generoso para mantener un diseño limpio, profesional y que respire.
+
+Estilo Tipográfico: Cada botón estará compuesto por un icono representativo y texto. Las letras deben ser de color blanco sólido con un borde/contorno negro (implementar mediante CSS -webkit-text-stroke o múltiples text-shadows para asegurar la legibilidad).
+
+Estado Activo (Active State): Al hacer clic en cualquiera de las 4 opciones, el icono seleccionado debe iluminarse con un resplandor o brillo en color azul eléctrico (drop-shadow o box-shadow CSS). Esto servirá como indicador visual (feedback) para que el usuario sepa qué pestaña está viendo en ese momento.
+
+3. Área de Visualización y Transiciones (UX)
+Comportamiento del contenedor inferior: Toda la información se renderizará en el mismo contenedor ubicado debajo de los 4 iconos. Al pulsar un icono nuevo, el contenido actual debe desvanecerse (transición fade-out) y el nuevo contenido debe aparecer suavemente (fade-in).
+
+Contenido 1 (Arriba Izquierda) - "Mapa de nuestro servicio": Al pulsar, se desplegará el espacio destinado a mostrar el mapa de actuación en Madrid (marcador de posición o integración de API de mapas, a definir en futuras fases de desarrollo).
+
+Contenido 2 (Arriba Derecha) - "Extras a la carta": Al pulsar, se listarán los servicios adicionales/complementarios.
+
+Contenido 3 (Abajo Izquierda) - "Nuestras reviews": Al pulsar, se desplegará un contenedor en formato fila (flex-row o carrusel horizontal) mostrando 3 reseñas de clientes simultáneamente.
+
+Contenido 4 (Abajo Derecha) - "Conócenos": Al pulsar, se desplegará la información de contacto directo. Debe incluir los iconos de Teléfono, TikTok e Instagram.
+
+Requisito técnico: Estos elementos no deben ser solo texto o imágenes, deben ser hipervínculos completos (etiquetas <a> con target="_blank") con áreas de impacto grandes para dispositivos móviles, redirigiendo directamente a la llamada o a las respectivas redes sociales.
