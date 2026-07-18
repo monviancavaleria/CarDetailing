@@ -1,8 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Check } from 'lucide-react';
 
-const categoryA = [
+const mantenimiento = [
   {
     name: "Mantenimiento Básico",
     price: "35€",
@@ -27,7 +27,7 @@ const categoryA = [
   }
 ];
 
-const categoryB = [
+const detallado = [
   {
     name: "Boutique Integral",
     price: "89€",
@@ -56,154 +56,239 @@ const categoryB = [
   }
 ];
 
+type TabId = 'detallado' | 'mantenimiento';
+
+const slideVariants = {
+  enter: (direction: number) => ({ x: direction * 90, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (direction: number) => ({ x: direction * -90, opacity: 0 }),
+};
+
 export default function Packages() {
+  const [activeTab, setActiveTab] = React.useState<TabId>('detallado');
+  const [direction, setDirection] = React.useState(1);
+
+  const switchTab = (tab: TabId) => {
+    if (tab === activeTab) return;
+    setDirection(tab === 'mantenimiento' ? 1 : -1);
+    setActiveTab(tab);
+  };
+
+  const detalladoRef = React.useRef<HTMLButtonElement>(null);
+  const mantenimientoRef = React.useRef<HTMLButtonElement>(null);
+
+  const onTablistKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const order: TabId[] = ['detallado', 'mantenimiento'];
+    const idx = order.indexOf(activeTab);
+    let next: TabId | undefined;
+    if (e.key === 'ArrowRight') next = order[(idx + 1) % order.length];
+    else if (e.key === 'ArrowLeft') next = order[(idx - 1 + order.length) % order.length];
+    else if (e.key === 'Home') next = order[0];
+    else if (e.key === 'End') next = order[order.length - 1];
+    if (!next) return;
+    e.preventDefault();
+    if (next !== activeTab) switchTab(next);
+    (next === 'detallado' ? detalladoRef : mantenimientoRef).current?.focus();
+  };
+
   return (
-    <section id="servicios" className="py-24 bg-background relative z-10">
+    <section id="servicios" className="py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
+        <div className="text-center mb-14">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-serif text-white inline-block relative uppercase tracking-wider"
+            className="text-3xl md:text-5xl font-serif text-foreground inline-block uppercase tracking-wider"
           >
             Nuestros Servicios
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-12 h-[2px] bg-primary"></div>
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="font-script text-2xl md:text-3xl text-[#0077D6] mt-3"
+          >
+            Lo que tu coche te pide
+          </motion.p>
         </div>
 
-        {/* Category A — PLATA / Mantenimiento */}
-        <div className="mb-24">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4 mb-8"
+        {/* Pestañas */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex justify-center mb-14"
+        >
+          <div
+            role="tablist"
+            aria-label="Categorías de servicio"
+            onKeyDown={onTablistKeyDown}
+            className="glass rounded-full p-1.5 inline-flex gap-1"
           >
-            <span className="px-3 py-1 text-xs font-semibold tracking-widest text-[#C9CED6] bg-[#C9CED6]/10 border border-[#C9CED6]/20 rounded-full font-sans">
-              CATEGORÍA A
-            </span>
-            <h3 className="text-xl font-serif text-white uppercase tracking-wider">Mantenimiento</h3>
-            <div className="h-[1px] flex-1 bg-white/5 ml-4"></div>
-          </motion.div>
-          <p className="text-sm text-muted-foreground mb-8 italic font-sans">
-            Servicio a domicilio, mínimo 2 vehículos por desplazamiento.
+            <button
+              ref={detalladoRef}
+              id="tab-detallado"
+              role="tab"
+              aria-selected={activeTab === 'detallado'}
+              aria-controls="panel-detallado"
+              tabIndex={activeTab === 'detallado' ? 0 : -1}
+              onClick={() => switchTab('detallado')}
+              className={`px-6 sm:px-10 py-3 rounded-full text-sm font-semibold tracking-widest uppercase font-sans transition-all duration-300 ${
+                activeTab === 'detallado'
+                  ? 'bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white shadow-[0_4px_20px_rgba(0,119,214,0.35)]'
+                  : 'text-[#0077D6] hover:bg-[#0077D6]/5'
+              }`}
+            >
+              Detallado
+            </button>
+            <button
+              ref={mantenimientoRef}
+              id="tab-mantenimiento"
+              role="tab"
+              aria-selected={activeTab === 'mantenimiento'}
+              aria-controls="panel-mantenimiento"
+              tabIndex={activeTab === 'mantenimiento' ? 0 : -1}
+              onClick={() => switchTab('mantenimiento')}
+              className={`px-6 sm:px-10 py-3 rounded-full text-sm font-semibold tracking-widest uppercase font-sans transition-all duration-300 ${
+                activeTab === 'mantenimiento'
+                  ? 'bg-gradient-to-r from-[#B8912F] to-[#D4AF37] text-[#15181D] shadow-[0_4px_20px_rgba(212,175,55,0.40)]'
+                  : 'text-[#8F6D1F] hover:bg-[#D4AF37]/10'
+              }`}
+            >
+              Mantenimiento
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Contenido con transición deslizante */}
+        <div className="relative overflow-hidden">
+          <AnimatePresence mode="wait" custom={direction} initial={false}>
+            {activeTab === 'detallado' ? (
+              <motion.div
+                key="detallado"
+                id="panel-detallado"
+                role="tabpanel"
+                aria-labelledby="tab-detallado"
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                  {detallado.map((pkg, i) => (
+                    <div
+                      key={i}
+                      className={`relative rounded-2xl p-8 lg:p-10 flex flex-col transition-all duration-500 ${
+                        pkg.popular
+                          ? 'glass-popular hover:shadow-[0_16px_60px_rgba(0,119,214,0.22)]'
+                          : 'glass-blue hover:border-[#0077D6]/35 hover:shadow-[0_12px_45px_rgba(0,119,214,0.12)]'
+                      }`}
+                    >
+                      {pkg.popular && (
+                        <div className="absolute top-0 right-8 -translate-y-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white text-[10px] font-bold tracking-widest uppercase font-sans shadow-[0_4px_14px_rgba(0,119,214,0.35)]">
+                        ⭐ Más Popular
+                        </div>
+                      )}
+
+                      <h4 className="text-2xl font-serif text-foreground mb-2 uppercase tracking-wider">{pkg.name}</h4>
+                      <div className="text-muted-foreground text-sm mb-2 flex items-baseline gap-2 font-sans">
+                        <span>Desde</span>
+                        <span className="text-4xl text-[#0077D6] font-light">{pkg.price}</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground italic mb-6 font-sans">{pkg.note}</p>
+
+                      <div className="h-[1px] w-full bg-[#0077D6]/10 mb-8"></div>
+
+                      <ul className="space-y-4 mb-10 flex-1">
+                        {pkg.features.map((feature, j) => (
+                          <li key={j} className="flex items-start gap-3">
+                            <Check className="w-5 h-5 text-[#0077D6] shrink-0" />
+                            <span className="text-sm text-muted-foreground font-sans">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <a
+                        href="https://wa.me/34603533624"
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`w-full text-center py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans ${
+                          pkg.popular
+                            ? 'bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white hover:brightness-110 shadow-[0_4px_18px_rgba(0,119,214,0.30)]'
+                            : 'border border-[#0077D6]/30 text-[#0077D6] hover:border-[#0077D6] hover:bg-[#0077D6]/5'
+                        }`}
+                      >
+                        Reservar
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="mantenimiento"
+                id="panel-mantenimiento"
+                role="tabpanel"
+                aria-labelledby="tab-mantenimiento"
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                  {mantenimiento.map((pkg, i) => (
+                    <div
+                      key={i}
+                      className="glass-gold rounded-2xl p-8 lg:p-10 flex flex-col hover:border-[#D4AF37]/45 hover:shadow-[0_12px_45px_rgba(212,175,55,0.14)] transition-all duration-500"
+                    >
+                      <h4 className="text-2xl font-serif text-foreground mb-2 uppercase tracking-wider">{pkg.name}</h4>
+                      <div className="text-muted-foreground text-sm mb-6 flex items-baseline gap-2 font-sans">
+                        <span>Desde</span>
+                        <span className="text-3xl text-[#A8862B] font-light">{pkg.price}</span>
+                      </div>
+
+                      <div className="h-[1px] w-full bg-[#D4AF37]/15 mb-8"></div>
+
+                      <ul className="space-y-4 mb-10 flex-1">
+                        {pkg.features.map((feature, j) => (
+                          <li key={j} className="flex items-start gap-3">
+                            <Check className="w-5 h-5 text-[#A8862B] shrink-0" />
+                            <span className="text-sm text-muted-foreground font-sans">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <a
+                        href="https://wa.me/34603533624"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full text-center py-3 rounded-full border border-[#D4AF37]/40 text-[#8F6D1F] hover:border-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans"
+                      >
+                        Reservar
+                      </a>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Condición — misma tipografía que el logotipo */}
+                <p className="font-script text-lg md:text-xl text-[#0077D6] text-center mt-10">
+                  Servicio a domicilio mínimo 2 vehículos por servicio de mantenimiento
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="text-sm text-muted-foreground italic font-sans">
+            * Los precios varían según el tamaño del vehículo: S/M &middot; L &middot; XL. Consulta sin compromiso.
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {categoryA.map((pkg, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="glass-silver p-8 lg:p-10 flex flex-col hover:border-[#C9CED6]/30 hover:shadow-[0_0_40px_rgba(201,206,214,0.06)] transition-all duration-500"
-              >
-                <h4 className="text-2xl font-serif text-white mb-2 uppercase tracking-wider">{pkg.name}</h4>
-                <div className="text-muted-foreground text-sm mb-6 flex items-baseline gap-2 font-sans">
-                  <span>Desde</span>
-                  <span className="text-3xl text-[#C9CED6] font-light">{pkg.price}</span>
-                </div>
-
-                <div className="h-[1px] w-full bg-white/5 mb-8"></div>
-
-                <ul className="space-y-4 mb-10 flex-1">
-                  {pkg.features.map((feature, j) => (
-                    <li key={j} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-[#C9CED6] shrink-0 opacity-80" />
-                      <span className="text-sm text-muted-foreground font-sans">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="https://wa.me/34603533624"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full text-center border border-[#C9CED6]/20 text-[#C9CED6] hover:border-[#C9CED6]/60 hover:bg-[#C9CED6]/10 py-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans"
-                >
-                  Reservar
-                </a>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Category B — AZUL ELÉCTRICO / Detallado */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4 mb-8"
-          >
-            <span className="px-3 py-1 text-xs font-semibold tracking-widest text-primary bg-primary/10 border border-primary/20 rounded-full font-sans">
-              CATEGORÍA B
-            </span>
-            <h3 className="text-xl font-serif text-white uppercase tracking-wider">Detallado</h3>
-            <div className="h-[1px] flex-1 bg-white/5 ml-4"></div>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {categoryB.map((pkg, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`relative p-8 lg:p-10 flex flex-col transition-all duration-500 ${
-                  pkg.popular
-                    ? 'glass-popular hover:shadow-[0_0_80px_rgba(55,182,255,0.2)]'
-                    : 'glass hover:border-primary/30 hover:shadow-[0_0_40px_rgba(55,182,255,0.08)]'
-                }`}
-              >
-                {pkg.popular && (
-                  <div className="absolute top-0 right-8 -translate-y-1/2 px-3 py-1 bg-primary text-primary-foreground text-[10px] font-bold tracking-widest uppercase font-sans">
-                    ⭐ Más Popular
-                  </div>
-                )}
-
-                <h4 className="text-2xl font-serif text-white mb-2 uppercase tracking-wider">{pkg.name}</h4>
-                <div className="text-muted-foreground text-sm mb-2 flex items-baseline gap-2 font-sans">
-                  <span>Desde</span>
-                  <span className="text-4xl text-primary font-light">{pkg.price}</span>
-                </div>
-                <p className="text-xs text-muted-foreground/60 italic mb-6 font-sans">{pkg.note}</p>
-
-                <div className="h-[1px] w-full bg-primary/10 mb-8"></div>
-
-                <ul className="space-y-4 mb-10 flex-1">
-                  {pkg.features.map((feature, j) => (
-                    <li key={j} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-primary shrink-0 opacity-80" />
-                      <span className="text-sm text-muted-foreground font-sans">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href="https://wa.me/34603533624"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`w-full text-center py-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans ${
-                    pkg.popular
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/80 hover:shadow-[0_0_20px_rgba(55,182,255,0.4)]'
-                      : 'border border-primary/30 text-primary hover:border-primary hover:bg-primary/10'
-                  }`}
-                >
-                  Reservar
-                </a>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-sm text-muted-foreground/80 italic font-sans">
-              * Los precios varían según el tamaño del vehículo: S/M &middot; L &middot; XL. Consulta sin compromiso.
-            </p>
-          </div>
         </div>
       </div>
     </section>

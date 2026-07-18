@@ -51,49 +51,49 @@
 }
 
 :root {
-  --button-outline: rgba(255, 255, 255, 0.1);
-  --badge-outline: rgba(255, 255, 255, 0.05);
-  --opaque-button-border-intensity: 9;
-  --elevate-1: rgba(55, 182, 255, 0.04);
-  --elevate-2: rgba(55, 182, 255, 0.09);
+  --button-outline: rgba(15, 30, 50, 0.08);
+  --badge-outline: rgba(15, 30, 50, 0.05);
+  --opaque-button-border-intensity: -6;
+  --elevate-1: rgba(0, 119, 214, 0.04);
+  --elevate-2: rgba(0, 119, 214, 0.09);
 
-  /* Negro carbón #0B0D10 */
-  --background: 216 19% 5%;
-  --foreground: 0 0% 100%;
+  /* Escala de grises y blancos */
+  --background: 210 20% 97%; /* #F4F6F9 */
+  --foreground: 216 15% 10%; /* #15181D carbón para texto */
 
-  --border: 216 15% 16%;
-  --input: 216 15% 16%;
-  --ring: 202 100% 61%; /* Azul eléctrico */
+  --border: 210 14% 87%;
+  --input: 210 14% 87%;
+  --ring: 207 100% 42%; /* Azul profundo #0077D6 */
 
-  --card: 216 17% 9%;
-  --card-foreground: 0 0% 100%;
-  --card-border: 216 15% 16%;
+  --card: 0 0% 100%;
+  --card-foreground: 216 15% 10%;
+  --card-border: 210 14% 90%;
 
-  --popover: 216 17% 9%;
-  --popover-foreground: 0 0% 100%;
-  --popover-border: 216 15% 16%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 216 15% 10%;
+  --popover-border: 210 14% 90%;
 
-  /* Azul eléctrico #37B6FF */
-  --primary: 202 100% 61%;
-  --primary-foreground: 216 19% 5%;
+  /* Azul profundo #0077D6 — legible sobre fondo claro */
+  --primary: 207 100% 42%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 216 15% 13%;
-  --secondary-foreground: 0 0% 100%;
+  --secondary: 210 15% 92%;
+  --secondary-foreground: 216 15% 10%;
 
-  --muted: 216 15% 13%;
-  --muted-foreground: 216 10% 60%;
+  --muted: 210 15% 92%;
+  --muted-foreground: 215 10% 40%;
 
-  --accent: 202 100% 61%;
-  --accent-foreground: 216 19% 5%;
+  --accent: 207 100% 42%;
+  --accent-foreground: 0 0% 100%;
 
-  --destructive: 0 84% 60%;
+  --destructive: 0 74% 48%;
   --destructive-foreground: 0 0% 100%;
 
   --app-font-sans: 'Barlow Semi Condensed', sans-serif;
   --app-font-serif: 'Anton', sans-serif;
   --app-font-script: 'Kaushan Script', cursive;
   --app-font-mono: Menlo, monospace;
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
   --primary-border: hsl(
     from hsl(var(--primary)) h s
@@ -117,70 +117,159 @@
   );
 }
 
-.dark {
-  --background: 216 19% 5%;
-  --foreground: 0 0% 100%;
-  --border: 216 15% 16%;
-  --input: 216 15% 16%;
-  --ring: 202 100% 61%;
-  --card: 216 17% 9%;
-  --card-foreground: 0 0% 100%;
-  --card-border: 216 15% 16%;
-  --popover: 216 17% 9%;
-  --popover-foreground: 0 0% 100%;
-  --popover-border: 216 15% 16%;
-  --primary: 202 100% 61%;
-  --primary-foreground: 216 19% 5%;
-  --secondary: 216 15% 13%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 216 15% 13%;
-  --muted-foreground: 216 10% 60%;
-  --accent: 202 100% 61%;
-  --accent-foreground: 216 19% 5%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-}
-
 @layer base {
   * {
     @apply border-border;
   }
   body {
-    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground;
+    @apply font-sans antialiased text-foreground selection:bg-primary/20 selection:text-primary;
+    background:
+      radial-gradient(ellipse 65% 45% at 12% -5%, rgba(140, 232, 255, 0.30), transparent 70%),
+      radial-gradient(ellipse 50% 38% at 88% 5%, rgba(212, 175, 55, 0.10), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 50% 108%, rgba(0, 119, 214, 0.09), transparent 70%),
+      linear-gradient(180deg, #fafbfd 0%, #eef1f5 100%);
+    background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
   }
 }
 
-/* Liquid Glass utilities */
+/* ---------- Liquid Glass (tema claro) ---------- */
 .glass {
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  background: rgba(55, 182, 255, 0.04);
-  border: 1px solid rgba(55, 182, 255, 0.12);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 0 30px rgba(55, 182, 255, 0.06);
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 8px 32px rgba(15, 30, 50, 0.07);
 }
 
-.glass-silver {
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  background: rgba(201, 206, 214, 0.04);
-  border: 1px solid rgba(201, 206, 214, 0.12);
+.glass-blue {
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: rgba(0, 119, 214, 0.05);
+  border: 1px solid rgba(0, 119, 214, 0.16);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 0 30px rgba(201, 206, 214, 0.04);
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 8px 32px rgba(0, 119, 214, 0.08);
+}
+
+.glass-gold {
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: rgba(212, 175, 55, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 8px 32px rgba(212, 175, 55, 0.08);
 }
 
 .glass-popular {
-  backdrop-filter: blur(40px) saturate(200%);
-  -webkit-backdrop-filter: blur(40px) saturate(200%);
-  background: rgba(55, 182, 255, 0.08);
-  border: 1px solid rgba(55, 182, 255, 0.30);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  background: rgba(0, 119, 214, 0.08);
+  border: 1px solid rgba(0, 119, 214, 0.35);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 0 50px rgba(55, 182, 255, 0.15),
-    0 0 100px rgba(55, 182, 255, 0.05);
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 12px 45px rgba(0, 119, 214, 0.16),
+    0 0 90px rgba(55, 182, 255, 0.10);
+}
+
+/* ---------- Barrido de luz (logo, titulares) ---------- */
+@keyframes light-sweep {
+  0% {
+    background-position: 100% 0;
+  }
+  60% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+.sweep {
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: light-sweep 3.6s ease-in-out infinite;
+}
+
+/* Azul: base azul profundo, brillo azul hielo (la "P" de Puro) */
+.sweep-blue {
+  background-image: linear-gradient(
+    105deg,
+    #0077d6 0%,
+    #0077d6 40%,
+    #37b6ff 47%,
+    #8ce8ff 50%,
+    #37b6ff 53%,
+    #0077d6 60%,
+    #0077d6 100%
+  );
+}
+
+/* Dorado: base carbón, brillo dorado (la palabra DETALLE) */
+.sweep-gold {
+  background-image: linear-gradient(
+    105deg,
+    #15181d 0%,
+    #15181d 40%,
+    #d4af37 47%,
+    #f4de88 50%,
+    #d4af37 53%,
+    #15181d 60%,
+    #15181d 100%
+  );
+}
+
+/* Carbón con destello azul (titulares) */
+.sweep-dark {
+  background-image: linear-gradient(
+    105deg,
+    #15181d 0%,
+    #15181d 40%,
+    #3e6e96 47%,
+    #37b6ff 50%,
+    #3e6e96 53%,
+    #15181d 60%,
+    #15181d 100%
+  );
+}
+
+.sweep-delay {
+  animation-delay: 0.45s;
+}
+
+/* ---------- Pulso luminoso del CTA ---------- */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(0, 119, 214, 0.35),
+      0 10px 30px -5px rgba(0, 119, 214, 0.35);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 14px rgba(0, 119, 214, 0),
+      0 10px 45px -5px rgba(55, 182, 255, 0.55);
+    filter: brightness(1.07);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep,
+  .pulse-glow {
+    animation: none;
+  }
 }

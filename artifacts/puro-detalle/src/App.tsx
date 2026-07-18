@@ -1,9 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { MotionConfig } from 'framer-motion';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
 import NotFound from '@/pages/not-found';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import TrustStrip from './components/TrustStrip';
+// import TrustStrip from './components/TrustStrip'; // Oculto en esta fase del rediseño premium
 import Packages from './components/Packages';
 import Extras from './components/Extras';
 import Testimonials from './components/Testimonials';
@@ -13,11 +14,11 @@ const queryClient = new QueryClient();
 
 function Home() {
   return (
-    <div className="bg-background min-h-screen text-foreground font-sans">
+    <div className="min-h-screen text-foreground font-sans">
       <Navbar />
       <main>
         <Hero />
-        <TrustStrip />
+        {/* <TrustStrip /> — oculto en esta fase del rediseño */}
         <Packages />
         <Extras />
         <Testimonials />
@@ -38,11 +39,13 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-        <Router />
-      </WouterRouter>
-    </QueryClientProvider>
+    <MotionConfig reducedMotion="user">
+      <QueryClientProvider client={queryClient}>
+        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
+          <Router />
+        </WouterRouter>
+      </QueryClientProvider>
+    </MotionConfig>
   );
 }
 

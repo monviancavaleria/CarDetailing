@@ -4,28 +4,44 @@ import { motion } from 'framer-motion';
 export default function Hero() {
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden w-full">
-      {/* Background Image & Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/hero-car.jpg"
-          alt="Luxury black sports car hood"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0B0D10]/75 via-[#0B0D10]/55 to-[#0B0D10] z-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/8 via-transparent to-transparent z-10" />
+      {/* Orbes de cristal líquido */}
+      <div aria-hidden className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full bg-[#8CE8FF]/30 blur-[120px]" />
+        <div className="absolute top-1/3 -right-32 w-[450px] h-[450px] rounded-full bg-[#37B6FF]/20 blur-[130px]" />
+        <div className="absolute -bottom-20 left-1/4 w-[400px] h-[400px] rounded-full bg-[#D4AF37]/15 blur-[120px]" />
       </div>
 
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center mt-20">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center pt-32 pb-20">
+        {/* Logotipo con barrido de luz: azul en la "P" → dorado en DETALLE */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-12"
+        >
+          <div className="flex items-end justify-center gap-2 md:gap-4">
+            <span className="sweep sweep-blue font-script text-6xl md:text-8xl leading-none pr-2 pb-1">
+              Puro
+            </span>
+            <span className="sweep sweep-gold sweep-delay font-serif text-5xl md:text-7xl uppercase tracking-[0.12em] leading-none">
+              Detalle
+            </span>
+          </div>
+          <div className="mt-4 h-[2px] w-full bg-gradient-to-r from-transparent via-[#0077D6]/50 to-transparent" />
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-4xl"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white leading-tight md:leading-[1.1] mb-6 uppercase tracking-wide">
-            El cuidado que tu coche se merece,{' '}
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif leading-tight md:leading-[1.12] mb-6 uppercase tracking-wide">
+            <span className="sweep sweep-dark">
+              El cuidado que tu coche se merece,
+            </span>{' '}
             <br className="hidden md:block" />
-            <span className="text-primary font-script text-5xl md:text-7xl lg:text-8xl normal-case tracking-normal">
+            <span className="sweep sweep-blue sweep-delay font-script text-4xl md:text-6xl lg:text-7xl normal-case tracking-normal">
               sin moverte de casa.
             </span>
           </h1>
@@ -34,41 +50,44 @@ export default function Hero() {
             En Puro Detalle ofrecemos un servicio exclusivo y de alta calidad hasta la comodidad de tu hogar, mediante el uso de los mejores productos del mercado para garantizar un acabado perfecto.
           </p>
 
-          <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center gap-5">
             <a
               href="https://wa.me/34603533624"
               target="_blank"
               rel="noreferrer"
-              className="group relative inline-flex items-center justify-center px-8 py-4 glass-popular overflow-hidden transition-all duration-300 active:scale-95 hover:shadow-[0_0_60px_rgba(55,182,255,0.3)]"
+              className="pulse-glow group relative inline-flex items-center justify-center px-10 py-4 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white overflow-hidden transition-transform duration-300 active:scale-95 hover:scale-[1.03]"
             >
-              <div className="absolute inset-0 w-full h-full bg-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
-              <span className="relative font-sans font-semibold tracking-widest uppercase text-sm text-primary group-hover:text-white transition-colors">
+              <span className="relative font-sans font-semibold tracking-widest uppercase text-sm">
                 Reservar por WhatsApp
               </span>
             </a>
 
-            <div className="flex items-center gap-2 text-sm text-muted-foreground font-light tracking-wide">
-              <span className="w-8 h-[1px] bg-primary/50"></span>
-              <p>Desde 35€ &middot; A domicilio &middot; Madrid</p>
-              <span className="w-8 h-[1px] bg-primary/50"></span>
+            <p className="font-script text-lg md:text-xl text-[#0077D6]">
+              Con un click y estamos en tu casa
+            </p>
+
+            <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground font-light tracking-wide">
+              <span className="w-8 h-[1px] bg-[#0077D6]/40"></span>
+              <p>Servicio premium a domicilio &middot; Madrid</p>
+              <span className="w-8 h-[1px] bg-[#0077D6]/40"></span>
             </div>
           </div>
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Indicador de scroll */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center"
       >
         <span className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4 font-sans">Descubrir</span>
-        <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
+        <div className="w-[1px] h-12 bg-foreground/15 relative overflow-hidden">
           <motion.div
             animate={{ y: [0, 48, 48], opacity: [0, 1, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: 'linear' }}
-            className="absolute top-0 left-0 w-full h-1/2 bg-primary"
+            className="absolute top-0 left-0 w-full h-1/2 bg-[#0077D6]"
           />
         </div>
       </motion.div>
