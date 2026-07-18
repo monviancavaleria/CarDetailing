@@ -6,8 +6,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 // import TrustStrip from './components/TrustStrip'; // Oculto en esta fase del rediseño premium
 import Packages from './components/Packages';
-import Extras from './components/Extras';
-import Testimonials from './components/Testimonials';
+import InfoHub from './components/InfoHub';
 import Footer from './components/Footer';
 
 const queryClient = new QueryClient();
@@ -20,8 +19,7 @@ function Home() {
         <Hero />
         {/* <TrustStrip /> — oculto en esta fase del rediseño */}
         <Packages />
-        <Extras />
-        <Testimonials />
+        <InfoHub />
       </main>
       <Footer />
     </div>

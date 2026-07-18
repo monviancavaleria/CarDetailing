@@ -267,6 +267,26 @@
   animation: pulse-glow 2.4s ease-in-out infinite;
 }
 
+/* ---------- Módulo dinámico 2x2 ---------- */
+/* Texto blanco con contorno negro para máxima legibilidad */
+.text-outline {
+  color: #ffffff;
+  -webkit-text-stroke: 1px #15181d;
+  paint-order: stroke fill;
+  text-shadow:
+    -1px -1px 0 #15181d,
+    1px -1px 0 #15181d,
+    -1px 1px 0 #15181d,
+    1px 1px 0 #15181d,
+    0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Resplandor azul eléctrico del icono activo */
+.icon-glow-blue {
+  filter: drop-shadow(0 0 6px rgba(55, 182, 255, 0.95))
+    drop-shadow(0 0 14px rgba(0, 119, 214, 0.75));
+}
+
 @media (prefers-reduced-motion: reduce) {
   .sweep,
   .pulse-glow {
