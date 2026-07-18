@@ -1,36 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script type="module">
-import { createHotContext } from "/@vite/client";
-const hot = createHotContext("/__dummy__runtime-error-plugin");
-
-function sendError(error) {
-  if (!(error instanceof Error)) {
-    error = new Error("(unknown runtime error)");
-  }
-  const serialized = {
-    message: error.message,
-    stack: error.stack,
-  };
-  hot.send("runtime-error-plugin:error", serialized);
-}
-
-hot.on("runtime-error-plugin:notify-parent", () => {
-  try {
-    window.parent.postMessage({ type: "runtime-error", id: null }, "*");
-  } catch (_) {}
-});
-
-window.addEventListener("error", (evt) => {
-  sendError(evt.error);
-});
-
-window.addEventListener("unhandledrejection", (evt) => {
-  sendError(evt.reason);
-});
-</script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <title>Puro Detalle</title>
@@ -52,12 +22,7 @@ window.addEventListener("unhandledrejection", (evt) => {
     </style>
   </head>
   <body>
-    <div id="root">
-      <div id="static-loading" style="position:fixed;inset:0;background:#0b0d10;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:sans-serif;z-index:9999;">
-        <div style="color:#37B6FF;font-size:2rem;letter-spacing:0.3em;font-weight:600;">PURO DETALLE</div>
-        <div style="color:#888;font-size:0.9rem;letter-spacing:0.1em;">Cargando...</div>
-      </div>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

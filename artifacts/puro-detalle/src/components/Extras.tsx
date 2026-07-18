@@ -48,7 +48,7 @@ export default function Extras() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="group flex items-center gap-4 p-5 glass border-l-2 border-l-primary/20 hover:border-l-primary hover:glass-popular hover:shadow-[0_0_20px_rgba(55,182,255,0.08)] transition-all duration-300"
+              className="group flex items-center gap-4 p-5 glass border-l-2 border-l-primary/20 hover:border-l-primary hover:bg-primary/[0.07] hover:shadow-[0_0_20px_rgba(55,182,255,0.08)] transition-all duration-300"
             >
               <div className="shrink-0 p-2 rounded-full bg-background group-hover:bg-primary/10 transition-colors duration-300">
                 <extra.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300 stroke-[1.5]" />
