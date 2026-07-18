@@ -42,6 +42,7 @@
   --font-sans: var(--app-font-sans);
   --font-serif: var(--app-font-serif);
   --font-mono: var(--app-font-mono);
+  --font-script: var(--app-font-script);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -53,44 +54,44 @@
   --button-outline: rgba(255, 255, 255, 0.1);
   --badge-outline: rgba(255, 255, 255, 0.05);
   --opaque-button-border-intensity: 9;
-  --elevate-1: rgba(255, 255, 255, 0.04);
-  --elevate-2: rgba(255, 255, 255, 0.09);
+  --elevate-1: rgba(55, 182, 255, 0.04);
+  --elevate-2: rgba(55, 182, 255, 0.09);
 
-  /* Defaulting everything to dark mode base */
-  --background: 0 0% 4%; /* #0A0A0A */
-  --foreground: 0 0% 100%; /* #FFFFFF */
-  
-  --border: 0 0% 15%; 
-  --input: 0 0% 15%;
-  --ring: 46 65% 52%; /* Gold */
+  /* Negro carbón #0B0D10 */
+  --background: 216 19% 5%;
+  --foreground: 0 0% 100%;
 
-  --card: 0 0% 9%; /* #161616 */
+  --border: 216 15% 16%;
+  --input: 216 15% 16%;
+  --ring: 202 100% 61%; /* Azul eléctrico */
+
+  --card: 216 17% 9%;
   --card-foreground: 0 0% 100%;
-  --card-border: 0 0% 18%;
+  --card-border: 216 15% 16%;
 
-  --popover: 0 0% 9%;
+  --popover: 216 17% 9%;
   --popover-foreground: 0 0% 100%;
-  --popover-border: 0 0% 18%;
+  --popover-border: 216 15% 16%;
 
-  /* Gold #D4AF37 */
-  --primary: 46 65% 52%;
-  --primary-foreground: 0 0% 4%;
+  /* Azul eléctrico #37B6FF */
+  --primary: 202 100% 61%;
+  --primary-foreground: 216 19% 5%;
 
-  --secondary: 0 0% 12%;
+  --secondary: 216 15% 13%;
   --secondary-foreground: 0 0% 100%;
 
-  /* Light grey */
-  --muted: 0 0% 12%;
-  --muted-foreground: 0 0% 63%; /* #A0A0A0 */
+  --muted: 216 15% 13%;
+  --muted-foreground: 216 10% 60%;
 
-  --accent: 46 65% 52%;
-  --accent-foreground: 0 0% 4%;
+  --accent: 202 100% 61%;
+  --accent-foreground: 216 19% 5%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --app-font-sans: 'Inter', sans-serif;
-  --app-font-serif: 'Playfair Display', serif;
+  --app-font-sans: 'Barlow Semi Condensed', sans-serif;
+  --app-font-serif: 'Anton', sans-serif;
+  --app-font-script: 'Kaushan Script', cursive;
   --app-font-mono: Menlo, monospace;
   --radius: 0.5rem;
 
@@ -117,25 +118,25 @@
 }
 
 .dark {
-  --background: 0 0% 4%;
+  --background: 216 19% 5%;
   --foreground: 0 0% 100%;
-  --border: 0 0% 15%;
-  --input: 0 0% 15%;
-  --ring: 46 65% 52%;
-  --card: 0 0% 9%;
+  --border: 216 15% 16%;
+  --input: 216 15% 16%;
+  --ring: 202 100% 61%;
+  --card: 216 17% 9%;
   --card-foreground: 0 0% 100%;
-  --card-border: 0 0% 18%;
-  --popover: 0 0% 9%;
+  --card-border: 216 15% 16%;
+  --popover: 216 17% 9%;
   --popover-foreground: 0 0% 100%;
-  --popover-border: 0 0% 18%;
-  --primary: 46 65% 52%;
-  --primary-foreground: 0 0% 4%;
-  --secondary: 0 0% 12%;
+  --popover-border: 216 15% 16%;
+  --primary: 202 100% 61%;
+  --primary-foreground: 216 19% 5%;
+  --secondary: 216 15% 13%;
   --secondary-foreground: 0 0% 100%;
-  --muted: 0 0% 12%;
-  --muted-foreground: 0 0% 63%;
-  --accent: 46 65% 52%;
-  --accent-foreground: 0 0% 4%;
+  --muted: 216 15% 13%;
+  --muted-foreground: 216 10% 60%;
+  --accent: 202 100% 61%;
+  --accent-foreground: 216 19% 5%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 }
@@ -150,4 +151,36 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
   }
+}
+
+/* Liquid Glass utilities */
+.glass {
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  background: rgba(55, 182, 255, 0.04);
+  border: 1px solid rgba(55, 182, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 30px rgba(55, 182, 255, 0.06);
+}
+
+.glass-silver {
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  background: rgba(201, 206, 214, 0.04);
+  border: 1px solid rgba(201, 206, 214, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 30px rgba(201, 206, 214, 0.04);
+}
+
+.glass-popular {
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  background: rgba(55, 182, 255, 0.08);
+  border: 1px solid rgba(55, 182, 255, 0.30);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 50px rgba(55, 182, 255, 0.15),
+    0 0 100px rgba(55, 182, 255, 0.05);
 }
