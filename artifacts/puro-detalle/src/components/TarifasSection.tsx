@@ -189,7 +189,7 @@ export default function TarifasSection({ highlighted }: { highlighted: string | 
   return (
     <section id="tarifas" className="py-24 relative z-10 scroll-mt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ---------- Tarifas ---------- */}
+        {/* ---------- Plan de servicios ---------- */}
         <div className="text-center mb-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -197,103 +197,8 @@ export default function TarifasSection({ highlighted }: { highlighted: string | 
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-serif uppercase tracking-wider text-foreground"
           >
-            Tarifas
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            className="font-script italic text-2xl md:text-3xl text-[#0077D6] mt-3"
-          >
-            Precios según el tamaño de tu vehículo
-          </motion.p>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="glass rounded-3xl p-4 sm:p-6 lg:p-8 mb-6 overflow-x-auto"
-        >
-          <table className="w-full min-w-[680px] border-separate border-spacing-2">
-            <caption className="sr-only">
-              Precios de cada paquete según el tamaño del vehículo
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col" className="sr-only">
-                  Tamaño del vehículo
-                </th>
-                {PACKAGES.map((pkg) => (
-                  <th key={pkg.id} scope="col" className="w-1/5 align-bottom pt-3">
-                    <PkgHeader pkg={pkg} highlighted={activeId === pkg.id} />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {SIZES.map(({ label, desc, Icon, prices }) => (
-                <tr key={label}>
-                  <th scope="row" className="text-left align-middle py-4 pr-2">
-                    <span className="flex items-center gap-3">
-                      <Icon className="w-8 h-8 text-[#0077D6]" strokeWidth={1.5} />
-                      <span>
-                        <span className="block font-serif uppercase tracking-wider text-lg text-foreground leading-none">
-                          {label}
-                        </span>
-                        <span className="block text-[10px] tracking-widest uppercase text-muted-foreground font-sans mt-1">
-                          {desc}
-                        </span>
-                      </span>
-                    </span>
-                  </th>
-                  {prices.map((price, i) => {
-                    const pkg = PACKAGES[i];
-                    return (
-                      <td
-                        key={pkg.id}
-                        className={`text-center align-middle rounded-xl py-5 transition-colors duration-300 ${colTint(pkg)}`}
-                      >
-                        <span
-                          className={`text-2xl md:text-3xl font-light ${
-                            pkg.kind === 'blue' ? 'text-[#0077D6]' : 'text-[#4A5462]'
-                          }`}
-                        >
-                          {price}
-                        </span>
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </motion.div>
-
-        {/* Notas de tarifas */}
-        <div className="flex flex-col items-center gap-2 mb-20 text-sm text-muted-foreground font-sans">
-          <p className="inline-flex items-center gap-2">
-            <Home className="w-4 h-4 text-[#0077D6]" />
-            Servicio de mantenimiento a domicilio · mínimo 2 vehículos
-          </p>
-          <p className="inline-flex items-center gap-2">
-            <Armchair className="w-4 h-4 text-[#0077D6]" />
-            Boutique Integral · +12,50 € por asiento extra
-          </p>
-        </div>
-
-        {/* ---------- Plan de servicios ---------- */}
-        <div className="text-center mb-10">
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl md:text-4xl font-serif uppercase tracking-wider text-foreground"
-          >
             Plan de Servicios
-          </motion.h3>
+          </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -310,7 +215,7 @@ export default function TarifasSection({ highlighted }: { highlighted: string | 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="glass rounded-3xl p-4 sm:p-6 lg:p-8 overflow-x-auto"
+          className="glass rounded-3xl p-4 sm:p-6 lg:p-8 overflow-x-auto mb-20"
         >
           <table className="w-full min-w-[680px] border-separate border-spacing-x-2 border-spacing-y-0">
             <caption className="sr-only">
@@ -386,6 +291,101 @@ export default function TarifasSection({ highlighted }: { highlighted: string | 
             </span>
           </div>
         </motion.div>
+
+        {/* ---------- Tarifas ---------- */}
+        <div className="text-center mb-10">
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-4xl font-serif uppercase tracking-wider text-foreground"
+          >
+            Tarifas
+          </motion.h3>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="font-script italic text-2xl md:text-3xl text-[#0077D6] mt-3"
+          >
+            Precios según el tamaño de tu vehículo
+          </motion.p>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="glass rounded-3xl p-4 sm:p-6 lg:p-8 mb-6 overflow-x-auto"
+        >
+          <table className="w-full min-w-[680px] border-separate border-spacing-2">
+            <caption className="sr-only">
+              Precios de cada paquete según el tamaño del vehículo
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col" className="sr-only">
+                  Tamaño del vehículo
+                </th>
+                {PACKAGES.map((pkg) => (
+                  <th key={pkg.id} scope="col" className="w-1/5 align-bottom pt-3">
+                    <PkgHeader pkg={pkg} highlighted={activeId === pkg.id} />
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {SIZES.map(({ label, desc, Icon, prices }) => (
+                <tr key={label}>
+                  <th scope="row" className="text-left align-middle py-4 pr-2">
+                    <span className="flex items-center gap-3">
+                      <Icon className="w-8 h-8 text-[#0077D6]" strokeWidth={1.5} />
+                      <span>
+                        <span className="block font-serif uppercase tracking-wider text-lg text-foreground leading-none">
+                          {label}
+                        </span>
+                        <span className="block text-[10px] tracking-widest uppercase text-muted-foreground font-sans mt-1">
+                          {desc}
+                        </span>
+                      </span>
+                    </span>
+                  </th>
+                  {prices.map((price, i) => {
+                    const pkg = PACKAGES[i];
+                    return (
+                      <td
+                        key={pkg.id}
+                        className={`text-center align-middle rounded-xl py-5 transition-colors duration-300 ${colTint(pkg)}`}
+                      >
+                        <span
+                          className={`text-2xl md:text-3xl font-light ${
+                            pkg.kind === 'blue' ? 'text-[#0077D6]' : 'text-[#4A5462]'
+                          }`}
+                        >
+                          {price}
+                        </span>
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </motion.div>
+
+        {/* Notas de tarifas */}
+        <div className="flex flex-col items-center gap-2 text-sm text-muted-foreground font-sans">
+          <p className="inline-flex items-center gap-2">
+            <Home className="w-4 h-4 text-[#0077D6]" />
+            Servicio de mantenimiento a domicilio · mínimo 2 vehículos
+          </p>
+          <p className="inline-flex items-center gap-2">
+            <Armchair className="w-4 h-4 text-[#0077D6]" />
+            Boutique Integral · +12,50 € por asiento extra
+          </p>
+        </div>
 
         {/* ---------- CTA ---------- */}
         <div className="text-center mt-14">
