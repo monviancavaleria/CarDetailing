@@ -188,8 +188,11 @@ export default function Packages() {
           </div>
         </motion.div>
 
-        {/* Contenido con transición deslizante */}
-        <div className="relative overflow-hidden">
+        {/* Contenido con transición deslizante.
+            El overflow-hidden (necesario para el deslizamiento entre pestañas)
+            recortaba el anillo/brillo de la tarjeta seleccionada: se compensa
+            con padding interno y márgenes negativos equivalentes. */}
+        <div className="relative overflow-hidden px-4 -mx-4 py-5 -my-5">
           <AnimatePresence mode="wait" custom={direction} initial={false}>
             {activeTab === 'detallado' ? (
               <motion.div
