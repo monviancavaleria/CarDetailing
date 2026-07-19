@@ -38,7 +38,7 @@ const detallado = [
     popular: false,
     note: "(incluye 1 asiento)",
     description:
-      "Una puesta a punto completa, por dentro y por fuera: habitáculo impecable con tapicería en profundidad y carrocería realzada con sellado de pintura SiO₂.",
+      "Un detallado extenso por dentro y fuera: habitáculo impecable, tapicería como nueva y carrocería realzada con sellado de pintura SiO₂.",
     tagline: "Tu coche, como el primer día."
   },
   {
@@ -48,7 +48,7 @@ const detallado = [
     popular: true,
     note: "(incluye todos los asientos)",
     description:
-      "Nuestra experiencia más exclusiva: desinfección con vapor, cuidado integral del cuero y hasta lavado de motor. El detallado de alta gama que no deja ni un rincón sin mimar.",
+      "Nuestra experiencia más exclusiva: incluye desinfección a vapor completa, cuidado profesional del cuero, entre otros servicios exclusivos para un acabado de exhibición.",
     tagline: "La sensación de estreno, sin salir de casa."
   }
 ];
