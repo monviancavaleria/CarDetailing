@@ -155,7 +155,7 @@ export default function Packages({
             transition={{ delay: 0.15 }}
             className="font-script italic text-2xl md:text-3xl text-[#0077D6] mt-3"
           >
-            Lo que tu coche te pide
+            Lo que tu coche necesita
           </motion.p>
         </div>
 
