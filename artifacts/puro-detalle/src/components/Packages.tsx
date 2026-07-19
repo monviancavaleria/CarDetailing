@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Info } from 'lucide-react';
 import WashEffect from './WashEffect';
 
 const mantenimiento = [
   {
+    id: "mantenimiento-basico",
     name: "Mantenimiento Básico",
     price: "35€",
     features: [
@@ -16,6 +17,7 @@ const mantenimiento = [
     ]
   },
   {
+    id: "mantenimiento-profundo",
     name: "Mantenimiento Profundo",
     price: "55€",
     features: [
@@ -30,6 +32,7 @@ const mantenimiento = [
 
 const detallado = [
   {
+    id: "boutique-integral",
     name: "Boutique Integral",
     price: "89€",
     popular: false,
@@ -43,6 +46,7 @@ const detallado = [
     ]
   },
   {
+    id: "platinum",
     name: "Platinum",
     price: "139€",
     popular: true,
@@ -67,7 +71,11 @@ const slideVariants = {
   exit: (direction: number) => ({ x: direction * -90, opacity: 0 }),
 };
 
-export default function Packages() {
+export default function Packages({
+  onMoreInfo,
+}: {
+  onMoreInfo: (id: string) => void;
+}) {
   const [activeTab, setActiveTab] = React.useState<TabId>('detallado');
   const [direction, setDirection] = React.useState(1);
   const [selected, setSelected] = React.useState<string | null>(null);
@@ -115,6 +123,14 @@ export default function Packages() {
     e.preventDefault();
     if (next !== activeTab) switchTab(next);
     (next === 'detallado' ? detalladoRef : mantenimientoRef).current?.focus();
+  };
+
+  const onInfoClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    // Enlace interno a #tarifas: desplazamiento suave + resaltado de columna,
+    // gestionados por Home (App.tsx). Sin pestañas nuevas.
+    e.preventDefault();
+    e.stopPropagation();
+    onMoreInfo(id);
   };
 
   return (
@@ -244,22 +260,15 @@ export default function Packages() {
                         ))}
                       </ul>
 
-                      <button
-                        type="button"
-                        aria-pressed={isSelected}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleSelect(pkg.name);
-                        }}
-                        className={`w-full inline-flex items-center justify-center gap-2 text-center py-3 rounded-full mb-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans focus-visible:outline-2 focus-visible:outline-[#0077D6]/60 focus-visible:outline-offset-2 ${
-                          isSelected
-                            ? 'bg-[#0077D6]/10 border border-[#0077D6] text-[#075A9E] font-semibold'
-                            : 'border border-dashed border-[#0077D6]/40 text-[#0077D6] hover:border-solid hover:border-[#0077D6]'
-                        }`}
+                      <a
+                        href="#tarifas"
+                        aria-label={`Ver tarifas y servicios incluidos de ${pkg.name}`}
+                        onClick={(e) => onInfoClick(e, pkg.id)}
+                        className="w-full inline-flex items-center justify-center gap-2 text-center py-3 rounded-full mb-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans border border-dashed border-[#0077D6]/40 text-[#0077D6] hover:border-solid hover:border-[#0077D6] hover:bg-[#0077D6]/5 focus-visible:outline-2 focus-visible:outline-[#0077D6]/60 focus-visible:outline-offset-2"
                       >
-                        {isSelected && <Check className="w-4 h-4" strokeWidth={3} />}
-                        {isSelected ? 'Seleccionado' : `Seleccionar ${pkg.name}`}
-                      </button>
+                        <Info className="w-4 h-4" />
+                        Más información
+                      </a>
 
                       <a
                         href="https://wa.me/34603533624"
@@ -320,22 +329,15 @@ export default function Packages() {
                         ))}
                       </ul>
 
-                      <button
-                        type="button"
-                        aria-pressed={isSelected}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleSelect(pkg.name);
-                        }}
-                        className={`w-full inline-flex items-center justify-center gap-2 text-center py-3 rounded-full mb-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans focus-visible:outline-2 focus-visible:outline-[#5B6470]/60 focus-visible:outline-offset-2 ${
-                          isSelected
-                            ? 'bg-[#5B6470]/10 border border-[#5B6470] text-[#4A5462] font-semibold'
-                            : 'border border-dashed border-[#8C96A3]/60 text-[#4A5462] hover:border-solid hover:border-[#5B6470]'
-                        }`}
+                      <a
+                        href="#tarifas"
+                        aria-label={`Ver tarifas y servicios incluidos de ${pkg.name}`}
+                        onClick={(e) => onInfoClick(e, pkg.id)}
+                        className="w-full inline-flex items-center justify-center gap-2 text-center py-3 rounded-full mb-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans border border-dashed border-[#8C96A3]/60 text-[#4A5462] hover:border-solid hover:border-[#5B6470] hover:bg-[#C9CED6]/15 focus-visible:outline-2 focus-visible:outline-[#5B6470]/60 focus-visible:outline-offset-2"
                       >
-                        {isSelected && <Check className="w-4 h-4" strokeWidth={3} />}
-                        {isSelected ? 'Seleccionado' : `Seleccionar ${pkg.name}`}
-                      </button>
+                        <Info className="w-4 h-4" />
+                        Más información
+                      </a>
 
                       <a
                         href="https://wa.me/34603533624"
