@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const logoUrl = `${import.meta.env.BASE_URL}logo-hero.webp`;
+const logoUrl = `${import.meta.env.BASE_URL}logo-wordmark.webp`;
 
 export default function Hero() {
   return (
@@ -55,7 +55,7 @@ export default function Hero() {
               El cuidado que tu coche se merece,
             </span>{' '}
             <br className="hidden md:block" />
-            <span className="sweep sweep-blue sweep-delay font-script text-4xl md:text-6xl lg:text-7xl normal-case tracking-normal">
+            <span className="sweep sweep-blue sweep-delay font-script italic text-4xl md:text-6xl lg:text-7xl normal-case tracking-normal">
               sin moverte de casa.
             </span>
           </h1>
@@ -76,7 +76,7 @@ export default function Hero() {
               </span>
             </a>
 
-            <p className="font-script text-2xl md:text-4xl text-[#0077D6]">
+            <p className="font-script italic text-2xl md:text-4xl text-[#0077D6]">
               A un click de tu hogar.
             </p>
 

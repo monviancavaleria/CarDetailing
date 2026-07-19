@@ -1,6 +1,7 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Check } from 'lucide-react';
+import WashEffect from './WashEffect';
 
 const mantenimiento = [
   {
@@ -58,6 +59,8 @@ const detallado = [
 
 type TabId = 'detallado' | 'mantenimiento';
 
+const WASH_DURATION_MS = 1150;
+
 const slideVariants = {
   enter: (direction: number) => ({ x: direction * 90, opacity: 0 }),
   center: { x: 0, opacity: 1 },
@@ -67,11 +70,34 @@ const slideVariants = {
 export default function Packages() {
   const [activeTab, setActiveTab] = React.useState<TabId>('detallado');
   const [direction, setDirection] = React.useState(1);
+  const [selected, setSelected] = React.useState<string | null>(null);
+  const [washing, setWashing] = React.useState<string | null>(null);
+  const washTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  React.useEffect(
+    () => () => {
+      if (washTimer.current) clearTimeout(washTimer.current);
+    },
+    []
+  );
 
   const switchTab = (tab: TabId) => {
     if (tab === activeTab) return;
     setDirection(tab === 'mantenimiento' ? 1 : -1);
     setActiveTab(tab);
+  };
+
+  const toggleSelect = (name: string) => {
+    const willSelect = selected !== name;
+    setSelected(willSelect ? name : null);
+    if (washTimer.current) clearTimeout(washTimer.current);
+    if (willSelect && !prefersReducedMotion) {
+      setWashing(name);
+      washTimer.current = setTimeout(() => setWashing(null), WASH_DURATION_MS);
+    } else {
+      setWashing(null);
+    }
   };
 
   const detalladoRef = React.useRef<HTMLButtonElement>(null);
@@ -108,7 +134,7 @@ export default function Packages() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="font-script text-2xl md:text-3xl text-[#0077D6] mt-3"
+            className="font-script italic text-2xl md:text-3xl text-[#0077D6] mt-3"
           >
             Lo que tu coche te pide
           </motion.p>
@@ -179,14 +205,17 @@ export default function Packages() {
                 transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                  {detallado.map((pkg, i) => (
+                  {detallado.map((pkg, i) => {
+                    const isSelected = selected === pkg.name;
+                    return (
                     <div
                       key={i}
-                      className={`relative rounded-2xl p-8 lg:p-10 flex flex-col transition-all duration-500 ${
+                      onClick={() => toggleSelect(pkg.name)}
+                      className={`relative rounded-2xl p-8 lg:p-10 flex flex-col cursor-pointer transition-all duration-300 ${
                         pkg.popular
                           ? 'glass-popular hover:shadow-[0_16px_60px_rgba(0,119,214,0.22)]'
                           : 'glass-blue hover:border-[#0077D6]/35 hover:shadow-[0_12px_45px_rgba(0,119,214,0.12)]'
-                      }`}
+                      } ${isSelected ? 'card-selected-blue' : ''}`}
                     >
                       {pkg.popular && (
                         <div className="absolute top-4 right-4 px-4 py-1 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white text-[10px] font-bold tracking-widest uppercase font-sans shadow-[0_4px_14px_rgba(0,119,214,0.35)]">
@@ -212,10 +241,28 @@ export default function Packages() {
                         ))}
                       </ul>
 
+                      <button
+                        type="button"
+                        aria-pressed={isSelected}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleSelect(pkg.name);
+                        }}
+                        className={`w-full inline-flex items-center justify-center gap-2 text-center py-3 rounded-full mb-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans focus-visible:outline-2 focus-visible:outline-[#0077D6]/60 focus-visible:outline-offset-2 ${
+                          isSelected
+                            ? 'bg-[#0077D6]/10 border border-[#0077D6] text-[#075A9E] font-semibold'
+                            : 'border border-dashed border-[#0077D6]/40 text-[#0077D6] hover:border-solid hover:border-[#0077D6]'
+                        }`}
+                      >
+                        {isSelected && <Check className="w-4 h-4" strokeWidth={3} />}
+                        {isSelected ? 'Seleccionado' : `Seleccionar ${pkg.name}`}
+                      </button>
+
                       <a
                         href="https://wa.me/34603533624"
                         target="_blank"
                         rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                         className={`w-full text-center py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans ${
                           pkg.popular
                             ? 'bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white hover:brightness-110 shadow-[0_4px_18px_rgba(0,119,214,0.30)]'
@@ -224,8 +271,11 @@ export default function Packages() {
                       >
                         Reservar
                       </a>
+
+                      {washing === pkg.name && <WashEffect tint="blue" />}
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </motion.div>
             ) : (
@@ -242,10 +292,13 @@ export default function Packages() {
                 transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                  {mantenimiento.map((pkg, i) => (
+                  {mantenimiento.map((pkg, i) => {
+                    const isSelected = selected === pkg.name;
+                    return (
                     <div
                       key={i}
-                      className="glass-silver rounded-2xl p-8 lg:p-10 flex flex-col hover:border-[#8C96A3]/60 hover:shadow-[0_12px_45px_rgba(90,100,112,0.16)] transition-all duration-500"
+                      onClick={() => toggleSelect(pkg.name)}
+                      className={`relative glass-silver rounded-2xl p-8 lg:p-10 flex flex-col cursor-pointer hover:border-[#8C96A3]/60 hover:shadow-[0_12px_45px_rgba(90,100,112,0.16)] transition-all duration-300 ${isSelected ? 'card-selected-silver' : ''}`}
                     >
                       <h4 className="text-2xl font-serif text-[#4A5462] mb-2 uppercase tracking-wider">{pkg.name}</h4>
                       <div className="text-muted-foreground text-sm mb-6 flex items-baseline gap-2 font-sans">
@@ -264,20 +317,41 @@ export default function Packages() {
                         ))}
                       </ul>
 
+                      <button
+                        type="button"
+                        aria-pressed={isSelected}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleSelect(pkg.name);
+                        }}
+                        className={`w-full inline-flex items-center justify-center gap-2 text-center py-3 rounded-full mb-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans focus-visible:outline-2 focus-visible:outline-[#5B6470]/60 focus-visible:outline-offset-2 ${
+                          isSelected
+                            ? 'bg-[#5B6470]/10 border border-[#5B6470] text-[#4A5462] font-semibold'
+                            : 'border border-dashed border-[#8C96A3]/60 text-[#4A5462] hover:border-solid hover:border-[#5B6470]'
+                        }`}
+                      >
+                        {isSelected && <Check className="w-4 h-4" strokeWidth={3} />}
+                        {isSelected ? 'Seleccionado' : `Seleccionar ${pkg.name}`}
+                      </button>
+
                       <a
                         href="https://wa.me/34603533624"
                         target="_blank"
                         rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                         className="w-full text-center py-3 rounded-full border border-[#8C96A3]/50 text-[#4A5462] hover:border-[#5B6470] hover:bg-[#C9CED6]/15 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans"
                       >
                         Reservar
                       </a>
+
+                      {washing === pkg.name && <WashEffect tint="silver" />}
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
-                {/* Condición — misma tipografía que el logotipo */}
-                <p className="font-script text-lg md:text-xl text-[#0077D6] text-center mt-10">
+                {/* Condición del servicio de mantenimiento */}
+                <p className="font-script italic text-lg md:text-xl text-[#0077D6] text-center mt-10">
                   Servicio a domicilio mínimo 2 vehículos por servicio de mantenimiento
                 </p>
               </motion.div>

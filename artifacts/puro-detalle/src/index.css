@@ -91,7 +91,7 @@
 
   --app-font-sans: 'Barlow Semi Condensed', sans-serif;
   --app-font-serif: 'Anton', sans-serif;
-  --app-font-script: 'Kaushan Script', cursive;
+  --app-font-script: 'Playfair Display', Georgia, serif;
   --app-font-mono: Menlo, monospace;
   --radius: 0.75rem;
 
@@ -175,6 +175,29 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
     0 12px 45px rgba(0, 119, 214, 0.16),
     0 0 90px rgba(55, 182, 255, 0.10);
+}
+
+/* ---------- Estado seleccionado de las tarjetas de paquete ----------
+   Definidas DESPUÉS de las glass-* (mismo nivel de cascada, sin capa)
+   para que su box-shadow gane a las anteriores por orden. */
+.card-selected-blue {
+  border-color: rgba(0, 119, 214, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 0 0 2px #0077d6,
+    0 0 0 6px rgba(0, 119, 214, 0.16),
+    0 18px 65px rgba(0, 119, 214, 0.35);
+  transform: scale(1.02);
+}
+
+.card-selected-silver {
+  border-color: rgba(91, 100, 112, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 2px #5b6470,
+    0 0 0 6px rgba(140, 150, 163, 0.22),
+    0 18px 65px rgba(90, 100, 112, 0.32);
+  transform: scale(1.02);
 }
 
 /* ---------- Barrido de luz (logo, titulares) ---------- */
