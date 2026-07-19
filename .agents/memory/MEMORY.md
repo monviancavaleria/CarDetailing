@@ -6,3 +6,5 @@
 - [Regenerated assets need a rename](logo-favicon-assets.md) — replacing a public/ image under the same filename serves the stale cached version to users; rename + update refs to cache-bust.
 - [Unlayered CSS vs utilities](tailwind-cascade-glass.md) — glass-* plain CSS beats ring/shadow utilities (cascade layers); add state classes after glass-*, use outline-* for focus.
 - [Decorative card selection](decorative-card-selection.md) — wash/glow select on package cards is pointer-only by user choice; don't re-add aria-pressed buttons unasked.
+- [Tarifas #00EAFF tick](decorative-card-selection.md) — cyan tick badge is the user's explicit color pick (sample image); don't "fix" its contrast; #0077D6 icons nearby are intentional.
+- [E2E color checks](e2e-verification.md) — give the tester the exact element + computed property upfront; generic SVG sampling hits decorative icons and yields false failures.

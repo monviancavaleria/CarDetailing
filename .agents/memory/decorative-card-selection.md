@@ -10,3 +10,8 @@ Rule: on the landing's package cards, the card-body click that triggers the wash
 **Why:** the user explicitly replaced the earlier accessible "Seleccionar" toggle buttons with "Más información" links (in-page anchors that scroll to the #tarifas section and highlight that package's column there). Selection currently has no functional consequence — every real action (Más información, Reservar) is a proper link. Code review flags this as a medium a11y gap; it was consciously accepted to honor the user's design.
 
 **How to apply:** do not "fix" this by re-adding aria-pressed buttons or card button semantics without the user asking. If a future feature makes selection functional (e.g. booking via WhatsApp with the chosen package pre-filled), THAT is the moment to design proper accessible selection semantics. When e2e-verifying selection, check the card's `card-selected-*` class + visuals, not aria state; the wash overlay unmounts after ~1.15 s.
+
+## Tick badge #00EAFF en la matriz de tarifas (jul 2026)
+Rule: the "included" badge in the Plan de Servicios matrix uses #00EAFF background + dark #05435C check — the user's explicit pick (sent a color-sample image, "Azul Eléctrico Luminoso").
+**Why:** reviewers flag the cyan's soft contrast on light glass; do NOT revert it to #0077D6 or darken it unasked.
+**How to apply:** nearby #0077D6 SVGs (vehicle-size icons, note icons, WhatsApp CTA) are intentional brand blue, not stale ticks. The category filtering on "Más información" + "Ver los 4 paquetes" reset chip is deliberate UX (user wanted the section less overloaded).

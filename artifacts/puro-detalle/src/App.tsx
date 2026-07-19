@@ -31,7 +31,7 @@ function Home() {
         <Hero />
         {/* <TrustStrip /> — oculto en esta fase del rediseño */}
         <Packages onMoreInfo={handleMoreInfo} activeInfo={infoPkg} />
-        <TarifasSection highlighted={infoPkg} />
+        <TarifasSection highlighted={infoPkg} onClear={() => setInfoPkg(null)} />
         <InfoHub />
       </main>
       <Footer />

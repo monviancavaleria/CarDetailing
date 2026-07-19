@@ -16,7 +16,10 @@ import {
  * Sección #tarifas de la landing: matriz de precios por tamaño de vehículo
  * y plan de servicios (qué incluye cada paquete y qué no).
  * `highlighted` (id de paquete) resalta la columna correspondiente; se activa
- * desde los botones "Más información" de las tarjetas de paquetes.
+ * desde los botones "Más información" de las tarjetas de paquetes. Al haber
+ * un paquete activo, solo se muestran las columnas de su categoría
+ * (Mantenimiento o Detallado) para aligerar la sección; `onClear` vuelve a
+ * la comparativa completa.
  */
 
 type PkgId =
@@ -121,8 +124,8 @@ const SERVICE_GROUPS: {
 function LevelIcon({ level }: { level: Level }) {
   if (level === 'full') {
     return (
-      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#0077D6] shadow-[0_2px_8px_rgba(0,119,214,0.35)]">
-        <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#00EAFF] shadow-[0_2px_10px_rgba(0,234,255,0.5)]">
+        <Check className="w-3.5 h-3.5 text-[#05435C]" strokeWidth={3} />
         <span className="sr-only">{LEVEL_LABEL.full}</span>
       </span>
     );
@@ -174,10 +177,33 @@ function PkgHeader({ pkg, highlighted }: { pkg: Pkg; highlighted: boolean }) {
   );
 }
 
-export default function TarifasSection({ highlighted }: { highlighted: string | null }) {
-  const activeId: PkgId | null = PACKAGES.some((pkg) => pkg.id === highlighted)
-    ? (highlighted as PkgId)
-    : null;
+export default function TarifasSection({
+  highlighted,
+  onClear,
+}: {
+  highlighted: string | null;
+  onClear?: () => void;
+}) {
+  const activePkg = PACKAGES.find((pkg) => pkg.id === highlighted) ?? null;
+  const activeId = activePkg?.id ?? null;
+
+  /* Columnas visibles: todas, o solo las de la categoría del paquete activo */
+  const cols = PACKAGES.map((pkg, idx) => ({ pkg, idx })).filter(
+    ({ pkg }) => !activePkg || pkg.kind === activePkg.kind,
+  );
+  const isFiltered = cols.length < PACKAGES.length;
+
+  /* Con la vista filtrada se ocultan las filas donde nada está incluido */
+  const groups = SERVICE_GROUPS.map((group) => ({
+    ...group,
+    rows: isFiltered
+      ? group.rows.filter((row) => cols.some(({ idx }) => row.levels[idx] !== 'none'))
+      : group.rows,
+  })).filter((group) => group.rows.length > 0);
+
+  const colWidth = isFiltered ? 'w-[30%]' : 'w-[17%]';
+  const priceColWidth = isFiltered ? 'w-[30%]' : 'w-1/5';
+  const tableMinWidth = isFiltered ? 'min-w-[440px]' : 'min-w-[680px]';
 
   const colTint = (pkg: Pkg) =>
     activeId === pkg.id
@@ -189,7 +215,7 @@ export default function TarifasSection({ highlighted }: { highlighted: string | 
   return (
     <section id="tarifas" className="py-24 relative z-10 scroll-mt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ---------- Plan de servicios ---------- */}
+        {/* ---------- Tarifas ---------- */}
         <div className="text-center mb-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -197,8 +223,113 @@ export default function TarifasSection({ highlighted }: { highlighted: string | 
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-serif uppercase tracking-wider text-foreground"
           >
-            Plan de Servicios
+            Tarifas
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="font-script italic text-2xl md:text-3xl text-[#0077D6] mt-3"
+          >
+            Precios según el tamaño de tu vehículo
+          </motion.p>
+          {isFiltered && onClear && (
+            <button
+              type="button"
+              onClick={onClear}
+              className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#0077D6]/30 bg-white/40 text-[11px] tracking-widest uppercase font-sans font-medium text-[#075A9E] hover:bg-[#0077D6]/10 transition-colors"
+            >
+              Ver los 4 paquetes
+            </button>
+          )}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="glass rounded-3xl p-4 sm:p-6 lg:p-8 mb-6 overflow-x-auto"
+        >
+          <table className={`w-full ${tableMinWidth} border-separate border-spacing-2`}>
+            <caption className="sr-only">
+              Precios de cada paquete según el tamaño del vehículo
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col" className="sr-only">
+                  Tamaño del vehículo
+                </th>
+                {cols.map(({ pkg }) => (
+                  <th key={pkg.id} scope="col" className={`${priceColWidth} align-bottom pt-3`}>
+                    <PkgHeader pkg={pkg} highlighted={activeId === pkg.id} />
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {SIZES.map(({ label, desc, Icon, prices }) => (
+                <tr key={label}>
+                  <th scope="row" className="text-left align-middle py-4 pr-2">
+                    <span className="flex items-center gap-3">
+                      <Icon className="w-8 h-8 text-[#0077D6]" strokeWidth={1.5} />
+                      <span>
+                        <span className="block font-serif uppercase tracking-wider text-lg text-foreground leading-none">
+                          {label}
+                        </span>
+                        <span className="block text-[10px] tracking-widest uppercase text-muted-foreground font-sans mt-1">
+                          {desc}
+                        </span>
+                      </span>
+                    </span>
+                  </th>
+                  {cols.map(({ pkg, idx }) => (
+                    <td
+                      key={pkg.id}
+                      className={`text-center align-middle rounded-xl py-5 transition-colors duration-300 ${colTint(pkg)}`}
+                    >
+                      <span
+                        className={`text-2xl md:text-3xl font-light ${
+                          pkg.kind === 'blue' ? 'text-[#0077D6]' : 'text-[#4A5462]'
+                        }`}
+                      >
+                        {prices[idx]}
+                      </span>
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </motion.div>
+
+        {/* Notas de tarifas */}
+        <div className="flex flex-col items-center gap-2 mb-20 text-sm text-muted-foreground font-sans">
+          {(!isFiltered || activePkg?.kind === 'silver') && (
+            <p className="inline-flex items-center gap-2">
+              <Home className="w-4 h-4 text-[#0077D6]" />
+              Servicio de mantenimiento a domicilio · mínimo 2 vehículos
+            </p>
+          )}
+          {(!isFiltered || activePkg?.kind === 'blue') && (
+            <p className="inline-flex items-center gap-2">
+              <Armchair className="w-4 h-4 text-[#0077D6]" />
+              Boutique Integral · +12,50 € por asiento extra
+            </p>
+          )}
+        </div>
+
+        {/* ---------- Plan de servicios ---------- */}
+        <div className="text-center mb-10">
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-4xl font-serif uppercase tracking-wider text-foreground"
+          >
+            Plan de Servicios
+          </motion.h3>
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -215,9 +346,9 @@ export default function TarifasSection({ highlighted }: { highlighted: string | 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="glass rounded-3xl p-4 sm:p-6 lg:p-8 overflow-x-auto mb-20"
+          className="glass rounded-3xl p-4 sm:p-6 lg:p-8 overflow-x-auto"
         >
-          <table className="w-full min-w-[680px] border-separate border-spacing-x-2 border-spacing-y-0">
+          <table className={`w-full ${tableMinWidth} border-separate border-spacing-x-2 border-spacing-y-0`}>
             <caption className="sr-only">
               Servicios incluidos en cada paquete: nivel completo, nivel básico o no incluido
             </caption>
@@ -226,19 +357,19 @@ export default function TarifasSection({ highlighted }: { highlighted: string | 
                 <th scope="col" className="sr-only">
                   Servicio
                 </th>
-                {PACKAGES.map((pkg) => (
-                  <th key={pkg.id} scope="col" className="w-[17%] align-bottom pt-3 pb-2">
+                {cols.map(({ pkg }) => (
+                  <th key={pkg.id} scope="col" className={`${colWidth} align-bottom pt-3 pb-2`}>
                     <PkgHeader pkg={pkg} highlighted={activeId === pkg.id} />
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {SERVICE_GROUPS.map((group, gi) => (
-                <React.Fragment key={gi}>
+              {groups.map((group, gi) => (
+                <React.Fragment key={group.title ?? gi}>
                   {group.title && (
                     <tr>
-                      <td colSpan={5} className="pt-8 pb-3">
+                      <td colSpan={cols.length + 1} className="pt-8 pb-3">
                         <div className="flex items-center gap-4">
                           <span className="h-px flex-1 bg-[#0077D6]/15" />
                           <span className="text-xs tracking-[0.25em] uppercase font-sans font-semibold text-[#075A9E]">
@@ -257,17 +388,14 @@ export default function TarifasSection({ highlighted }: { highlighted: string | 
                       >
                         {row.label}
                       </th>
-                      {row.levels.map((level, i) => {
-                        const pkg = PACKAGES[i];
-                        return (
-                          <td
-                            key={pkg.id}
-                            className={`text-center align-middle py-3 border-b border-[#C9CED6]/40 transition-colors duration-300 ${colTint(pkg)}`}
-                          >
-                            <LevelIcon level={level} />
-                          </td>
-                        );
-                      })}
+                      {cols.map(({ pkg, idx }) => (
+                        <td
+                          key={pkg.id}
+                          className={`text-center align-middle py-3 border-b border-[#C9CED6]/40 transition-colors duration-300 ${colTint(pkg)}`}
+                        >
+                          <LevelIcon level={row.levels[idx]} />
+                        </td>
+                      ))}
                     </tr>
                   ))}
                 </React.Fragment>
@@ -291,101 +419,6 @@ export default function TarifasSection({ highlighted }: { highlighted: string | 
             </span>
           </div>
         </motion.div>
-
-        {/* ---------- Tarifas ---------- */}
-        <div className="text-center mb-10">
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-2xl md:text-4xl font-serif uppercase tracking-wider text-foreground"
-          >
-            Tarifas
-          </motion.h3>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            className="font-script italic text-2xl md:text-3xl text-[#0077D6] mt-3"
-          >
-            Precios según el tamaño de tu vehículo
-          </motion.p>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="glass rounded-3xl p-4 sm:p-6 lg:p-8 mb-6 overflow-x-auto"
-        >
-          <table className="w-full min-w-[680px] border-separate border-spacing-2">
-            <caption className="sr-only">
-              Precios de cada paquete según el tamaño del vehículo
-            </caption>
-            <thead>
-              <tr>
-                <th scope="col" className="sr-only">
-                  Tamaño del vehículo
-                </th>
-                {PACKAGES.map((pkg) => (
-                  <th key={pkg.id} scope="col" className="w-1/5 align-bottom pt-3">
-                    <PkgHeader pkg={pkg} highlighted={activeId === pkg.id} />
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {SIZES.map(({ label, desc, Icon, prices }) => (
-                <tr key={label}>
-                  <th scope="row" className="text-left align-middle py-4 pr-2">
-                    <span className="flex items-center gap-3">
-                      <Icon className="w-8 h-8 text-[#0077D6]" strokeWidth={1.5} />
-                      <span>
-                        <span className="block font-serif uppercase tracking-wider text-lg text-foreground leading-none">
-                          {label}
-                        </span>
-                        <span className="block text-[10px] tracking-widest uppercase text-muted-foreground font-sans mt-1">
-                          {desc}
-                        </span>
-                      </span>
-                    </span>
-                  </th>
-                  {prices.map((price, i) => {
-                    const pkg = PACKAGES[i];
-                    return (
-                      <td
-                        key={pkg.id}
-                        className={`text-center align-middle rounded-xl py-5 transition-colors duration-300 ${colTint(pkg)}`}
-                      >
-                        <span
-                          className={`text-2xl md:text-3xl font-light ${
-                            pkg.kind === 'blue' ? 'text-[#0077D6]' : 'text-[#4A5462]'
-                          }`}
-                        >
-                          {price}
-                        </span>
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </motion.div>
-
-        {/* Notas de tarifas */}
-        <div className="flex flex-col items-center gap-2 text-sm text-muted-foreground font-sans">
-          <p className="inline-flex items-center gap-2">
-            <Home className="w-4 h-4 text-[#0077D6]" />
-            Servicio de mantenimiento a domicilio · mínimo 2 vehículos
-          </p>
-          <p className="inline-flex items-center gap-2">
-            <Armchair className="w-4 h-4 text-[#0077D6]" />
-            Boutique Integral · +12,50 € por asiento extra
-          </p>
-        </div>
 
         {/* ---------- CTA ---------- */}
         <div className="text-center mt-14">
