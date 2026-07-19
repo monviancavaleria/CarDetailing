@@ -37,13 +37,9 @@ const detallado = [
     price: "89€",
     popular: false,
     note: "(incluye 1 asiento)",
-    features: [
-      "Lavado exterior premium",
-      "Descontaminación química",
-      "Limpieza profunda de motor",
-      "Limpieza de tapicería (1 asiento)",
-      "Sellador cerámico express"
-    ]
+    description:
+      "Una puesta a punto completa, por dentro y por fuera: habitáculo impecable con tapicería en profundidad y carrocería realzada con sellado de pintura SiO₂.",
+    tagline: "Tu coche, como el primer día."
   },
   {
     id: "platinum",
@@ -51,13 +47,9 @@ const detallado = [
     price: "139€",
     popular: true,
     note: "(incluye todos los asientos)",
-    features: [
-      "Lavado exterior premium total",
-      "Descontaminación química y física",
-      "Limpieza de tapicería integral",
-      "Nutrición de plásticos/cuero",
-      "Protección cerámica 6 meses"
-    ]
+    description:
+      "Nuestra experiencia más exclusiva: desinfección con vapor, cuidado integral del cuero y hasta lavado de motor. El detallado de alta gama que no deja ni un rincón sin mimar.",
+    tagline: "La sensación de estreno, sin salir de casa."
   }
 ];
 
@@ -254,14 +246,14 @@ export default function Packages({
 
                       <div className="h-[1px] w-full bg-[#0077D6]/10 mb-8"></div>
 
-                      <ul className="space-y-4 mb-10 flex-1">
-                        {pkg.features.map((feature, j) => (
-                          <li key={j} className="flex items-start gap-3">
-                            <Check className="w-5 h-5 text-[#0077D6] shrink-0" />
-                            <span className="text-sm font-serif text-[#075A9E] tracking-wide">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <div className="mb-10 flex-1">
+                        <p className="text-[15px] md:text-base leading-relaxed font-serif text-[#075A9E] tracking-wide">
+                          {pkg.description}
+                        </p>
+                        <p className="font-script italic text-xl md:text-2xl text-[#0077D6] mt-5">
+                          {pkg.tagline}
+                        </p>
+                      </div>
 
                       <a
                         href="#tarifas"
