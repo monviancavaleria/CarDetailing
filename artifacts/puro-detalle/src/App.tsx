@@ -30,7 +30,7 @@ function Home() {
       <main>
         <Hero />
         {/* <TrustStrip /> — oculto en esta fase del rediseño */}
-        <Packages onMoreInfo={handleMoreInfo} />
+        <Packages onMoreInfo={handleMoreInfo} activeInfo={infoPkg} />
         <TarifasSection highlighted={infoPkg} />
         <InfoHub />
       </main>
