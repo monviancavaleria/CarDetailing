@@ -55,7 +55,7 @@ export default function Hero() {
               El cuidado que tu coche se merece,
             </span>{' '}
             <br className="hidden md:block" />
-            <span className="sweep sweep-blue sweep-delay font-script italic text-4xl md:text-6xl lg:text-7xl normal-case tracking-normal">
+            <span className="sweep sweep-blue sweep-delay font-script italic text-[2rem] md:text-[3.25rem] lg:text-[4rem] normal-case tracking-normal">
               sin moverte de casa.
             </span>
           </h1>
