@@ -145,7 +145,7 @@ export default function Packages({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="font-script italic text-2xl md:text-3xl text-[#1D80C3] mt-3"
+            className="font-script italic text-2xl md:text-3xl text-[#78C8ED] mt-3"
           >
             Lo que tu coche necesita
           </motion.p>
@@ -233,24 +233,24 @@ export default function Packages({
                     >
                       {pkg.popular && (
                         <div className="absolute top-4 right-4 px-4 py-1 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white text-[10px] font-bold tracking-widest uppercase font-sans shadow-[0_4px_14px_rgba(0,119,214,0.35)]">
-                        <span className="text-[#2CA5DC]" aria-hidden>★</span> Más Popular
+                        <span className="text-[#96DCF6]" aria-hidden>★</span> Más Popular
                         </div>
                       )}
 
-                      <h4 className="text-2xl font-serif text-[#1D80C3] mb-2 uppercase tracking-wider">{pkg.name}</h4>
+                      <h4 className="text-2xl font-serif text-[#78C8ED] mb-2 uppercase tracking-wider">{pkg.name}</h4>
                       <div className="text-muted-foreground text-sm mb-2 flex items-baseline gap-2 font-sans">
                         <span>Desde</span>
-                        <span className="text-4xl text-[#1D80C3] font-light">{pkg.price}</span>
+                        <span className="text-4xl text-[#78C8ED] font-light">{pkg.price}</span>
                       </div>
                       <p className="text-xs text-muted-foreground italic mb-6 font-sans">{pkg.note}</p>
 
                       <div className="h-[1px] w-full bg-[#0077D6]/10 mb-8"></div>
 
                       <div className="mb-10 flex-1">
-                        <p className="text-[15px] md:text-base leading-relaxed font-serif text-[#1D80C3] tracking-wide">
+                        <p className="text-[15px] md:text-base leading-relaxed font-serif text-[#78C8ED] tracking-wide">
                           {pkg.description}
                         </p>
-                        <p className="font-script italic text-xl md:text-2xl text-[#1D80C3] mt-5">
+                        <p className="font-script italic text-xl md:text-2xl text-[#78C8ED] mt-5">
                           {pkg.tagline}
                         </p>
                       </div>
@@ -261,11 +261,11 @@ export default function Packages({
                         onClick={(e) => onInfoClick(e, pkg.id)}
                         className={`w-full inline-flex items-center justify-center gap-2 text-center py-3 rounded-full mb-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans border focus-visible:outline-2 focus-visible:outline-[#0077D6]/60 focus-visible:outline-offset-2 ${
                           activeInfo === pkg.id
-                            ? 'border-solid border-[#0077D6] bg-[#0077D6]/10 text-[#1D80C3] shadow-[0_0_0_3px_rgba(0,119,214,0.16),0_6px_22px_rgba(0,119,214,0.30)]'
+                            ? 'border-solid border-[#0077D6] bg-[#0077D6]/10 text-[#78C8ED] shadow-[0_0_0_3px_rgba(0,119,214,0.16),0_6px_22px_rgba(0,119,214,0.30)]'
                             : 'border-dashed border-[#0077D6]/40 text-[#0077D6] hover:border-solid hover:border-[#0077D6] hover:bg-[#0077D6]/5'
                         }`}
                       >
-                        <Info className="w-4 h-4 text-[#2CA5DC]" />
+                        <Info className="w-4 h-4 text-[#96DCF6]" />
                         Más información
                       </a>
 
@@ -318,7 +318,7 @@ export default function Packages({
                       <ul className="space-y-4 mb-10 flex-1">
                         {pkg.features.map((feature, j) => (
                           <li key={j} className="flex items-start gap-3">
-                            <Check className="w-5 h-5 text-[#2CA5DC] shrink-0" />
+                            <Check className="w-5 h-5 text-[#96DCF6] shrink-0" />
                             <span className="text-sm font-serif text-[#4A5462] tracking-wide">{feature}</span>
                           </li>
                         ))}
@@ -334,7 +334,7 @@ export default function Packages({
                             : 'border-dashed border-[#8C96A3]/60 text-[#4A5462] hover:border-solid hover:border-[#5B6470] hover:bg-[#C9CED6]/15'
                         }`}
                       >
-                        <Info className="w-4 h-4 text-[#2CA5DC]" />
+                        <Info className="w-4 h-4 text-[#96DCF6]" />
                         Más información
                       </a>
 
@@ -355,7 +355,7 @@ export default function Packages({
                 </div>
 
                 {/* Condición del servicio de mantenimiento */}
-                <p className="font-script italic text-lg md:text-xl text-[#1D80C3] text-center mt-10">
+                <p className="font-script italic text-lg md:text-xl text-[#78C8ED] text-center mt-10">
                   Servicio a domicilio mínimo 2 vehículos por servicio de mantenimiento
                 </p>
               </motion.div>

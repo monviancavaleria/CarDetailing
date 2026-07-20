@@ -79,7 +79,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-[#2CA5DC] hover:text-[#1D80C3] transition-colors"
+              className="text-[#96DCF6] hover:text-[#78C8ED] transition-colors"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>

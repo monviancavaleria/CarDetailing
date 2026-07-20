@@ -228,13 +228,13 @@
 .sweep-blue {
   background-image: linear-gradient(
     105deg,
-    #1D80C3 0%,
-    #1D80C3 40%,
-    #2CA5DC 47%,
+    #78C8ED 0%,
+    #78C8ED 40%,
+    #96DCF6 47%,
     #d9f4ff 50%,
-    #2CA5DC 53%,
-    #1D80C3 60%,
-    #1D80C3 100%
+    #96DCF6 53%,
+    #78C8ED 60%,
+    #78C8ED 100%
   );
 }
 

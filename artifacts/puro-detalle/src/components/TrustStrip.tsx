@@ -40,7 +40,7 @@ export default function TrustStrip() {
               className="flex flex-col items-center text-center group"
             >
               <div className="mb-6 p-4 rounded-full bg-background border border-white/5 group-hover:border-primary/50 transition-colors duration-500">
-                <benefit.icon className="w-6 h-6 text-[#2CA5DC] stroke-[1.5]" />
+                <benefit.icon className="w-6 h-6 text-[#96DCF6] stroke-[1.5]" />
               </div>
               <h3 className="text-lg font-serif text-white mb-2">{benefit.title}</h3>
               <p className="text-sm text-muted-foreground font-light leading-relaxed">

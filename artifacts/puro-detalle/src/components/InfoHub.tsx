@@ -123,7 +123,7 @@ export default function InfoHub() {
               >
                 <tab.icon
                   className={`w-8 h-8 md:w-10 md:h-10 transition-all duration-300 ${
-                    active ? 'text-[#2CA5DC] icon-glow-blue' : 'text-[#2CA5DC]/60 group-hover:text-[#2CA5DC]'
+                    active ? 'text-[#96DCF6] icon-glow-blue' : 'text-[#96DCF6]/60 group-hover:text-[#96DCF6]'
                   }`}
                   strokeWidth={1.75}
                 />
@@ -148,7 +148,7 @@ export default function InfoHub() {
                 transition={{ duration: 0.35 }}
               >
                 <div className="glass-blue rounded-2xl max-w-4xl mx-auto p-10 md:p-16 flex flex-col items-center justify-center text-center min-h-[280px]">
-                  <MapPin className="w-12 h-12 text-[#2CA5DC] mb-5" strokeWidth={1.5} />
+                  <MapPin className="w-12 h-12 text-[#96DCF6] mb-5" strokeWidth={1.5} />
                   <h3 className="text-2xl font-serif uppercase tracking-wider text-foreground mb-3">
                     Área de actuación: Madrid
                   </h3>
@@ -176,7 +176,7 @@ export default function InfoHub() {
                       className="group flex items-center gap-4 p-5 glass rounded-xl border-l-2 border-l-[#0077D6]/25 hover:border-l-[#0077D6] hover:bg-white/75 hover:shadow-[0_10px_35px_rgba(0,119,214,0.10)] transition-all duration-300"
                     >
                       <div className="shrink-0 p-2 rounded-full bg-[#0077D6]/5 group-hover:bg-[#0077D6]/10 transition-colors duration-300">
-                        <extra.icon className="w-5 h-5 text-[#2CA5DC]/70 group-hover:text-[#2CA5DC] transition-colors duration-300 stroke-[1.5]" />
+                        <extra.icon className="w-5 h-5 text-[#96DCF6]/70 group-hover:text-[#96DCF6] transition-colors duration-300 stroke-[1.5]" />
                       </div>
                       <span className="text-sm text-foreground/80 group-hover:text-foreground transition-colors font-sans font-medium">
                         {extra.name}
@@ -241,7 +241,7 @@ export default function InfoHub() {
                       rel="noreferrer"
                       className="flex items-center justify-center gap-3 px-8 py-5 rounded-2xl glass-blue text-foreground hover:shadow-[0_8px_35px_rgba(0,119,214,0.18)] transition-all group"
                     >
-                      <Phone className="w-7 h-7 text-[#2CA5DC] group-hover:scale-110 transition-transform" />
+                      <Phone className="w-7 h-7 text-[#96DCF6] group-hover:scale-110 transition-transform" />
                       <span className="font-sans font-medium tracking-wide">603 533 624</span>
                     </a>
                     <a
@@ -250,7 +250,7 @@ export default function InfoHub() {
                       rel="noreferrer"
                       className="flex items-center justify-center gap-3 px-8 py-5 rounded-2xl glass text-foreground hover:bg-white/80 hover:shadow-[0_8px_35px_rgba(15,30,50,0.12)] transition-all group"
                     >
-                      <FaTiktok className="w-7 h-7 text-[#2CA5DC] group-hover:scale-110 transition-transform" />
+                      <FaTiktok className="w-7 h-7 text-[#96DCF6] group-hover:scale-110 transition-transform" />
                       <span className="font-sans font-medium tracking-wide">@purodetallecar</span>
                     </a>
                     <a
