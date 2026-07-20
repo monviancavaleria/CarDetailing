@@ -69,7 +69,7 @@ export default function Hero() {
               href="https://wa.me/34603533624"
               target="_blank"
               rel="noreferrer"
-              className="btn-bubble group relative inline-flex items-center justify-center px-10 py-4 rounded-full overflow-hidden text-[#78C8ED] transition-transform duration-300 active:scale-95 hover:scale-[1.03]"
+              className="btn-bubble group relative inline-flex items-center justify-center px-10 py-4 rounded-full overflow-hidden text-[#075A9E] transition-transform duration-300 active:scale-95 hover:scale-[1.03]"
             >
               <span className="relative font-sans font-semibold tracking-widest uppercase text-sm">
                 Reservar por WhatsApp
