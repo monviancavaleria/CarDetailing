@@ -123,12 +123,10 @@
   }
   body {
     @apply font-sans antialiased text-foreground selection:bg-primary/20 selection:text-primary;
-    /* Degradado sutil: turquesa arriba → azul claro abajo */
+    /* Color de la camioneta (gris azulado claro), con luz sutil como la carrocería */
     background:
-      radial-gradient(ellipse 65% 45% at 12% -5%, rgba(150, 220, 246, 0.42), transparent 70%),
-      radial-gradient(ellipse 50% 38% at 88% 5%, rgba(150, 220, 246, 0.24), transparent 70%),
-      radial-gradient(ellipse 70% 50% at 50% 108%, rgba(120, 200, 237, 0.32), transparent 70%),
-      linear-gradient(180deg, #E6F6FD 0%, #CDEAF9 100%);
+      radial-gradient(ellipse 70% 45% at 50% -5%, rgba(255, 255, 255, 0.22), transparent 70%),
+      linear-gradient(180deg, #BCCAD6 0%, #B7C5D2 45%, #A9B8C4 100%);
     background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
