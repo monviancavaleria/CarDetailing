@@ -14,4 +14,9 @@ Rule: on the landing's package cards, the card-body click that triggers the wash
 ## Tick badge #00EAFF en la matriz de tarifas (jul 2026)
 Rule: the "included" badge in the Plan de Servicios matrix uses #00EAFF background + dark #05435C check — the user's explicit pick (sent a color-sample image, "Azul Eléctrico Luminoso").
 **Why:** reviewers flag the cyan's soft contrast on light glass; do NOT revert it to #0077D6 or darken it unasked.
-**How to apply:** nearby #0077D6 SVGs (vehicle-size icons, note icons, WhatsApp CTA) are intentional brand blue, not stale ticks. The category filtering on "Más información" + "Ver los 4 paquetes" reset chip is deliberate UX (user wanted the section less overloaded).
+**How to apply:** the category filtering on "Más información" + "Ver los 4 paquetes" reset chip is deliberate UX (user wanted the section less overloaded).
+
+## Paleta clara elegida por el usuario (jul 2026)
+Rule: sitewide, letters that were navy #075A9E are now #78C8ED, and icons that were brand blue #0077D6 / text-primary are now #96DCF6 — both sampled from a user-sent two-tone image (top color = icons, bottom = letters).
+**Why:** explicit user pick despite light-on-light contrast; do NOT darken or revert unasked (same stance as the #00EAFF tick).
+**How to apply:** new icons → #96DCF6; display text that used to be navy → #78C8ED. Script italic phrases, prices and outline "Reservar/Más información" buttons intentionally keep #0077D6 (user scoped the change to navy letters + icons only). The #05435C check inside the cyan tick and the decorative #0077D6/10 quote mark stay as-is.

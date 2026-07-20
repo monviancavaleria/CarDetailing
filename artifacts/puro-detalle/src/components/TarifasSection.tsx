@@ -161,7 +161,7 @@ function PkgHeader({ pkg, highlighted }: { pkg: Pkg; highlighted: boolean }) {
       )}
       <span
         className={`font-serif uppercase tracking-wider text-sm md:text-base leading-tight ${
-          isBlue ? 'text-[#075A9E]' : 'text-[#4A5462]'
+          isBlue ? 'text-[#78C8ED]' : 'text-[#4A5462]'
         }`}
       >
         {pkg.name}
@@ -238,7 +238,7 @@ export default function TarifasSection({
             <button
               type="button"
               onClick={onClear}
-              className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#0077D6]/30 bg-white/40 text-[11px] tracking-widest uppercase font-sans font-medium text-[#075A9E] hover:bg-[#0077D6]/10 transition-colors"
+              className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#0077D6]/30 bg-white/40 text-[11px] tracking-widest uppercase font-sans font-medium text-[#78C8ED] hover:bg-[#0077D6]/10 transition-colors"
             >
               Ver los 4 paquetes
             </button>
@@ -276,7 +276,7 @@ export default function TarifasSection({
                       <td colSpan={cols.length + 1} className="pt-8 pb-3">
                         <div className="flex items-center gap-4">
                           <span className="h-px flex-1 bg-[#0077D6]/15" />
-                          <span className="text-xs tracking-[0.25em] uppercase font-sans font-semibold text-[#075A9E]">
+                          <span className="text-xs tracking-[0.25em] uppercase font-sans font-semibold text-[#78C8ED]">
                             {group.title}
                           </span>
                           <span className="h-px flex-1 bg-[#0077D6]/15" />
@@ -373,7 +373,7 @@ export default function TarifasSection({
                 <tr key={label}>
                   <th scope="row" className="text-left align-middle py-4 pr-2">
                     <span className="flex items-center gap-3">
-                      <Icon className="w-8 h-8 text-[#0077D6]" strokeWidth={1.5} />
+                      <Icon className="w-8 h-8 text-[#96DCF6]" strokeWidth={1.5} />
                       <span>
                         <span className="block font-serif uppercase tracking-wider text-lg text-foreground leading-none">
                           {label}
@@ -408,13 +408,13 @@ export default function TarifasSection({
         <div className="flex flex-col items-center gap-2 text-sm text-muted-foreground font-sans">
           {(!isFiltered || activePkg?.kind === 'silver') && (
             <p className="inline-flex items-center gap-2">
-              <Home className="w-4 h-4 text-[#0077D6]" />
+              <Home className="w-4 h-4 text-[#96DCF6]" />
               Servicio de mantenimiento a domicilio · mínimo 2 vehículos
             </p>
           )}
           {(!isFiltered || activePkg?.kind === 'blue') && (
             <p className="inline-flex items-center gap-2">
-              <Armchair className="w-4 h-4 text-[#0077D6]" />
+              <Armchair className="w-4 h-4 text-[#96DCF6]" />
               Boutique Integral · +12,50 € por asiento extra
             </p>
           )}
