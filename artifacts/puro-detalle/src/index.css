@@ -123,11 +123,12 @@
   }
   body {
     @apply font-sans antialiased text-foreground selection:bg-primary/20 selection:text-primary;
+    /* Degradado sutil: turquesa arriba → azul claro abajo */
     background:
-      radial-gradient(ellipse 65% 45% at 12% -5%, rgba(140, 232, 255, 0.30), transparent 70%),
-      radial-gradient(ellipse 50% 38% at 88% 5%, rgba(201, 206, 214, 0.28), transparent 70%),
-      radial-gradient(ellipse 70% 50% at 50% 108%, rgba(0, 119, 214, 0.09), transparent 70%),
-      linear-gradient(180deg, #fafbfd 0%, #eef1f5 100%);
+      radial-gradient(ellipse 65% 45% at 12% -5%, rgba(150, 220, 246, 0.42), transparent 70%),
+      radial-gradient(ellipse 50% 38% at 88% 5%, rgba(150, 220, 246, 0.24), transparent 70%),
+      radial-gradient(ellipse 70% 50% at 50% 108%, rgba(120, 200, 237, 0.32), transparent 70%),
+      linear-gradient(180deg, #E6F6FD 0%, #CDEAF9 100%);
     background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -223,17 +224,17 @@
   animation: light-sweep 3.6s ease-in-out infinite;
 }
 
-/* Azul: base azul profundo, brillo azul hielo (la "P" de Puro) */
+/* Azul claro: base azul claro de la paleta, brillo hielo */
 .sweep-blue {
   background-image: linear-gradient(
     105deg,
-    #0077d6 0%,
-    #0077d6 40%,
-    #37b6ff 47%,
-    #8ce8ff 50%,
-    #37b6ff 53%,
-    #0077d6 60%,
-    #0077d6 100%
+    #78c8ed 0%,
+    #78c8ed 40%,
+    #96dcf6 47%,
+    #d9f4ff 50%,
+    #96dcf6 53%,
+    #78c8ed 60%,
+    #78c8ed 100%
   );
 }
 
@@ -372,10 +373,10 @@
     0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
-/* Resplandor azul eléctrico del icono activo */
+/* Resplandor turquesa del icono activo */
 .icon-glow-blue {
-  filter: drop-shadow(0 0 6px rgba(55, 182, 255, 0.95))
-    drop-shadow(0 0 14px rgba(0, 119, 214, 0.75));
+  filter: drop-shadow(0 0 6px rgba(150, 220, 246, 0.95))
+    drop-shadow(0 0 14px rgba(120, 200, 237, 0.8));
 }
 
 @media (prefers-reduced-motion: reduce) {

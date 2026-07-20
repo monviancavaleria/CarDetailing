@@ -63,7 +63,7 @@ const PACKAGES: Pkg[] = [
     duration: '5 h – 6 h',
     kind: 'blue',
     note: 'Todos los asientos',
-    badge: '★ La preferida',
+    badge: 'La preferida',
   },
 ];
 
@@ -124,7 +124,7 @@ const SERVICE_GROUPS: {
 function LevelIcon({ level }: { level: Level }) {
   if (level === 'full') {
     return (
-      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#00EAFF] shadow-[0_2px_10px_rgba(0,234,255,0.5)]">
+      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#96DCF6] shadow-[0_2px_10px_rgba(150,220,246,0.6)]">
         <Check className="w-3.5 h-3.5 text-[#05435C]" strokeWidth={3} />
         <span className="sr-only">{LEVEL_LABEL.full}</span>
       </span>
@@ -133,14 +133,14 @@ function LevelIcon({ level }: { level: Level }) {
   if (level === 'basic') {
     return (
       <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#C9CED6]/60 border border-[#8C96A3]/60">
-        <Check className="w-3.5 h-3.5 text-[#4A5462]" strokeWidth={3} />
+        <Check className="w-3.5 h-3.5 text-[#96DCF6]" strokeWidth={3} />
         <span className="sr-only">{LEVEL_LABEL.basic}</span>
       </span>
     );
   }
   return (
     <span className="inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#C9CED6]/80">
-      <X className="w-3.5 h-3.5 text-[#8C96A3]/70" strokeWidth={2.5} />
+      <X className="w-3.5 h-3.5 text-[#96DCF6]" strokeWidth={2.5} />
       <span className="sr-only">{LEVEL_LABEL.none}</span>
     </span>
   );
@@ -156,12 +156,12 @@ function PkgHeader({ pkg, highlighted }: { pkg: Pkg; highlighted: boolean }) {
     >
       {pkg.badge && (
         <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-0.5 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white text-[9px] font-bold tracking-widest uppercase font-sans shadow-[0_4px_14px_rgba(0,119,214,0.35)]">
-      {pkg.badge}
+      <span className="text-[#96DCF6]" aria-hidden>★ </span>{pkg.badge}
       </span>
       )}
       <span
         className={`font-serif uppercase tracking-wider text-sm md:text-base leading-tight ${
-          isBlue ? 'text-[#075A9E]' : 'text-[#4A5462]'
+          isBlue ? 'text-[#78C8ED]' : 'text-[#4A5462]'
         }`}
       >
         {pkg.name}
@@ -170,7 +170,7 @@ function PkgHeader({ pkg, highlighted }: { pkg: Pkg; highlighted: boolean }) {
         <span className="text-[10px] text-muted-foreground font-sans italic">{pkg.note}</span>
       )}
       <span className="inline-flex items-center gap-1 text-[10px] text-muted-foreground font-sans">
-        <Clock className="w-3 h-3" />
+        <Clock className="w-3 h-3 text-[#96DCF6]" />
         {pkg.duration}
       </span>
     </div>
@@ -230,7 +230,7 @@ export default function TarifasSection({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="font-script italic text-2xl md:text-3xl text-[#0077D6] mt-3"
+            className="font-script italic text-2xl md:text-3xl text-[#78C8ED] mt-3"
           >
             Qué incluye exactamente cada paquete
           </motion.p>
@@ -238,7 +238,7 @@ export default function TarifasSection({
             <button
               type="button"
               onClick={onClear}
-              className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#0077D6]/30 bg-white/40 text-[11px] tracking-widest uppercase font-sans font-medium text-[#075A9E] hover:bg-[#0077D6]/10 transition-colors"
+              className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#0077D6]/30 bg-white/40 text-[11px] tracking-widest uppercase font-sans font-medium text-[#78C8ED] hover:bg-[#0077D6]/10 transition-colors"
             >
               Ver los 4 paquetes
             </button>
@@ -276,7 +276,7 @@ export default function TarifasSection({
                       <td colSpan={cols.length + 1} className="pt-8 pb-3">
                         <div className="flex items-center gap-4">
                           <span className="h-px flex-1 bg-[#0077D6]/15" />
-                          <span className="text-xs tracking-[0.25em] uppercase font-sans font-semibold text-[#075A9E]">
+                          <span className="text-xs tracking-[0.25em] uppercase font-sans font-semibold text-[#78C8ED]">
                             {group.title}
                           </span>
                           <span className="h-px flex-1 bg-[#0077D6]/15" />
@@ -339,7 +339,7 @@ export default function TarifasSection({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="font-script italic text-2xl md:text-3xl text-[#0077D6] mt-3"
+            className="font-script italic text-2xl md:text-3xl text-[#78C8ED] mt-3"
           >
             Precios según el tamaño de tu vehículo
           </motion.p>
@@ -373,7 +373,7 @@ export default function TarifasSection({
                 <tr key={label}>
                   <th scope="row" className="text-left align-middle py-4 pr-2">
                     <span className="flex items-center gap-3">
-                      <Icon className="w-8 h-8 text-[#0077D6]" strokeWidth={1.5} />
+                      <Icon className="w-8 h-8 text-[#96DCF6]" strokeWidth={1.5} />
                       <span>
                         <span className="block font-serif uppercase tracking-wider text-lg text-foreground leading-none">
                           {label}
@@ -391,7 +391,7 @@ export default function TarifasSection({
                     >
                       <span
                         className={`text-2xl md:text-3xl font-light ${
-                          pkg.kind === 'blue' ? 'text-[#0077D6]' : 'text-[#4A5462]'
+                          pkg.kind === 'blue' ? 'text-[#78C8ED]' : 'text-[#4A5462]'
                         }`}
                       >
                         {prices[idx]}
@@ -408,13 +408,13 @@ export default function TarifasSection({
         <div className="flex flex-col items-center gap-2 text-sm text-muted-foreground font-sans">
           {(!isFiltered || activePkg?.kind === 'silver') && (
             <p className="inline-flex items-center gap-2">
-              <Home className="w-4 h-4 text-[#0077D6]" />
+              <Home className="w-4 h-4 text-[#96DCF6]" />
               Servicio de mantenimiento a domicilio · mínimo 2 vehículos
             </p>
           )}
           {(!isFiltered || activePkg?.kind === 'blue') && (
             <p className="inline-flex items-center gap-2">
-              <Armchair className="w-4 h-4 text-[#0077D6]" />
+              <Armchair className="w-4 h-4 text-[#96DCF6]" />
               Boutique Integral · +12,50 € por asiento extra
             </p>
           )}
@@ -422,16 +422,16 @@ export default function TarifasSection({
 
         {/* ---------- CTA ---------- */}
         <div className="text-center mt-14">
-          <p className="font-script italic text-xl md:text-2xl text-[#0077D6] mb-5">
+          <p className="font-script italic text-xl md:text-2xl text-[#78C8ED] mb-5">
             ¿Dudas sobre qué paquete elegir? Escríbenos y te asesoramos.
           </p>
           <a
             href="https://wa.me/34603533624"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white text-sm tracking-widest uppercase font-medium font-sans hover:brightness-110 transition-all shadow-[0_8px_30px_rgba(0,119,214,0.35)]"
+            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-[#78C8ED] text-sm tracking-widest uppercase font-medium font-sans hover:brightness-110 transition-all shadow-[0_8px_30px_rgba(0,119,214,0.35)]"
           >
-            <MessageCircle className="w-5 h-5" />
+            <MessageCircle className="w-5 h-5 text-[#96DCF6]" />
             Reservar por WhatsApp
           </a>
         </div>

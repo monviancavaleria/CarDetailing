@@ -6,5 +6,5 @@
 - [Regenerated assets need a rename](logo-favicon-assets.md) — replacing a public/ image under the same filename serves the stale cached version to users; rename + update refs to cache-bust.
 - [Unlayered CSS vs utilities](tailwind-cascade-glass.md) — glass-* plain CSS beats ring/shadow utilities (cascade layers); add state classes after glass-*, use outline-* for focus.
 - [Decorative card selection](decorative-card-selection.md) — wash/glow select on package cards is pointer-only by user choice; don't re-add aria-pressed buttons unasked.
-- [User color picks](decorative-card-selection.md) — tick #00EAFF is explicit, never contrast-"fix" it; a pale text/icon palette (#78C8ED/#96DCF6) was tried and rejected — keep #075A9E letters, #0077D6 icons.
+- [User color picks](decorative-card-selection.md) — light palette REINSTATED by explicit full spec (jul 2026): letters/scripts/blue prices #78C8ED, ALL icons #96DCF6, bg turquesa→azul claro; never contrast-"fix" it.
 - [E2E color checks](e2e-verification.md) — give the tester the exact element + computed property upfront; generic SVG sampling hits decorative icons and yields false failures.

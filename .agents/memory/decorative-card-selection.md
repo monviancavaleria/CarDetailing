@@ -11,12 +11,10 @@ Rule: on the landing's package cards, the card-body click that triggers the wash
 
 **How to apply:** do not "fix" this by re-adding aria-pressed buttons or card button semantics without the user asking. If a future feature makes selection functional (e.g. booking via WhatsApp with the chosen package pre-filled), THAT is the moment to design proper accessible selection semantics. When e2e-verifying selection, check the card's `card-selected-*` class + visuals, not aria state; the wash overlay unmounts after ~1.15 s.
 
-## Tick badge #00EAFF en la matriz de tarifas (jul 2026)
-Rule: the "included" badge in the Plan de Servicios matrix uses #00EAFF background + dark #05435C check — the user's explicit pick (sent a color-sample image, "Azul Eléctrico Luminoso").
-**Why:** reviewers flag the cyan's soft contrast on light glass; do NOT revert it to #0077D6 or darken it unasked.
-**How to apply:** the category filtering on "Más información" + "Ver los 4 paquetes" reset chip is deliberate UX (user wanted the section less overloaded).
+## Paleta clara VIGENTE en todo el sitio (jul 2026)
+Rule: standing palette from the user's two-tone sample image: former navy letters, script italics, blue prices and "Reservar por WhatsApp" button text → azul claro #78C8ED; ALL icons (stars, cars, check/X/clock, pin/list/user tabs, phone, hamburger, TikTok) → turquesa #96DCF6; body bg = subtle turquesa→azul claro vertical gradient. Main headings stay dark; the silver "mantenimiento" theme is untouched except its check icons; primary gradient buttons keep #0077D6→#37B6FF; Instagram keeps brand pink.
+**Why:** the user rejected a PARTIAL version of this palette one day, then returned with a detailed spec enumerating every element — palette picks here are volatile and only the latest explicit spec counts. The old #00EAFF "included" tick was superseded: now a #96DCF6 badge with dark #05435C check kept for legibility.
+**How to apply:** never contrast-"fix" these picks unasked. Reviewers flag the light CTA text on the blue gradient WhatsApp button — that exact combo was explicitly requested; it was disclosed to the user with an offer of white. If a new sample image arrives, apply fully but keep the swap cheap (grep-count verification + hero screenshot).
 
-## Paleta clara probada y RECHAZADA (jul 2026)
-Rule: display letters stay navy #075A9E and icons stay brand blue #0077D6 / text-primary. A lighter two-tone palette from a user sample image (letters → #78C8ED, icons → #96DCF6) was applied sitewide and reverted the same day at the user's request ("no me gusta así").
-**Why:** the user disliked the light-on-light result once seen on the real page; the "don't fix contrast" stance covers ONLY the #00EAFF tick badge, not site-wide text/icons.
-**How to apply:** don't reintroduce pale-blue text/icon tones on your own. When the user sends color samples for broad changes, they may still reject the result on sight — confirming one section visually before styling the whole site can save a full revert.
+## Filtrado por categoría en #tarifas (UX deliberada)
+"Más información" filters the plan matrix + price table to that package's category; the "Ver los 4 paquetes" chip resets. User wanted the section less overloaded — keep this behavior.
