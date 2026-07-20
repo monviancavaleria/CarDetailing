@@ -161,7 +161,7 @@ function PkgHeader({ pkg, highlighted }: { pkg: Pkg; highlighted: boolean }) {
       )}
       <span
         className={`font-serif uppercase tracking-wider text-sm md:text-base leading-tight ${
-          isBlue ? 'text-[#78C8ED]' : 'text-[#4A5462]'
+          isBlue ? 'text-[#4FA9DE]' : 'text-[#4A5462]'
         }`}
       >
         {pkg.name}
@@ -230,7 +230,7 @@ export default function TarifasSection({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="font-script italic text-2xl md:text-3xl text-[#78C8ED] mt-3"
+            className="font-script italic text-2xl md:text-3xl text-[#4FA9DE] mt-3"
           >
             Qué incluye exactamente cada paquete
           </motion.p>
@@ -238,7 +238,7 @@ export default function TarifasSection({
             <button
               type="button"
               onClick={onClear}
-              className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#0077D6]/30 bg-white/40 text-[11px] tracking-widest uppercase font-sans font-medium text-[#78C8ED] hover:bg-[#0077D6]/10 transition-colors"
+              className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#0077D6]/30 bg-white/40 text-[11px] tracking-widest uppercase font-sans font-medium text-[#4FA9DE] hover:bg-[#0077D6]/10 transition-colors"
             >
               Ver los 4 paquetes
             </button>
@@ -276,7 +276,7 @@ export default function TarifasSection({
                       <td colSpan={cols.length + 1} className="pt-8 pb-3">
                         <div className="flex items-center gap-4">
                           <span className="h-px flex-1 bg-[#0077D6]/15" />
-                          <span className="text-xs tracking-[0.25em] uppercase font-sans font-semibold text-[#78C8ED]">
+                          <span className="text-xs tracking-[0.25em] uppercase font-sans font-semibold text-[#4FA9DE]">
                             {group.title}
                           </span>
                           <span className="h-px flex-1 bg-[#0077D6]/15" />
@@ -339,7 +339,7 @@ export default function TarifasSection({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="font-script italic text-2xl md:text-3xl text-[#78C8ED] mt-3"
+            className="font-script italic text-2xl md:text-3xl text-[#4FA9DE] mt-3"
           >
             Precios según el tamaño de tu vehículo
           </motion.p>
@@ -391,7 +391,7 @@ export default function TarifasSection({
                     >
                       <span
                         className={`text-2xl md:text-3xl font-light ${
-                          pkg.kind === 'blue' ? 'text-[#78C8ED]' : 'text-[#4A5462]'
+                          pkg.kind === 'blue' ? 'text-[#4FA9DE]' : 'text-[#4A5462]'
                         }`}
                       >
                         {prices[idx]}
@@ -422,14 +422,14 @@ export default function TarifasSection({
 
         {/* ---------- CTA ---------- */}
         <div className="text-center mt-14">
-          <p className="font-script italic text-xl md:text-2xl text-[#78C8ED] mb-5">
+          <p className="font-script italic text-xl md:text-2xl text-[#4FA9DE] mb-5">
             ¿Dudas sobre qué paquete elegir? Escríbenos y te asesoramos.
           </p>
           <a
             href="https://wa.me/34603533624"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-[#78C8ED] text-sm tracking-widest uppercase font-medium font-sans hover:brightness-110 transition-all shadow-[0_8px_30px_rgba(0,119,214,0.35)]"
+            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-[#4FA9DE] text-sm tracking-widest uppercase font-medium font-sans hover:brightness-110 transition-all shadow-[0_8px_30px_rgba(0,119,214,0.35)]"
           >
             <MessageCircle className="w-5 h-5 text-[#96DCF6]" />
             Reservar por WhatsApp

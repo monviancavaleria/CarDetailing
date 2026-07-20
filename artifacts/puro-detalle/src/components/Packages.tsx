@@ -145,7 +145,7 @@ export default function Packages({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="font-script italic text-2xl md:text-3xl text-[#78C8ED] mt-3"
+            className="font-script italic text-2xl md:text-3xl text-[#4FA9DE] mt-3"
           >
             Lo que tu coche necesita
           </motion.p>
@@ -237,20 +237,20 @@ export default function Packages({
                         </div>
                       )}
 
-                      <h4 className="text-2xl font-serif text-[#78C8ED] mb-2 uppercase tracking-wider">{pkg.name}</h4>
+                      <h4 className="text-2xl font-serif text-[#4FA9DE] mb-2 uppercase tracking-wider">{pkg.name}</h4>
                       <div className="text-muted-foreground text-sm mb-2 flex items-baseline gap-2 font-sans">
                         <span>Desde</span>
-                        <span className="text-4xl text-[#78C8ED] font-light">{pkg.price}</span>
+                        <span className="text-4xl text-[#4FA9DE] font-light">{pkg.price}</span>
                       </div>
                       <p className="text-xs text-muted-foreground italic mb-6 font-sans">{pkg.note}</p>
 
                       <div className="h-[1px] w-full bg-[#0077D6]/10 mb-8"></div>
 
                       <div className="mb-10 flex-1">
-                        <p className="text-[15px] md:text-base leading-relaxed font-serif text-[#78C8ED] tracking-wide">
+                        <p className="text-[15px] md:text-base leading-relaxed font-serif text-[#4FA9DE] tracking-wide">
                           {pkg.description}
                         </p>
-                        <p className="font-script italic text-xl md:text-2xl text-[#78C8ED] mt-5">
+                        <p className="font-script italic text-xl md:text-2xl text-[#4FA9DE] mt-5">
                           {pkg.tagline}
                         </p>
                       </div>
@@ -261,7 +261,7 @@ export default function Packages({
                         onClick={(e) => onInfoClick(e, pkg.id)}
                         className={`w-full inline-flex items-center justify-center gap-2 text-center py-3 rounded-full mb-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans border focus-visible:outline-2 focus-visible:outline-[#0077D6]/60 focus-visible:outline-offset-2 ${
                           activeInfo === pkg.id
-                            ? 'border-solid border-[#0077D6] bg-[#0077D6]/10 text-[#78C8ED] shadow-[0_0_0_3px_rgba(0,119,214,0.16),0_6px_22px_rgba(0,119,214,0.30)]'
+                            ? 'border-solid border-[#0077D6] bg-[#0077D6]/10 text-[#4FA9DE] shadow-[0_0_0_3px_rgba(0,119,214,0.16),0_6px_22px_rgba(0,119,214,0.30)]'
                             : 'border-dashed border-[#0077D6]/40 text-[#0077D6] hover:border-solid hover:border-[#0077D6] hover:bg-[#0077D6]/5'
                         }`}
                       >
@@ -355,7 +355,7 @@ export default function Packages({
                 </div>
 
                 {/* Condición del servicio de mantenimiento */}
-                <p className="font-script italic text-lg md:text-xl text-[#78C8ED] text-center mt-10">
+                <p className="font-script italic text-lg md:text-xl text-[#4FA9DE] text-center mt-10">
                   Servicio a domicilio mínimo 2 vehículos por servicio de mantenimiento
                 </p>
               </motion.div>
