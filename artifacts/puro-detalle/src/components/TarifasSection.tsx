@@ -201,9 +201,9 @@ export default function TarifasSection({
       : group.rows,
   })).filter((group) => group.rows.length > 0);
 
-  const colWidth = isFiltered ? 'w-[30%]' : 'w-[17%]';
-  const priceColWidth = isFiltered ? 'w-[30%]' : 'w-1/5';
-  const tableMinWidth = isFiltered ? 'min-w-[440px]' : 'min-w-[680px]';
+  const colWidth = isFiltered ? 'w-[34%]' : 'w-[17%]';
+  const priceColWidth = isFiltered ? 'w-[34%]' : 'w-1/5';
+  const tableMinWidth = isFiltered ? 'min-w-[520px]' : 'min-w-[680px]';
 
   const colTint = (pkg: Pkg) =>
     activeId === pkg.id
@@ -212,10 +212,9 @@ export default function TarifasSection({
         : 'bg-[#8C96A3]/10'
       : '';
 
-  return (
-    <section id="tarifas" className="py-24 relative z-10 scroll-mt-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ---------- Plan de servicios ---------- */}
+  /* ---------- Bloque: plan de servicios ---------- */
+  const planBlock = (
+    <div>
         <div className="text-center mb-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -234,15 +233,6 @@ export default function TarifasSection({
           >
             Qué incluye exactamente cada paquete
           </motion.p>
-          {isFiltered && onClear && (
-            <button
-              type="button"
-              onClick={onClear}
-              className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#0077D6]/30 bg-white/40 text-[11px] tracking-widest uppercase font-sans font-medium text-[#4FA9DE] hover:bg-[#0077D6]/10 transition-colors"
-            >
-              Ver los 4 paquetes
-            </button>
-          )}
         </div>
 
         <motion.div
@@ -250,7 +240,7 @@ export default function TarifasSection({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="glass rounded-3xl p-4 sm:p-6 lg:p-8 overflow-x-auto mb-20"
+          className="glass rounded-3xl p-4 sm:p-6 lg:p-8 overflow-x-auto"
         >
           <table className={`w-full ${tableMinWidth} border-separate border-spacing-x-2 border-spacing-y-0`}>
             <caption className="sr-only">
@@ -323,8 +313,12 @@ export default function TarifasSection({
             </span>
           </div>
         </motion.div>
+    </div>
+  );
 
-        {/* ---------- Tarifas ---------- */}
+  /* ---------- Bloque: tarifas ---------- */
+  const tarifasBlock = (
+    <div>
         <div className="text-center mb-10">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
@@ -343,6 +337,15 @@ export default function TarifasSection({
           >
             Precios según el tamaño de tu vehículo
           </motion.p>
+          {isFiltered && onClear && (
+            <button
+              type="button"
+              onClick={onClear}
+              className="mt-6 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-[#0077D6]/30 bg-white/40 text-[11px] tracking-widest uppercase font-sans font-medium text-[#4FA9DE] hover:bg-[#0077D6]/10 transition-colors"
+            >
+              Ver los 4 paquetes
+            </button>
+          )}
         </div>
 
         <motion.div
@@ -419,6 +422,23 @@ export default function TarifasSection({
             </p>
           )}
         </div>
+    </div>
+  );
+
+  return (
+    <section id="tarifas" className="py-24 relative z-10 scroll-mt-20">
+      <div className={`${isFiltered ? 'max-w-7xl' : 'max-w-6xl'} mx-auto px-4 sm:px-6 lg:px-8`}>
+        {isFiltered ? (
+          <>
+            {tarifasBlock}
+            <div className="mt-20">{planBlock}</div>
+          </>
+        ) : (
+          <>
+            {planBlock}
+            <div className="mt-20">{tarifasBlock}</div>
+          </>
+        )}
 
         {/* ---------- CTA ---------- */}
         <div className="text-center mt-14">
