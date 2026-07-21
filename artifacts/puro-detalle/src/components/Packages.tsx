@@ -19,7 +19,7 @@ const mantenimiento = [
   {
     id: "mantenimiento-profundo",
     name: "Mantenimiento Profundo",
-    price: "55€",
+    price: "49€",
     features: [
       "Todo lo del Básico",
       "Descontaminación férrica exterior",
@@ -48,7 +48,7 @@ const detallado = [
     popular: true,
     note: "(incluye todos los asientos)",
     description:
-      "Nuestra experiencia más exclusiva: incluye desinfección a vapor completa, cuidado profesional del cuero, entre otros servicios exclusivos para un acabado de exhibición.",
+      "Nuestra experiencia más exclusiva: incluye limpieza y cuidado profesional del cuero, entre otros servicios exclusivos para un acabado de exhibición.",
     tagline: "La sensación de estreno, sin salir de casa."
   }
 ];
@@ -365,7 +365,7 @@ export default function Packages({
 
         <div className="mt-12 text-center">
           <p className="text-sm text-muted-foreground italic font-sans">
-            * Los precios varían según el tamaño del vehículo: S/M &middot; L &middot; XL. Consulta sin compromiso.
+            * Los precios varían según el tamaño del vehículo: S &middot; M &middot; L &middot; XL. Consulta sin compromiso.
           </p>
         </div>
       </div>

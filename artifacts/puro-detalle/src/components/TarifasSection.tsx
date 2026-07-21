@@ -9,6 +9,7 @@ import {
   Clock,
   Home,
   MessageCircle,
+  Plus,
   X,
 } from 'lucide-react';
 
@@ -73,16 +74,18 @@ const SIZES: {
   Icon: typeof Car;
   prices: [string, string, string, string];
 }[] = [
-  { label: 'S / M', desc: 'Compacto · Turismo', Icon: Car, prices: ['35 €', '55 €', '89 €', '139 €'] },
-  { label: 'L', desc: 'SUV · Familiar', Icon: CarFront, prices: ['40 €', '60 €', '99 €', '149 €'] },
-  { label: 'XL', desc: 'SUV grande · 7 plazas', Icon: Bus, prices: ['45 €', '65 €', '109 €', '159 €'] },
+  { label: 'S', desc: '< 4,20 m · Urbano · Compacto', Icon: Car, prices: ['35 €', '49 €', '89 €', '139 €'] },
+  { label: 'M', desc: '4,20 – 4,60 m · Turismo', Icon: Car, prices: ['39 €', '54 €', '99 €', '149 €'] },
+  { label: 'L', desc: '4,60 – 4,90 m · SUV · Familiar', Icon: CarFront, prices: ['45 €', '64 €', '109 €', '159 €'] },
+  { label: 'XL', desc: '> 4,90 m · SUV grande · 7 plazas', Icon: Bus, prices: ['55 €', '74 €', '119 €', '169 €'] },
 ];
 
-type Level = 'full' | 'basic' | 'none';
+type Level = 'full' | 'basic' | 'extra' | 'none';
 
 const LEVEL_LABEL: Record<Level, string> = {
   full: 'Nivel completo',
   basic: 'Nivel básico',
+  extra: 'Extra opcional',
   none: 'No incluido',
 };
 
@@ -108,13 +111,13 @@ const SERVICE_GROUPS: {
       { label: 'Acond. plásticos interiores', levels: ['none', 'none', 'full', 'full'] },
       { label: 'Acond. plásticos exteriores', levels: ['none', 'none', 'full', 'full'] },
       { label: 'Tapicería en profundidad', levels: ['none', 'none', 'full', 'full'] },
-      { label: 'Desinfección con vapor', levels: ['none', 'none', 'none', 'full'] },
+      { label: 'Desinfección con vapor', levels: ['none', 'none', 'full', 'full'] },
     ],
   },
   {
     title: 'Solo Platinum',
     rows: [
-      { label: 'Lavado de motor', levels: ['none', 'none', 'none', 'full'] },
+      { label: 'Lavado de motor', levels: ['none', 'none', 'none', 'extra'] },
       { label: 'Limpieza de cuero', levels: ['none', 'none', 'none', 'full'] },
       { label: 'Acond. e hidrat. cuero', levels: ['none', 'none', 'none', 'full'] },
     ],
@@ -127,6 +130,14 @@ function LevelIcon({ level }: { level: Level }) {
       <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#96DCF6] shadow-[0_2px_10px_rgba(150,220,246,0.6)]">
         <Check className="w-3.5 h-3.5 text-[#05435C]" strokeWidth={3} />
         <span className="sr-only">{LEVEL_LABEL.full}</span>
+      </span>
+    );
+  }
+  if (level === 'extra') {
+    return (
+      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#0077D6]/50 bg-[#0077D6]/10">
+        <Plus className="w-3.5 h-3.5 text-[#4FA9DE]" strokeWidth={3} />
+        <span className="sr-only">{LEVEL_LABEL.extra}</span>
       </span>
     );
   }
@@ -244,7 +255,7 @@ export default function TarifasSection({
         >
           <table className={`w-full ${tableMinWidth} border-separate border-spacing-x-2 border-spacing-y-0`}>
             <caption className="sr-only">
-              Servicios incluidos en cada paquete: nivel completo, nivel básico o no incluido
+              Servicios incluidos en cada paquete: nivel completo, nivel básico, extra opcional o no incluido
             </caption>
             <thead>
               <tr>
@@ -306,6 +317,10 @@ export default function TarifasSection({
             <span className="inline-flex items-center gap-2">
               <LevelIcon level="basic" />
               Nivel básico
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <LevelIcon level="extra" />
+              Extra opcional
             </span>
             <span className="inline-flex items-center gap-2">
               <LevelIcon level="none" />
