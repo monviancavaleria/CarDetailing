@@ -393,7 +393,7 @@ export default function TarifasSection({
                     <span className="flex items-center gap-3">
                       <Icon className="w-8 h-8 text-[#96DCF6]" strokeWidth={1.5} />
                       <span>
-                        <span className="block font-serif uppercase tracking-wider text-lg text-foreground leading-none">
+                        <span className="block font-serif uppercase tracking-wider text-xl md:text-2xl text-foreground leading-none">
                           {label}
                         </span>
                         <span className="block text-xs md:text-sm tracking-widest uppercase text-muted-foreground font-sans mt-1">
