@@ -66,10 +66,13 @@ const slideVariants = {
 export default function Packages({
   onMoreInfo,
   activeInfo,
+  onTabChange,
 }: {
   onMoreInfo: (id: string) => void;
   /** Paquete cuya info está resaltada en #tarifas: su botón "Más información" se ilumina. */
   activeInfo: string | null;
+  /** Al cambiar de pestaña, filtra tarifas y plan de servicios por categoría. */
+  onTabChange?: (tab: TabId) => void;
 }) {
   const [activeTab, setActiveTab] = React.useState<TabId>('detallado');
   const [direction, setDirection] = React.useState(1);
@@ -86,6 +89,9 @@ export default function Packages({
   );
 
   const switchTab = (tab: TabId) => {
+    // Aunque la pestaña ya esté activa, re-aplicamos el filtro de tarifas:
+    // el chip "Ver los 4 paquetes" puede haberlo limpiado externamente.
+    onTabChange?.(tab);
     if (tab === activeTab) return;
     setDirection(tab === 'mantenimiento' ? 1 : -1);
     setActiveTab(tab);

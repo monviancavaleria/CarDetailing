@@ -190,17 +190,25 @@ function PkgHeader({ pkg, highlighted }: { pkg: Pkg; highlighted: boolean }) {
 
 export default function TarifasSection({
   highlighted,
+  category,
   onClear,
 }: {
   highlighted: string | null;
+  /** Categoría activa desde las pestañas de paquetes (sin paquete concreto). */
+  category?: 'detallado' | 'mantenimiento' | null;
   onClear?: () => void;
 }) {
   const activePkg = PACKAGES.find((pkg) => pkg.id === highlighted) ?? null;
   const activeId = activePkg?.id ?? null;
 
-  /* Columnas visibles: todas, o solo las de la categoría del paquete activo */
+  /* Categoría a filtrar: la del paquete activo o la de la pestaña elegida */
+  const activeKind: Pkg['kind'] | null =
+    activePkg?.kind ??
+    (category === 'detallado' ? 'blue' : category === 'mantenimiento' ? 'silver' : null);
+
+  /* Columnas visibles: todas, o solo las de la categoría activa */
   const cols = PACKAGES.map((pkg, idx) => ({ pkg, idx })).filter(
-    ({ pkg }) => !activePkg || pkg.kind === activePkg.kind,
+    ({ pkg }) => !activeKind || pkg.kind === activeKind,
   );
   const isFiltered = cols.length < PACKAGES.length;
 
@@ -424,13 +432,13 @@ export default function TarifasSection({
 
         {/* Notas de tarifas */}
         <div className="flex flex-col items-center gap-2 text-sm text-muted-foreground font-sans">
-          {(!isFiltered || activePkg?.kind === 'silver') && (
+          {(!isFiltered || activeKind === 'silver') && (
             <p className="inline-flex items-center gap-2">
               <Home className="w-4 h-4 text-[#96DCF6]" />
               Servicio de mantenimiento a domicilio · mínimo 2 vehículos
             </p>
           )}
-          {(!isFiltered || activePkg?.kind === 'blue') && (
+          {(!isFiltered || activeKind === 'blue') && (
             <p className="inline-flex items-center gap-2">
               <Armchair className="w-4 h-4 text-[#96DCF6]" />
               Boutique Integral · +12,50 € por asiento extra

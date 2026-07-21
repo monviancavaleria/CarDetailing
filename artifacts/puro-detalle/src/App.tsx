@@ -16,6 +16,8 @@ const queryClient = new QueryClient();
 function Home() {
   // Paquete cuya columna se resalta en la sección de tarifas.
   const [infoPkg, setInfoPkg] = React.useState<string | null>(null);
+  // Categoría activa (pestaña Detallado / Mantenimiento): filtra tarifas y plan.
+  const [infoCat, setInfoCat] = React.useState<'detallado' | 'mantenimiento' | null>(null);
 
   const handleMoreInfo = (id: string) => {
     setInfoPkg(id);
@@ -24,14 +26,26 @@ function Home() {
     el?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   };
 
+  const handleTabChange = (tab: 'detallado' | 'mantenimiento') => {
+    setInfoCat(tab);
+    setInfoPkg(null);
+  };
+
   return (
     <div className="min-h-screen text-foreground font-sans">
       <Navbar />
       <main>
         <Hero />
         {/* <TrustStrip /> — oculto en esta fase del rediseño */}
-        <Packages onMoreInfo={handleMoreInfo} activeInfo={infoPkg} />
-        <TarifasSection highlighted={infoPkg} onClear={() => setInfoPkg(null)} />
+        <Packages onMoreInfo={handleMoreInfo} activeInfo={infoPkg} onTabChange={handleTabChange} />
+        <TarifasSection
+          highlighted={infoPkg}
+          category={infoCat}
+          onClear={() => {
+            setInfoPkg(null);
+            setInfoCat(null);
+          }}
+        />
         <InfoHub />
       </main>
       <Footer />
