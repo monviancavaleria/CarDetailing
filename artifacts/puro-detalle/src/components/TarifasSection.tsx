@@ -396,7 +396,7 @@ export default function TarifasSection({
                         <span className="block font-serif uppercase tracking-wider text-lg text-foreground leading-none">
                           {label}
                         </span>
-                        <span className="block text-[10px] tracking-widest uppercase text-muted-foreground font-sans mt-1">
+                        <span className="block text-xs md:text-sm tracking-widest uppercase text-muted-foreground font-sans mt-1">
                           {desc}
                         </span>
                       </span>
