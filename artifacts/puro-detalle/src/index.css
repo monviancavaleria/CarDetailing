@@ -148,8 +148,8 @@
 .glass-blue {
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
-  background: rgba(0, 119, 214, 0.05);
-  border: 1px solid rgba(0, 119, 214, 0.16);
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(0, 119, 214, 0.14);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.85),
     0 8px 32px rgba(0, 119, 214, 0.08);
@@ -168,12 +168,18 @@
 .glass-popular {
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
-  background: rgba(0, 119, 214, 0.08);
-  border: 1px solid rgba(0, 119, 214, 0.35);
+  background: linear-gradient(
+    160deg,
+    rgba(0, 119, 214, 0.18) 0%,
+    rgba(55, 182, 255, 0.10) 55%,
+    rgba(0, 119, 214, 0.14) 100%
+  );
+  border: 1.5px solid rgba(0, 119, 214, 0.55);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 12px 45px rgba(0, 119, 214, 0.16),
-    0 0 90px rgba(55, 182, 255, 0.10);
+    inset 0 -40px 80px rgba(0, 119, 214, 0.08),
+    0 14px 55px rgba(0, 119, 214, 0.24),
+    0 0 110px rgba(55, 182, 255, 0.14);
 }
 
 /* ---------- Estado seleccionado de las tarjetas de paquete ----------
