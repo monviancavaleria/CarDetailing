@@ -184,17 +184,22 @@ function ExtraIcon() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-label={`${LEVEL_LABEL.extra}: ver coste`}
-        className="inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#0077D6]/50 bg-[#0077D6]/10 cursor-pointer hover:bg-[#0077D6]/20 focus-visible:outline-2 focus-visible:outline-[#0077D6]/60 focus-visible:outline-offset-2 transition-colors"
+        className="relative inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#0077D6]/60 bg-[#0077D6]/10 cursor-pointer shadow-[0_2px_10px_rgba(0,119,214,0.35)] hover:bg-[#0077D6]/20 hover:scale-110 focus-visible:outline-2 focus-visible:outline-[#0077D6]/60 focus-visible:outline-offset-2 transition-all"
       >
-        <Plus className="w-3.5 h-3.5 text-[#4FA9DE]" strokeWidth={3} />
+        {/* Halo pulsante: señala que el icono es pulsable */}
+        <span
+          aria-hidden
+          className="absolute inset-0 rounded-full bg-[#0077D6]/30 animate-ping [animation-duration:2.2s]"
+        />
+        <Plus className="relative w-3.5 h-3.5 text-[#4FA9DE]" strokeWidth={3} />
       </button>
       {open && (
         <span
           role="status"
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-20 w-56 rounded-xl bg-[#15181D] text-white text-xs font-sans font-medium leading-relaxed px-4 py-3 shadow-[0_10px_35px_rgba(0,0,0,0.35)] normal-case tracking-normal text-center"
+          className="absolute bottom-full right-[-10px] mb-3 z-20 w-64 rounded-xl bg-[#15181D] text-white text-sm font-sans font-medium leading-relaxed px-4 py-3 shadow-[0_10px_35px_rgba(0,0,0,0.35)] normal-case tracking-normal text-center"
         >
           {EXTRA_INFO}
-          <span className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#15181D]" />
+          <span className="absolute top-full right-[16px] border-8 border-transparent border-t-[#15181D]" />
         </span>
       )}
     </span>
