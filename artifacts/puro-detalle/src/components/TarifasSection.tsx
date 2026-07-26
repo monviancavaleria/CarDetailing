@@ -143,8 +143,8 @@ function LevelIcon({ level }: { level: Level }) {
   }
   if (level === 'basic') {
     return (
-      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#C9CED6]/60 border border-[#8C96A3]/60">
-        <Check className="w-3.5 h-3.5 text-[#96DCF6]" strokeWidth={3} />
+      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/50 border border-[#8C96A3]/80">
+        <Check className="w-3.5 h-3.5 text-[#0077D6]" strokeWidth={3} />
         <span className="sr-only">{LEVEL_LABEL.basic}</span>
       </span>
     );
