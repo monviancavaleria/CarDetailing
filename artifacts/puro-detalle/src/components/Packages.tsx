@@ -268,7 +268,7 @@ export default function Packages({
                         className={`w-full inline-flex items-center justify-center gap-2 text-center py-3 rounded-full mb-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans border focus-visible:outline-2 focus-visible:outline-[#0077D6]/60 focus-visible:outline-offset-2 ${
                           activeInfo === pkg.id
                             ? 'border-solid border-[#0077D6] bg-[#0077D6]/10 text-[#4FA9DE] shadow-[0_0_0_3px_rgba(0,119,214,0.16),0_6px_22px_rgba(0,119,214,0.30)]'
-                            : 'border-dashed border-[#0077D6]/40 text-[#0077D6] hover:border-solid hover:border-[#0077D6] hover:bg-[#0077D6]/5'
+                            : 'border-[#0077D6]/30 text-[#0077D6] hover:border-[#0077D6] hover:bg-[#0077D6]/5'
                         }`}
                       >
                         <Info className="w-4 h-4 text-[#96DCF6]" />
@@ -337,7 +337,7 @@ export default function Packages({
                         className={`w-full inline-flex items-center justify-center gap-2 text-center py-3 rounded-full mb-3 transition-all duration-300 text-sm tracking-widest uppercase font-medium font-sans border focus-visible:outline-2 focus-visible:outline-[#5B6470]/60 focus-visible:outline-offset-2 ${
                           activeInfo === pkg.id
                             ? 'border-solid border-[#5B6470] bg-[#C9CED6]/30 text-[#31383F] shadow-[0_0_0_3px_rgba(140,150,163,0.25),0_6px_22px_rgba(90,100,112,0.28)]'
-                            : 'border-dashed border-[#8C96A3]/60 text-[#4A5462] hover:border-solid hover:border-[#5B6470] hover:bg-[#C9CED6]/15'
+                            : 'border-[#8C96A3]/50 text-[#4A5462] hover:border-[#5B6470] hover:bg-[#C9CED6]/15'
                         }`}
                       >
                         <Info className="w-4 h-4 text-[#96DCF6]" />
