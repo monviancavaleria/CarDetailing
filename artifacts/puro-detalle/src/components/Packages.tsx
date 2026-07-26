@@ -129,7 +129,7 @@ export default function Packages({
   /** Enlace de WhatsApp con mensaje pre-rellenado según el paquete elegido. */
   const waReserveLink = (pkgName: string) =>
     `https://wa.me/34603533624?text=${encodeURIComponent(
-      `Buen día, me interesa reservar el servicio de ${pkgName} para mi coche. Deseo recibir más información al respecto.`
+      `Buen día, me interesa reservar el servicio de ${pkgName} para mi coche. Deseo recibir más información.`
     )}`;
 
   const onInfoClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
