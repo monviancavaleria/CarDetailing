@@ -490,7 +490,7 @@ export default function TarifasSection({
             </p>
           )}
           {(!isFiltered || activeKind === 'blue') && (
-            <p className="inline-flex items-center gap-2">
+            <p className="inline-flex items-center gap-2 text-base md:text-lg">
               <Armchair className="w-4 h-4 text-[#96DCF6]" />
               Boutique Integral · +12,50 € por asiento extra
             </p>
