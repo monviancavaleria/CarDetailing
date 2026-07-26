@@ -523,7 +523,7 @@ export default function TarifasSection({
             href="https://wa.me/34603533624"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-[#4FA9DE] text-sm tracking-widest uppercase font-medium font-sans hover:brightness-110 transition-all shadow-[0_8px_30px_rgba(0,119,214,0.35)]"
+            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white text-sm tracking-widest uppercase font-medium font-sans hover:brightness-110 transition-all shadow-[0_8px_30px_rgba(0,119,214,0.35)]"
           >
             <MessageCircle className="w-5 h-5 text-[#96DCF6]" />
             Reservar por WhatsApp
