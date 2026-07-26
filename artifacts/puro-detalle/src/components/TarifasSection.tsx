@@ -134,12 +134,7 @@ function LevelIcon({ level }: { level: Level }) {
     );
   }
   if (level === 'extra') {
-    return (
-      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#0077D6]/50 bg-[#0077D6]/10">
-        <Plus className="w-3.5 h-3.5 text-[#4FA9DE]" strokeWidth={3} />
-        <span className="sr-only">{LEVEL_LABEL.extra}</span>
-      </span>
-    );
+    return <ExtraIcon />;
   }
   if (level === 'basic') {
     return (
@@ -153,6 +148,55 @@ function LevelIcon({ level }: { level: Level }) {
     <span className="inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#8C96A3]/70 bg-white/30">
       <X className="w-3.5 h-3.5 text-[#4A5462]" strokeWidth={2.75} />
       <span className="sr-only">{LEVEL_LABEL.none}</span>
+    </span>
+  );
+}
+
+const EXTRA_INFO = 'El extra de lavado de motor tiene un coste fijo de +30 euros';
+
+/** Icono "+" (extra opcional): al pulsarlo muestra el coste del extra. */
+function ExtraIcon() {
+  const [open, setOpen] = React.useState(false);
+  const wrapRef = React.useRef<HTMLSpanElement>(null);
+
+  React.useEffect(() => {
+    if (!open) return;
+    const onOutside = (e: MouseEvent | TouchEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('mousedown', onOutside);
+    document.addEventListener('touchstart', onOutside);
+    document.addEventListener('keydown', onEsc);
+    return () => {
+      document.removeEventListener('mousedown', onOutside);
+      document.removeEventListener('touchstart', onOutside);
+      document.removeEventListener('keydown', onEsc);
+    };
+  }, [open]);
+
+  return (
+    <span ref={wrapRef} className="relative inline-flex">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-label={`${LEVEL_LABEL.extra}: ver coste`}
+        className="inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#0077D6]/50 bg-[#0077D6]/10 cursor-pointer hover:bg-[#0077D6]/20 focus-visible:outline-2 focus-visible:outline-[#0077D6]/60 focus-visible:outline-offset-2 transition-colors"
+      >
+        <Plus className="w-3.5 h-3.5 text-[#4FA9DE]" strokeWidth={3} />
+      </button>
+      {open && (
+        <span
+          role="status"
+          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-20 w-56 rounded-xl bg-[#15181D] text-white text-xs font-sans font-medium leading-relaxed px-4 py-3 shadow-[0_10px_35px_rgba(0,0,0,0.35)] normal-case tracking-normal text-center"
+        >
+          {EXTRA_INFO}
+          <span className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#15181D]" />
+        </span>
+      )}
     </span>
   );
 }
@@ -327,7 +371,9 @@ export default function TarifasSection({
               Nivel básico
             </span>
             <span className="inline-flex items-center gap-2">
-              <LevelIcon level="extra" />
+              <span className="inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#0077D6]/50 bg-[#0077D6]/10">
+                <Plus className="w-3.5 h-3.5 text-[#4FA9DE]" strokeWidth={3} />
+              </span>
               Extra opcional
             </span>
             <span className="inline-flex items-center gap-2">
