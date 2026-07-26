@@ -150,8 +150,8 @@ function LevelIcon({ level }: { level: Level }) {
     );
   }
   return (
-    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#C9CED6]/80">
-      <X className="w-3.5 h-3.5 text-[#96DCF6]" strokeWidth={2.5} />
+    <span className="inline-flex items-center justify-center w-6 h-6 rounded-full border border-[#8C96A3]/70 bg-white/30">
+      <X className="w-3.5 h-3.5 text-[#4A5462]" strokeWidth={2.75} />
       <span className="sr-only">{LEVEL_LABEL.none}</span>
     </span>
   );
