@@ -237,11 +237,7 @@ export default function Packages({
                     <div
                       key={i}
                       onClick={() => toggleSelect(pkg.name)}
-                      className={`relative rounded-2xl p-8 lg:p-10 flex flex-col cursor-pointer transition-all duration-300 ${
-                        pkg.popular
-                          ? 'glass-popular hover:shadow-[0_16px_60px_rgba(0,119,214,0.22)]'
-                          : 'glass-blue hover:border-[#0077D6]/35 hover:shadow-[0_12px_45px_rgba(0,119,214,0.12)]'
-                      } ${isSelected ? 'card-selected-blue' : ''}`}
+                      className={`relative rounded-2xl p-8 lg:p-10 flex flex-col cursor-pointer transition-all duration-300 glass-blue hover:border-[#0077D6]/35 hover:shadow-[0_12px_45px_rgba(0,119,214,0.12)] ${isSelected ? 'card-selected-blue' : ''}`}
                     >
                       {pkg.popular && (
                         <div className="absolute top-4 right-4 px-4 py-1 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white text-[10px] font-bold tracking-widest uppercase font-sans shadow-[0_4px_14px_rgba(0,119,214,0.35)]">
@@ -259,10 +255,10 @@ export default function Packages({
                       <div className="h-[1px] w-full bg-[#0077D6]/10 mb-8"></div>
 
                       <div className="mb-10 flex-1">
-                        <p className="text-[15px] md:text-base leading-relaxed font-serif text-[#4FA9DE] tracking-wide">
+                        <p className="text-[15px] md:text-base leading-relaxed font-serif text-[#2E7FB8] tracking-wide">
                           {pkg.description}
                         </p>
-                        <p className="font-script italic text-xl md:text-2xl text-[#4FA9DE] mt-5">
+                        <p className="font-script italic text-xl md:text-2xl text-[#2E7FB8] mt-5">
                           {pkg.tagline}
                         </p>
                       </div>
