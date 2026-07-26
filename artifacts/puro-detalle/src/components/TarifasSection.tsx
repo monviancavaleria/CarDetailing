@@ -416,10 +416,15 @@ export default function TarifasSection({
             <button
               type="button"
               onClick={onClear}
-              className="mt-6 inline-flex items-center gap-2.5 px-7 py-3 rounded-full border border-[#0077D6]/50 bg-white/60 text-sm tracking-widest uppercase font-sans font-semibold text-[#0077D6] shadow-[0_4px_18px_rgba(0,119,214,0.25)] cursor-pointer hover:bg-[#0077D6]/10 hover:border-[#0077D6] hover:scale-105 active:scale-95 transition-all duration-300"
+              className="relative mt-6 inline-flex items-center gap-2.5 px-7 py-3 rounded-full border border-[#0077D6]/50 bg-white/60 text-sm tracking-widest uppercase font-sans font-semibold text-[#0077D6] shadow-[0_4px_18px_rgba(0,119,214,0.25)] cursor-pointer hover:bg-[#0077D6]/10 hover:border-[#0077D6] hover:scale-105 active:scale-95 transition-all duration-300"
             >
-              <LayoutGrid className="w-4 h-4 text-[#96DCF6]" />
-              Ver los 4 paquetes
+              {/* Halo pulsante: mismo distintivo que el botón "+" del extra */}
+              <span
+                aria-hidden
+                className="absolute inset-0 rounded-full bg-[#0077D6]/20 animate-ping [animation-duration:2.2s]"
+              />
+              <LayoutGrid className="relative w-4 h-4 text-[#96DCF6]" />
+              <span className="relative">Ver los 4 paquetes</span>
             </button>
           )}
         </div>
