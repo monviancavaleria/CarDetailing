@@ -8,6 +8,9 @@ const mantenimiento = [
     id: "mantenimiento-basico",
     name: "Mantenimiento Básico",
     price: "35€",
+    description:
+      "El lavado esencial para el día a día: carrocería, llantas y cristales limpios, interior aspirado y neumáticos acondicionados.",
+    tagline: "Tu coche siempre presentable.",
     features: [
       "Lavado exterior detallado",
       "Limpieza de llantas cara visible",
@@ -20,6 +23,9 @@ const mantenimiento = [
     id: "mantenimiento-profundo",
     name: "Mantenimiento Profundo",
     price: "49€",
+    description:
+      "Todo lo del Básico y un paso más: descontaminación de la carrocería, llantas a fondo y limpieza interior completa, maletero incluido.",
+    tagline: "Una limpieza a fondo, por dentro y por fuera.",
     features: [
       "Todo lo del Básico",
       "Descontaminación férrica exterior",
@@ -322,6 +328,15 @@ export default function Packages({
                       </div>
 
                       <div className="h-[1px] w-full bg-[#8C96A3]/25 mb-8"></div>
+
+                      <div className="mb-8">
+                        <p className="text-[15px] md:text-base leading-relaxed font-serif text-[#3A424D] tracking-wide">
+                          {pkg.description}
+                        </p>
+                        <p className="font-script italic text-xl md:text-2xl text-[#3A424D] mt-5">
+                          {pkg.tagline}
+                        </p>
+                      </div>
 
                       <ul className="space-y-4 mb-10 flex-1">
                         {pkg.features.map((feature, j) => (
