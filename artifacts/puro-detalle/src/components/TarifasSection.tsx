@@ -491,7 +491,7 @@ export default function TarifasSection({
         {/* Notas de tarifas */}
         <div className="flex flex-col items-center gap-2 text-sm text-muted-foreground font-sans">
           {(!isFiltered || activeKind === 'silver') && (
-            <p className="inline-flex items-center gap-2">
+            <p className="inline-flex items-center gap-2 text-base md:text-lg">
               <Home className="w-4 h-4 text-[#96DCF6]" />
               Servicio de mantenimiento a domicilio · mínimo 2 vehículos
             </p>
