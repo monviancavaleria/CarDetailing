@@ -71,7 +71,7 @@ export default function ServiceMap() {
         </span>
         <span className="inline-flex items-center gap-2">
           <span className="w-4 h-4 rounded-full border-2 border-dashed border-[#5B6470] bg-[#8C96A3]/20 shrink-0" />
-          Hasta {RADIUS_KM} km: pequeño suplemento por transporte
+          Hasta {RADIUS_KM} km: suplemento por transporte
         </span>
       </div>
     </div>
