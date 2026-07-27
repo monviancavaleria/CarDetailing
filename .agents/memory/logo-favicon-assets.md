@@ -25,3 +25,5 @@ AI background removal (removeImageBackground) deleted the thin blue speed lines 
 
 ## Cache-bust al regenerar assets
 Regenerating a `public/` asset under the SAME filename leaves users seeing the stale cached version (user kept seeing the pre-crop logo tagline after the crop). Fix by renaming the file (e.g. logo-hero.webp → logo-wordmark.webp) and updating every ref (components + index.html preload). Dev-server no-cache headers do not protect the user's browser/proxy cache.
+
+- Jul 2026: logo replaced by penguin version (includes tagline "DETAILING · MANTENIMIENTO" and penguin with hose). Served as public/logo-wordmark-v2.webp; cut from gray bg with corner floodfill (fuzz 9%) + alpha level 15%, speed lines survived. Old logo-wordmark.webp kept but unused; og:image may still show old logo.
