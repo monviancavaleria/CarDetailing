@@ -9,7 +9,7 @@ const mantenimiento = [
     name: "Mantenimiento Básico",
     price: "35€",
     description:
-      "El lavado esencial para el día a día: carrocería, llantas y cristales limpios, interior aspirado y neumáticos acondicionados.",
+      "El lavado esencial para el día a día: carrocería, llantas y cristales limpios, y el interior aspirado.",
     tagline: "Tu coche siempre presentable.",
   },
   {
