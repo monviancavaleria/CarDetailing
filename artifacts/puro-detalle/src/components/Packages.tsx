@@ -315,10 +315,10 @@ export default function Packages({
                       onClick={() => toggleSelect(pkg.name)}
                       className={`relative glass-silver rounded-2xl p-8 lg:p-10 flex flex-col cursor-pointer hover:border-[#8C96A3]/60 hover:shadow-[0_12px_45px_rgba(90,100,112,0.16)] transition-all duration-300 ${isSelected ? 'card-selected-silver' : ''}`}
                     >
-                      <h4 className="text-2xl font-serif text-[#4A5462] mb-2 uppercase tracking-wider">{pkg.name}</h4>
+                      <h4 className="text-2xl font-serif text-[#3A424D] mb-2 uppercase tracking-wider">{pkg.name}</h4>
                       <div className="text-muted-foreground text-sm mb-6 flex items-baseline gap-2 font-sans">
                         <span>Desde</span>
-                        <span className="text-3xl text-[#4A5462] font-light">{pkg.price}</span>
+                        <span className="text-3xl text-[#3A424D] font-light">{pkg.price}</span>
                       </div>
 
                       <div className="h-[1px] w-full bg-[#8C96A3]/25 mb-8"></div>
@@ -326,8 +326,10 @@ export default function Packages({
                       <ul className="space-y-4 mb-10 flex-1">
                         {pkg.features.map((feature, j) => (
                           <li key={j} className="flex items-start gap-3">
-                            <Check className="w-5 h-5 text-[#96DCF6] shrink-0" />
-                            <span className="text-sm font-serif text-[#4A5462] tracking-wide">{feature}</span>
+                            <span className="w-5 h-5 rounded-full bg-[#96DCF6] flex items-center justify-center shrink-0 shadow-[0_1px_4px_rgba(90,100,112,0.25)]">
+                              <Check className="w-3.5 h-3.5 text-[#05435C]" strokeWidth={3} />
+                            </span>
+                            <span className="text-sm font-serif text-[#3A424D] tracking-wide">{feature}</span>
                           </li>
                         ))}
                       </ul>
