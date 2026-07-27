@@ -17,7 +17,7 @@ const mantenimiento = [
     name: "Mantenimiento Profundo",
     price: "49€",
     description:
-      "Todo lo del Básico y un paso más: descontaminación de la carrocería, llantas a fondo y limpieza interior completa, maletero incluido.",
+      "Todo lo del Básico y un paso más: aspirado completo del habitáculo y limpieza de la superficie de asientos y puertas.",
     tagline: "Una limpieza a fondo, por dentro y por fuera.",
   }
 ];
