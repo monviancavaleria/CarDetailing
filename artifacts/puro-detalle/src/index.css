@@ -124,10 +124,7 @@
   body {
     @apply font-sans antialiased text-foreground selection:bg-primary/20 selection:text-primary;
     /* Color de la camioneta (gris azulado claro), con luz sutil como la carrocería */
-    background:
-      radial-gradient(ellipse 70% 45% at 50% -5%, rgba(255, 255, 255, 0.22), transparent 70%),
-      linear-gradient(180deg, #BCCAD6 0%, #B7C5D2 45%, #A9B8C4 100%);
-    background-attachment: fixed;
+    background: #B7C5D2;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;

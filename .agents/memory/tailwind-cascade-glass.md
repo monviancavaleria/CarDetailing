@@ -15,4 +15,4 @@ Rule: in this project the `glass`, `glass-blue`, `glass-silver`, `glass-popular`
 - Tailwind v4 note: `scale-*` sets the `scale` property, not `transform` — check the right computed property when verifying.
 - e2e note: computed-style assertions right after a click can read mid-transition values (cards use `transition-all duration-300`); wait ~450ms before asserting a reset.
 
-- Page background: `index.html` has an unlayered inline `html, body { background-color }` that beats the `@layer base` body rule for plain colors (gradient images still showed through). Change the bg in BOTH places. (User tried a uniform #B7C5D2 bg jul 2026 and reverted to the original gradient + hero orbs — keep the gradient.)
+- Page background: `index.html` has an unlayered inline `html, body { background-color }` that beats the `@layer base` body rule for plain colors (gradient images still showed through). Change the bg in BOTH places. (jul 2026: final decision is uniform #B7C5D2 bg, no gradient, no hero orbs — user went back and forth and settled on uniform.)

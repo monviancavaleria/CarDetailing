@@ -6,12 +6,6 @@ const logoUrl = `${import.meta.env.BASE_URL}logo-wordmark.webp`;
 export default function Hero() {
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden w-full">
-      {/* Orbes de cristal líquido */}
-      <div aria-hidden className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full bg-[#8CE8FF]/30 blur-[120px]" />
-        <div className="absolute top-1/3 -right-32 w-[450px] h-[450px] rounded-full bg-[#37B6FF]/20 blur-[130px]" />
-        <div className="absolute -bottom-20 left-1/4 w-[400px] h-[400px] rounded-full bg-[#C9CED6]/25 blur-[120px]" />
-      </div>
       <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center pt-32 pb-20">
         {/* Logotipo oficial (sin fondo ni lema) con barrido de luz sobre la propia silueta */}
         <motion.div
