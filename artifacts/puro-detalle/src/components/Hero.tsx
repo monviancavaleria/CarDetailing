@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const logoUrl = `${import.meta.env.BASE_URL}logo-wordmark-v7.webp`;
+const logoUrl = `${import.meta.env.BASE_URL}logo-wordmark-v8.webp`;
 
 export default function Hero() {
   return (
