@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Check, Info } from 'lucide-react';
+import { Info } from 'lucide-react';
 import WashEffect from './WashEffect';
 
 const mantenimiento = [
@@ -11,13 +11,6 @@ const mantenimiento = [
     description:
       "El lavado esencial para el día a día: carrocería, llantas y cristales limpios, interior aspirado y neumáticos acondicionados.",
     tagline: "Tu coche siempre presentable.",
-    features: [
-      "Lavado exterior detallado",
-      "Limpieza de llantas cara visible",
-      "Aspirado básico interior",
-      "Limpieza de cristales",
-      "Acondicionado de neumáticos"
-    ]
   },
   {
     id: "mantenimiento-profundo",
@@ -26,13 +19,6 @@ const mantenimiento = [
     description:
       "Todo lo del Básico y un paso más: descontaminación de la carrocería, llantas a fondo y limpieza interior completa, maletero incluido.",
     tagline: "Una limpieza a fondo, por dentro y por fuera.",
-    features: [
-      "Todo lo del Básico",
-      "Descontaminación férrica exterior",
-      "Limpieza profunda de llantas",
-      "Aspirado profundo (maletero incl.)",
-      "Limpieza de plásticos interiores"
-    ]
   }
 ];
 
@@ -329,7 +315,7 @@ export default function Packages({
 
                       <div className="h-[1px] w-full bg-[#8C96A3]/25 mb-8"></div>
 
-                      <div className="mb-8">
+                      <div className="mb-10 flex-1">
                         <p className="text-[15px] md:text-base leading-relaxed font-serif text-[#3A424D] tracking-wide">
                           {pkg.description}
                         </p>
@@ -337,17 +323,6 @@ export default function Packages({
                           {pkg.tagline}
                         </p>
                       </div>
-
-                      <ul className="space-y-4 mb-10 flex-1">
-                        {pkg.features.map((feature, j) => (
-                          <li key={j} className="flex items-start gap-3">
-                            <span className="w-5 h-5 rounded-full bg-[#96DCF6] flex items-center justify-center shrink-0 shadow-[0_1px_4px_rgba(90,100,112,0.25)]">
-                              <Check className="w-3.5 h-3.5 text-[#05435C]" strokeWidth={3} />
-                            </span>
-                            <span className="text-sm font-serif text-[#3A424D] tracking-wide">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
 
                       <a
                         href="#tarifas"
