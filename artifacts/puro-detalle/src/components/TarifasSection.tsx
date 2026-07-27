@@ -509,17 +509,8 @@ export default function TarifasSection({
   return (
     <section id="tarifas" className="py-24 relative z-10 scroll-mt-20">
       <div className={`${isFiltered ? 'max-w-7xl' : 'max-w-6xl'} mx-auto px-4 sm:px-6 lg:px-8`}>
-        {isFiltered ? (
-          <>
-            {tarifasBlock}
-            <div className="mt-20">{planBlock}</div>
-          </>
-        ) : (
-          <>
-            {planBlock}
-            <div className="mt-20">{tarifasBlock}</div>
-          </>
-        )}
+        {planBlock}
+        <div className="mt-20">{tarifasBlock}</div>
 
         {/* ---------- CTA ---------- */}
         <div className="text-center mt-14">
