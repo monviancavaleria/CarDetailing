@@ -355,7 +355,7 @@ export default function Packages({
                 </div>
 
                 {/* Condición del servicio de mantenimiento */}
-                <p className="font-script italic text-xl md:text-2xl text-[#4FA9DE] text-center mt-10">
+                <p className="font-sans text-base md:text-lg text-muted-foreground text-center mt-10">
                   Servicio a domicilio mínimo 2 vehículos por servicio de mantenimiento
                 </p>
               </motion.div>
