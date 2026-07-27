@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { FaInstagram, FaTiktok } from 'react-icons/fa';
 import ServiceMap from './ServiceMap';
+import ReviewsPanel from './ReviewsPanel';
 
 const extras = [
   { icon: Disc, name: 'Descontaminación férrica de llantas' },
@@ -27,27 +28,6 @@ const extras = [
   { icon: Armchair, name: 'Limpieza de tapicería (inyección/extracción)' },
   { icon: Wind, name: 'Desinfección térmica (vapor)' },
   { icon: Zap, name: 'Tratamiento premium de cuero' },
-];
-
-const testimonials = [
-  {
-    quote:
-      'Nunca había visto mi M4 reflejar la luz así. El nivel de detalle en el interior es obsesivo, superaron cualquier expectativa. Además, hacerlo en mi garaje es un lujo.',
-    author: 'Carlos M.',
-    car: 'BMW M4 Competition',
-  },
-  {
-    quote:
-      'Confié en Puro Detalle para el tratamiento cerámico de mi coche. Profesionalidad absoluta, puntualidad y un resultado de exposición. Totalmente recomendado.',
-    author: 'Elena R.',
-    car: 'Porsche Cayenne',
-  },
-  {
-    quote:
-      'Rescataron el cuero claro de mis asientos que daba por perdido. Parecen recién salidos del concesionario. El trato y los productos que usan son de otra liga.',
-    author: 'Javier T.',
-    car: 'Mercedes GLE',
-  },
 ];
 
 type TabId = 'mapa' | 'extras' | 'reviews' | 'conocenos';
@@ -201,28 +181,7 @@ export default function InfoHub() {
                 {...fade}
                 transition={{ duration: 0.35 }}
               >
-                <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-                  {testimonials.map((testimonial, i) => (
-                    <div
-                      key={i}
-                      className="glass-outlined rounded-2xl p-8 relative flex flex-col flex-1 hover:shadow-[0_12px_45px_rgba(15,30,50,0.12)] transition-shadow duration-500"
-                    >
-                      <span className="absolute top-6 left-6 text-6xl text-[#0077D6]/10 font-serif leading-none select-none">
-                        "
-                      </span>
-                      <p className="text-muted-foreground italic font-light text-sm leading-relaxed mb-8 relative z-10 pt-4 flex-1">
-                        {testimonial.quote}
-                      </p>
-                      <div className="mt-auto">
-                        <div className="h-[1px] w-12 bg-gradient-to-r from-[#0077D6]/50 to-[#C9CED6]/70 mb-4"></div>
-                        <h5 className="text-foreground font-medium text-sm">{testimonial.author}</h5>
-                        <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
-                          Cliente {testimonial.car}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <ReviewsPanel />
               </motion.div>
             )}
 

@@ -10,6 +10,7 @@ import Packages from './components/Packages';
 import TarifasSection from './components/TarifasSection';
 import InfoHub from './components/InfoHub';
 import Footer from './components/Footer';
+import ReviewsPage from '@/pages/Reviews';
 
 const queryClient = new QueryClient();
 
@@ -57,6 +58,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/resenas" component={ReviewsPage} />
       <Route component={NotFound} />
     </Switch>
   );
