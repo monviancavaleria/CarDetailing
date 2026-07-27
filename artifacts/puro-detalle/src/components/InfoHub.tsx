@@ -115,18 +115,19 @@ export default function InfoHub() {
                 aria-controls={`infopanel-${tab.id}`}
                 tabIndex={active ? 0 : -1}
                 onClick={() => setActiveTab(tab.id)}
-                className={`group flex flex-col items-center justify-center gap-3 rounded-2xl px-6 py-8 md:py-10 transition-all duration-300 ${
+                className={`group flex flex-col items-center justify-center gap-4 rounded-2xl px-6 py-8 md:py-10 transition-all duration-300 ${
                   active
-                    ? 'glass-blue border-[#0077D6]/40 shadow-[0_8px_35px_rgba(0,119,214,0.18)]'
-                    : 'glass hover:bg-white/75 hover:shadow-[0_10px_35px_rgba(0,119,214,0.10)]'
+                    ? 'glass-blue border-[#0077D6]/50 shadow-[0_10px_40px_rgba(0,119,214,0.22)]'
+                    : 'glass-outlined hover:bg-white/80 hover:shadow-[0_10px_35px_rgba(0,119,214,0.14)]'
                 }`}
               >
-                <tab.icon
-                  className={`w-8 h-8 md:w-10 md:h-10 transition-all duration-300 ${
-                    active ? 'text-[#96DCF6] icon-glow-blue' : 'text-[#96DCF6]/60 group-hover:text-[#96DCF6]'
+                <span
+                  className={`flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-[#0077D6] to-[#37B6FF] shadow-[0_6px_20px_rgba(0,119,214,0.35)] transition-transform duration-300 group-hover:scale-105 ${
+                    active ? 'scale-105' : ''
                   }`}
-                  strokeWidth={1.75}
-                />
+                >
+                  <tab.icon className="w-7 h-7 md:w-8 md:h-8 text-white" strokeWidth={1.75} />
+                </span>
                 <span className="text-sm md:text-base font-semibold tracking-wide uppercase font-sans text-outline text-center leading-snug">
                   {tab.label}
                 </span>
@@ -147,8 +148,10 @@ export default function InfoHub() {
                 {...fade}
                 transition={{ duration: 0.35 }}
               >
-                <div className="glass-blue rounded-2xl max-w-4xl mx-auto p-10 md:p-16 flex flex-col items-center justify-center text-center min-h-[280px]">
-                  <MapPin className="w-12 h-12 text-[#96DCF6] mb-5" strokeWidth={1.5} />
+                <div className="glass-blue border-[#0077D6]/30 shadow-[0_10px_40px_rgba(0,119,214,0.14)] rounded-2xl max-w-4xl mx-auto p-10 md:p-16 flex flex-col items-center justify-center text-center min-h-[280px]">
+                  <span className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#0077D6] to-[#37B6FF] shadow-[0_6px_20px_rgba(0,119,214,0.35)] mb-5">
+                    <MapPin className="w-8 h-8 text-white" strokeWidth={1.5} />
+                  </span>
                   <h3 className="text-2xl font-serif uppercase tracking-wider text-foreground mb-3">
                     Área de actuación: Madrid
                   </h3>
@@ -173,12 +176,12 @@ export default function InfoHub() {
                   {extras.map((extra, i) => (
                     <div
                       key={i}
-                      className="group flex items-center gap-4 p-5 glass rounded-xl border-l-2 border-l-[#0077D6]/25 hover:border-l-[#0077D6] hover:bg-white/75 hover:shadow-[0_10px_35px_rgba(0,119,214,0.10)] transition-all duration-300"
+                      className="group flex items-center gap-4 p-5 glass-outlined rounded-xl hover:bg-white/80 hover:shadow-[0_10px_35px_rgba(0,119,214,0.12)] transition-all duration-300"
                     >
-                      <div className="shrink-0 p-2 rounded-full bg-[#0077D6]/5 group-hover:bg-[#0077D6]/10 transition-colors duration-300">
-                        <extra.icon className="w-5 h-5 text-[#96DCF6]/70 group-hover:text-[#96DCF6] transition-colors duration-300 stroke-[1.5]" />
+                      <div className="shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-[#0077D6] to-[#37B6FF] shadow-[0_4px_14px_rgba(0,119,214,0.30)] transition-transform duration-300 group-hover:scale-105">
+                        <extra.icon className="w-5 h-5 text-white stroke-[1.5]" />
                       </div>
-                      <span className="text-sm text-foreground/80 group-hover:text-foreground transition-colors font-sans font-medium">
+                      <span className="text-sm text-foreground group-hover:text-foreground transition-colors font-sans font-medium">
                         {extra.name}
                       </span>
                     </div>
@@ -200,7 +203,7 @@ export default function InfoHub() {
                   {testimonials.map((testimonial, i) => (
                     <div
                       key={i}
-                      className="glass rounded-2xl p-8 relative flex flex-col flex-1 hover:shadow-[0_12px_45px_rgba(15,30,50,0.10)] transition-shadow duration-500"
+                      className="glass-outlined rounded-2xl p-8 relative flex flex-col flex-1 hover:shadow-[0_12px_45px_rgba(15,30,50,0.12)] transition-shadow duration-500"
                     >
                       <span className="absolute top-6 left-6 text-6xl text-[#0077D6]/10 font-serif leading-none select-none">
                         "
@@ -230,7 +233,7 @@ export default function InfoHub() {
                 {...fade}
                 transition={{ duration: 0.35 }}
               >
-                <div className="glass rounded-2xl max-w-4xl mx-auto p-8 md:p-14 min-h-[280px] flex flex-col justify-center">
+                <div className="glass-outlined rounded-2xl max-w-4xl mx-auto p-8 md:p-14 min-h-[280px] flex flex-col justify-center">
                   <p className="text-center text-muted-foreground font-sans font-light mb-10">
                     Llámanos o síguenos en redes — reserva tu cita o consulta sin compromiso.
                   </p>
@@ -248,7 +251,7 @@ export default function InfoHub() {
                       href="https://tiktok.com/@purodetallecar"
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center justify-center gap-3 px-8 py-5 rounded-2xl glass text-foreground hover:bg-white/80 hover:shadow-[0_8px_35px_rgba(15,30,50,0.12)] transition-all group"
+                      className="flex items-center justify-center gap-3 px-8 py-5 rounded-2xl glass-outlined text-foreground hover:bg-white/80 hover:shadow-[0_8px_35px_rgba(15,30,50,0.12)] transition-all group"
                     >
                       <FaTiktok className="w-7 h-7 text-[#96DCF6] group-hover:scale-110 transition-transform" />
                       <span className="font-sans font-medium tracking-wide">@purodetallecar</span>
@@ -257,7 +260,7 @@ export default function InfoHub() {
                       href="https://instagram.com/PuroDetallecar"
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center justify-center gap-3 px-8 py-5 rounded-2xl glass text-foreground hover:bg-[#E1306C]/10 hover:shadow-[0_8px_35px_rgba(225,48,108,0.15)] transition-all group"
+                      className="flex items-center justify-center gap-3 px-8 py-5 rounded-2xl glass-outlined text-foreground hover:bg-[#E1306C]/10 hover:shadow-[0_8px_35px_rgba(225,48,108,0.15)] transition-all group"
                     >
                       <FaInstagram className="w-7 h-7 text-[#E1306C] group-hover:scale-110 transition-transform" />
                       <span className="font-sans font-medium tracking-wide">@PuroDetallecar</span>
