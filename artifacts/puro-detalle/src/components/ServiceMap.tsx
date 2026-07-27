@@ -12,7 +12,6 @@ const FREE_ZONES: { name: string; pos: [number, number] }[] = [
   { name: 'Boadilla del Monte', pos: [40.4052, -3.8764] },
   { name: 'Majadahonda', pos: [40.4729, -3.8722] },
   { name: 'Las Rozas', pos: [40.4919, -3.8735] },
-  { name: 'La Moraleja', pos: [40.5164, -3.6486] },
   { name: 'Aravaca', pos: [40.4571, -3.7791] },
 ];
 
