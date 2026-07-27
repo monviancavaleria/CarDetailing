@@ -1,19 +1,19 @@
 import React from 'react';
-import { MapContainer, TileLayer, Circle, Tooltip } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, GeoJSON, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import zonesData from '../data/service-zones.json';
 
 // Base: Pozuelo de Alarcón
 const HOME: [number, number] = [40.4359, -3.8143];
 const RADIUS_KM = 20;
 
-// Zonas sin coste de transporte
-const FREE_ZONES: { name: string; pos: [number, number] }[] = [
-  { name: 'Pozuelo de Alarcón', pos: HOME },
-  { name: 'Boadilla del Monte', pos: [40.4052, -3.8764] },
-  { name: 'Majadahonda', pos: [40.4729, -3.8722] },
-  { name: 'Las Rozas', pos: [40.4919, -3.8735] },
-  { name: 'Aravaca', pos: [40.4571, -3.7791] },
-];
+type ZoneFeature = {
+  type: 'Feature';
+  properties: { name: string; center: [number, number] };
+  geometry: GeoJSON.Geometry;
+};
+
+const ZONES = (zonesData as unknown as { features: ZoneFeature[] }).features;
 
 export default function ServiceMap() {
   return (
@@ -43,23 +43,22 @@ export default function ServiceMap() {
             }}
           />
 
-          {/* Zonas con transporte incluido: manchas azules del color de la marca */}
-          {FREE_ZONES.map((z) => (
-            <Circle
-              key={z.name}
-              center={z.pos}
-              radius={2300}
-              pathOptions={{
+          {/* Zonas con transporte incluido: límites reales de cada municipio */}
+          {ZONES.map((z) => (
+            <GeoJSON
+              key={z.properties.name}
+              data={z as GeoJSON.GeoJsonObject}
+              style={{
                 color: '#0077D6',
-                weight: 1.5,
+                weight: 2,
                 fillColor: '#37B6FF',
-                fillOpacity: 0.4,
+                fillOpacity: 0.28,
               }}
             >
               <Tooltip permanent direction="center" className="pd-map-label">
-                {z.name}
+                {z.properties.name}
               </Tooltip>
-            </Circle>
+            </GeoJSON>
           ))}
         </MapContainer>
       </div>
