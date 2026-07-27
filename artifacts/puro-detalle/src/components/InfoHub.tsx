@@ -16,6 +16,7 @@ import {
   ListPlus,
 } from 'lucide-react';
 import { FaInstagram, FaTiktok } from 'react-icons/fa';
+import ServiceMap from './ServiceMap';
 
 const extras = [
   { icon: Disc, name: 'Descontaminación férrica de llantas' },
@@ -148,17 +149,18 @@ export default function InfoHub() {
                 {...fade}
                 transition={{ duration: 0.35 }}
               >
-                <div className="glass-blue border-[#0077D6]/30 shadow-[0_10px_40px_rgba(0,119,214,0.14)] rounded-2xl max-w-4xl mx-auto p-10 md:p-16 flex flex-col items-center justify-center text-center min-h-[280px]">
-                  <span className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#0077D6] to-[#37B6FF] shadow-[0_6px_20px_rgba(0,119,214,0.35)] mb-5">
-                    <MapPin className="w-8 h-8 text-white" strokeWidth={1.5} />
+                <div className="glass-blue border-[#0077D6]/30 shadow-[0_10px_40px_rgba(0,119,214,0.14)] rounded-2xl max-w-4xl mx-auto p-6 md:p-10 flex flex-col items-center text-center">
+                  <span className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-[#0077D6] to-[#37B6FF] shadow-[0_6px_20px_rgba(0,119,214,0.35)] mb-4">
+                    <MapPin className="w-6 h-6 text-white" strokeWidth={1.5} />
                   </span>
                   <h3 className="text-2xl font-serif uppercase tracking-wider text-foreground mb-3">
                     Área de actuación: Madrid
                   </h3>
-                  <p className="text-muted-foreground font-sans font-light text-sm md:text-base max-w-md">
-                    Muy pronto podrás consultar aquí el mapa interactivo de nuestras zonas de servicio a
-                    domicilio en la Comunidad de Madrid.
+                  <p className="text-muted-foreground font-sans font-light text-sm md:text-base max-w-2xl mb-6">
+                    En las zonas marcadas en verde el transporte es gratuito. En el resto de zonas dentro
+                    del radio de 20 km se aplica un pequeño suplemento por transporte.
                   </p>
+                  <ServiceMap />
                 </div>
               </motion.div>
             )}
