@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapContainer, TileLayer, Circle, CircleMarker, Tooltip } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 // Base: Pozuelo de Alarcón
@@ -36,31 +36,31 @@ export default function ServiceMap() {
             center={HOME}
             radius={RADIUS_KM * 1000}
             pathOptions={{
-              color: '#0077D6',
+              color: '#5B6470',
               weight: 2,
               dashArray: '6 8',
-              fillColor: '#37B6FF',
-              fillOpacity: 0.08,
+              fillColor: '#8C96A3',
+              fillOpacity: 0.06,
             }}
           />
 
-          {/* Zonas sin coste de transporte */}
+          {/* Zonas con transporte incluido: manchas azules del color de la marca */}
           {FREE_ZONES.map((z) => (
-            <CircleMarker
+            <Circle
               key={z.name}
               center={z.pos}
-              radius={11}
+              radius={2300}
               pathOptions={{
-                color: '#0E7A46',
-                weight: 2,
-                fillColor: '#22C55E',
-                fillOpacity: 0.85,
+                color: '#0077D6',
+                weight: 1.5,
+                fillColor: '#37B6FF',
+                fillOpacity: 0.4,
               }}
             >
-              <Tooltip permanent direction="top" offset={[0, -10]} className="pd-map-label">
+              <Tooltip permanent direction="center" className="pd-map-label">
                 {z.name}
               </Tooltip>
-            </CircleMarker>
+            </Circle>
           ))}
         </MapContainer>
       </div>
@@ -68,11 +68,11 @@ export default function ServiceMap() {
       {/* Leyenda */}
       <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 font-sans text-sm md:text-base text-muted-foreground">
         <span className="inline-flex items-center gap-2">
-          <span className="w-4 h-4 rounded-full bg-[#22C55E] border-2 border-[#0E7A46] shrink-0" />
-          Transporte gratuito
+          <span className="w-4 h-4 rounded-full bg-[#37B6FF]/60 border-2 border-[#0077D6] shrink-0" />
+          Transporte incluido
         </span>
         <span className="inline-flex items-center gap-2">
-          <span className="w-4 h-4 rounded-full border-2 border-dashed border-[#0077D6] bg-[#37B6FF]/20 shrink-0" />
+          <span className="w-4 h-4 rounded-full border-2 border-dashed border-[#5B6470] bg-[#8C96A3]/20 shrink-0" />
           Hasta {RADIUS_KM} km: pequeño suplemento por transporte
         </span>
       </div>

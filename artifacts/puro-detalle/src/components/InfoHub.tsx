@@ -157,7 +157,7 @@ export default function InfoHub() {
                     Área de actuación: Madrid
                   </h3>
                   <p className="text-muted-foreground font-sans font-light text-sm md:text-base max-w-2xl mb-6">
-                    En las zonas marcadas en verde el transporte es gratuito. En el resto de zonas dentro
+                    En las zonas marcadas en azul el transporte está incluido. En el resto de zonas dentro
                     del radio de 20 km se aplica un pequeño suplemento por transporte.
                   </p>
                   <ServiceMap />
