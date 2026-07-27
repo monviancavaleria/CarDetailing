@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
-const logoUrl = `${import.meta.env.BASE_URL}logo-wordmark-v6.webp`;
+const logoUrl = `${import.meta.env.BASE_URL}logo-wordmark-v7.webp`;
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
