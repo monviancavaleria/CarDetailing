@@ -161,6 +161,14 @@
 }
 
 /* Variante de .glass con borde visible, para tarjetas que se perdían con el fondo */
+/* Sin recuadro de foco al hacer clic con el ratón (se mantiene para teclado) */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 .glass-outlined {
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
