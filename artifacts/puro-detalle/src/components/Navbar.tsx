@@ -96,9 +96,14 @@ export default function Navbar() {
                 href="https://wa.me/34603533624"
                 target="_blank"
                 rel="noreferrer"
-                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white hover:brightness-110 transition-all duration-300 tracking-wider text-sm font-medium shadow-[0_4px_18px_rgba(0,119,214,0.30)]"
+                className="relative px-6 py-2.5 rounded-full bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white hover:brightness-110 hover:scale-110 transition-all duration-300 tracking-wider text-sm font-medium shadow-[0_4px_18px_rgba(0,119,214,0.30)]"
               >
-                Reservar ahora
+                {/* Halo pulsante: mismo distintivo que el botón "+" del extra */}
+                <span
+                  aria-hidden
+                  className="absolute inset-0 rounded-full bg-[#0077D6]/30 animate-ping [animation-duration:2.2s]"
+                />
+                <span className="relative">Reservar ahora</span>
               </a>
             </div>
           </div>
