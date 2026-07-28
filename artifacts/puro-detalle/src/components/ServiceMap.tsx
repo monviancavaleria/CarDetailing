@@ -5,7 +5,7 @@ import zonesData from '../data/service-zones.json';
 
 // Base: Pozuelo de Alarcón
 const HOME: [number, number] = [40.4359, -3.8143];
-const RADIUS_KM = 20;
+const RADIUS_KM = 50;
 
 type ZoneFeature = {
   type: 'Feature';
@@ -21,7 +21,7 @@ export default function ServiceMap() {
       <div className="rounded-2xl overflow-hidden border border-[#0077D6]/30 shadow-[0_10px_40px_rgba(0,119,214,0.14)]">
         <MapContainer
           center={HOME}
-          zoom={11}
+          zoom={9}
           scrollWheelZoom={false}
           style={{ height: '420px', width: '100%' }}
         >
@@ -30,7 +30,7 @@ export default function ServiceMap() {
             url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
           />
 
-          {/* Radio de 20 km: zona con suplemento de transporte */}
+          {/* Radio de 50 km desde Pozuelo: zona con suplemento de transporte */}
           <Circle
             center={HOME}
             radius={RADIUS_KM * 1000}
@@ -71,7 +71,7 @@ export default function ServiceMap() {
         </span>
         <span className="inline-flex items-center gap-2">
           <span className="w-4 h-4 rounded-full border-2 border-dashed border-[#5B6470] bg-[#8C96A3]/20 shrink-0" />
-          Hasta {RADIUS_KM} km: suplemento por transporte
+          Nos desplazamos hasta {RADIUS_KM} km desde Pozuelo de Alarcón — fuera de las zonas azules se cobra transporte
         </span>
       </div>
     </div>
