@@ -23,6 +23,26 @@ export default function Navbar() {
     ['0 0 0 rgba(15,30,50,0)', '0 8px 32px rgba(15,30,50,0.06)']
   );
 
+  const [activeSection, setActiveSection] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const ids = ['servicios', 'extras', 'contacto'];
+    const onScroll = () => {
+      const probe = window.innerHeight * 0.35;
+      let current: string | null = null;
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= probe) {
+          current = id;
+        }
+      }
+      setActiveSection(current);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const scrollTo = (id: string) => {
     setIsOpen(false);
     const element = document.getElementById(id);
@@ -59,7 +79,11 @@ export default function Navbar() {
                 <button
                   key={id}
                   onClick={() => scrollTo(id)}
-                  className="text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors uppercase font-sans"
+                  className={`text-sm tracking-widest transition-colors uppercase font-sans ${
+                    activeSection === id
+                      ? 'text-[#0077D6] font-semibold'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
                 >
                   {id}
                 </button>
@@ -99,7 +123,11 @@ export default function Navbar() {
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="text-sm tracking-widest text-muted-foreground hover:text-foreground transition-colors uppercase py-2"
+                className={`text-sm tracking-widest transition-colors uppercase py-2 ${
+                  activeSection === id
+                    ? 'text-[#0077D6] font-semibold'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
               >
                 {id}
               </button>
