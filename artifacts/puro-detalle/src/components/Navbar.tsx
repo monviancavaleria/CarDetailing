@@ -26,7 +26,7 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    const ids = ['servicios', 'extras', 'contacto'];
+    const ids = ['servicios', 'contacto'];
     const onScroll = () => {
       const probe = window.innerHeight * 0.35;
       let current: string | null = null;
@@ -79,7 +79,7 @@ export default function Navbar() {
           {/* Desktop nav */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-8">
-              {['servicios', 'extras', 'contacto'].map((id) => (
+              {['servicios', 'contacto'].map((id) => (
                 <button
                   key={id}
                   onClick={() => scrollTo(id)}
@@ -123,7 +123,7 @@ export default function Navbar() {
           className="md:hidden glass border-b border-foreground/5"
         >
           <div className="px-2 pt-2 pb-6 flex flex-col space-y-4 sm:px-3 items-center">
-            {['servicios', 'extras', 'contacto'].map((id) => (
+            {['servicios', 'contacto'].map((id) => (
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
