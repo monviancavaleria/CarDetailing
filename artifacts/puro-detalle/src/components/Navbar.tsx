@@ -36,6 +36,10 @@ export default function Navbar() {
           current = id;
         }
       }
+      // Al llegar al final de la página, marcar la última sección (contacto)
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        current = ids[ids.length - 1];
+      }
       setActiveSection(current);
     };
     onScroll();
