@@ -75,7 +75,7 @@ export default function Hero() {
 
             <div className="flex items-center gap-2 text-xs md:text-sm text-[#5B6470] font-normal tracking-wide">
               <span className="w-8 h-[1px] bg-[#0077D6]/40"></span>
-              <p>Servicio premium a domicilio &middot; Madrid</p>
+              <p>Servicio premium a domicilio</p>
               <span className="w-8 h-[1px] bg-[#0077D6]/40"></span>
             </div>
           </div>
@@ -89,7 +89,6 @@ export default function Hero() {
         transition={{ delay: 1, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center"
       >
-        <span className="text-[10px] uppercase tracking-widest text-[#5B6470] font-medium mb-4 font-sans">Descubrir</span>
         <div className="w-[1px] h-12 bg-foreground/15 relative overflow-hidden">
           <motion.div
             animate={{ y: [0, 48, 48], opacity: [0, 1, 0] }}
