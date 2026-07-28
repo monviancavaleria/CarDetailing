@@ -71,7 +71,7 @@ export default function ServiceMap() {
         </span>
         <span className="inline-flex items-center gap-2">
           <span className="w-4 h-4 rounded-full border-2 border-dashed border-[#5B6470] bg-[#8C96A3]/20 shrink-0" />
-          Nos desplazamos hasta {RADIUS_KM} km desde Pozuelo de Alarcón — fuera de las zonas azules se cobra transporte
+          Hasta {RADIUS_KM} km: con suplemento por transporte
         </span>
       </div>
     </div>

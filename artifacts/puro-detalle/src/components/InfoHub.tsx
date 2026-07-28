@@ -137,8 +137,8 @@ export default function InfoHub() {
                     Área de actuación: Madrid
                   </h3>
                   <p className="text-muted-foreground font-sans font-light text-sm md:text-base max-w-2xl mb-6">
-                    Nos desplazamos hasta 50 km desde Pozuelo de Alarcón. En las zonas marcadas en azul el
-                    transporte está incluido; en el resto se aplica un suplemento por transporte.
+                    Llegamos hasta 50 km a la redonda. En las zonas azules el transporte está incluido;
+                    fuera de ellas, con suplemento.
                   </p>
                   <ServiceMap />
                 </div>
