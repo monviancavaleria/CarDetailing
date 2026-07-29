@@ -1,4 +1,4 @@
-import { Router, type IRouter } from "express";
+import { Router, type IRouter, type Request, type Response } from "express";
 import { desc } from "drizzle-orm";
 import { db } from "@workspace/db";
 import { reviewsTable, insertReviewSchema } from "@workspace/db/schema";
@@ -28,7 +28,7 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
-router.get("/reviews", async (_req, res) => {
+router.get("/reviews", async (_req: Request, res: Response) => {
   try {
     const reviews = await db
       .select()
@@ -41,7 +41,7 @@ router.get("/reviews", async (_req, res) => {
   }
 });
 
-router.post("/reviews", async (req, res) => {
+router.post("/reviews", async (req: Request, res: Response) => {
   const ip = req.ip ?? "unknown";
   if (isRateLimited(ip)) {
     res.status(429).json({
