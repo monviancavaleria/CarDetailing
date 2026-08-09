@@ -1,7 +1,14 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Clock, MessageCircle, Sparkles } from 'lucide-react';
-import { CUSTOM_SERVICES, WA_PHONE, type CustomService } from '../data/services';
+import {
+  CUSTOM_SERVICES,
+  SIZE_SURCHARGE,
+  SIZE_INFO,
+  WA_PHONE,
+  type CustomService,
+  type SizeId,
+} from '../data/services';
 
 /**
  * Cotizador de servicio personalizado (#personalizado).
@@ -156,6 +163,7 @@ function ServiceToggle({
 
 export default function CustomBuilder({ embedded = false }: { embedded?: boolean }) {
   const [zone, setZone] = React.useState<Zone>('exterior');
+  const [size, setSize] = React.useState<SizeId>('S');
   const [selected, setSelected] = React.useState<Set<string>>(new Set());
   const zoneTabRefs: Record<Zone, React.RefObject<HTMLButtonElement | null>> = {
     exterior: React.useRef<HTMLButtonElement>(null),
@@ -170,14 +178,19 @@ export default function CustomBuilder({ embedded = false }: { embedded?: boolean
     });
 
   const chosen = CUSTOM_SERVICES.filter((s) => selected.has(s.id));
-  const totalPrice = chosen.reduce((sum, s) => sum + (s.price ?? 0), 0);
-  const totalMinutes = chosen.reduce((sum, s) => sum + (s.minutes ?? 0), 0);
+  // Suplemento global por tamaño: solo se aplica si hay algún servicio elegido.
+  const surcharge = chosen.length > 0 ? SIZE_SURCHARGE[size] : { price: 0, minutes: 0 };
+  const totalPrice = chosen.reduce((sum, s) => sum + (s.price ?? 0), 0) + surcharge.price;
+  const totalMinutes = chosen.reduce((sum, s) => sum + (s.minutes ?? 0), 0) + surcharge.minutes;
   const hasPending = chosen.some((s) => s.price === null);
 
   const waLink = () => {
     const lines = chosen.map((s) => `• ${s.label}${s.price !== null ? ` (${s.price} €)` : ''}`);
+    if (surcharge.price > 0) {
+      lines.push(`• Suplemento por tamaño ${size}: +${surcharge.price} €`);
+    }
     const msg =
-      `Buen día, me gustaría cotizar este servicio personalizado:\n\n${lines.join('\n')}\n\n` +
+      `Buen día, me gustaría cotizar este servicio personalizado (vehículo tamaño ${size}):\n\n${lines.join('\n')}\n\n` +
       `Precio estimado: ${totalPrice} €${hasPending ? ' + servicios a confirmar' : ''}\n` +
       `Tiempo estimado: ${formatMinutes(totalMinutes)}\n\n¿Me confirmáis presupuesto y disponibilidad?`;
     return `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
@@ -224,6 +237,41 @@ export default function CustomBuilder({ embedded = false }: { embedded?: boolean
           />
 
           <div className="relative p-5 sm:p-8 lg:p-10 pb-0">
+            {/* Selector de tamaño del vehículo */}
+            <div className="flex flex-col items-center gap-2 mb-8">
+              <span className="text-[10px] tracking-[0.25em] uppercase font-sans text-[#5F7A93]">
+                Tamaño del vehículo
+              </span>
+              <div
+                role="radiogroup"
+                aria-label="Tamaño del vehículo"
+                className="inline-flex gap-1 rounded-full border border-[#26394C] bg-[#0B1723] p-1.5"
+              >
+                {(Object.keys(SIZE_SURCHARGE) as SizeId[]).map((sz) => (
+                  <button
+                    key={sz}
+                    type="button"
+                    role="radio"
+                    aria-checked={size === sz}
+                    title={SIZE_INFO[sz].desc}
+                    onClick={() => setSize(sz)}
+                    className={`px-5 sm:px-7 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-widest uppercase font-sans transition-all duration-300 focus-ring-cyan ${
+                      size === sz
+                        ? 'bg-gradient-to-r from-[#0077D6] to-[#37B6FF] text-white shadow-[0_4px_20px_rgba(0,119,214,0.45)]'
+                        : 'text-[#7FA3BF] hover:text-white'
+                    }`}
+                  >
+                    {sz}
+                  </button>
+                ))}
+              </div>
+              <span className="text-xs font-sans text-[#5F7A93]">
+                {SIZE_INFO[size].desc}
+                {SIZE_SURCHARGE[size].price > 0 &&
+                  ` · Suplemento: +${SIZE_SURCHARGE[size].price} € y +${formatMinutes(SIZE_SURCHARGE[size].minutes)}`}
+              </span>
+            </div>
+
             {/* Pestañas EXTERIOR / INTERIOR */}
             <div className="flex justify-center mb-8">
               <div
@@ -316,6 +364,11 @@ export default function CustomBuilder({ embedded = false }: { embedded?: boolean
                   <span className="text-2xl md:text-3xl font-light text-[#4FC3FF]">
                     {totalPrice} €{hasPending && <span className="text-sm text-[#7FA3BF]"> + pendientes</span>}
                   </span>
+                  {surcharge.price > 0 && (
+                    <span className="block text-[11px] font-sans text-[#7FA3BF]">
+                      Suplemento por tamaño {size}: +{surcharge.price} €
+                    </span>
+                  )}
                 </div>
                 <div className="hidden sm:block w-px h-10 bg-[#1D3247]" />
                 <div>

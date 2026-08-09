@@ -259,6 +259,17 @@ export type CustomService = {
   minutes: number | null;
 };
 
+/**
+ * Suplemento global del cotizador según tamaño del vehículo.
+ * Los precios de la lista son base (tamaño S); esto se suma al total.
+ */
+export const SIZE_SURCHARGE: Record<SizeId, { price: number; minutes: number }> = {
+  S: { price: 0, minutes: 0 },
+  M: { price: 10, minutes: 30 },
+  L: { price: 20, minutes: 45 },
+  XL: { price: 30, minutes: 60 },
+};
+
 export const CUSTOM_SERVICES: CustomService[] = [
   // ---------- EXTERIOR ----------
   { id: 'lavado-mano', label: 'Lavado técnico a mano', zone: 'exterior', price: 20, minutes: 60 },
