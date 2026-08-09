@@ -273,17 +273,18 @@ export const SIZE_SURCHARGE: Record<SizeId, { price: number; minutes: number }> 
 export const CUSTOM_SERVICES: CustomService[] = [
   // ---------- EXTERIOR ----------
   { id: 'lavado-mano', label: 'Lavado técnico a mano', zone: 'exterior', price: 20, minutes: 60 },
-  { id: 'llantas', label: 'Limpieza de llantas', zone: 'exterior', price: 10, minutes: 30 },
+  { id: 'llantas', label: 'Limpieza de llantas', zone: 'exterior', price: 15, minutes: 30 },
   { id: 'cristales', label: 'Cristales interior y exterior', zone: 'exterior', price: 5, minutes: 20 },
-  { id: 'sellado-sio2', label: 'Sellado pintura SiO₂', zone: 'exterior', price: 25, minutes: 60 },
+  { id: 'sellado-sio2', label: 'Sellado pintura SiO₂', zone: 'exterior', price: 10, minutes: 60 },
   { id: 'sellador-neumaticos', label: 'Sellador de neumáticos', zone: 'exterior', price: 5, minutes: 15 },
   { id: 'plasticos-ext', label: 'Acond. plásticos exteriores', zone: 'exterior', price: 10, minutes: 25 },
   { id: 'motor-basico', label: 'Lavado de motor básico', zone: 'exterior', price: 35, minutes: 40 },
   { id: 'motor-vapor', label: 'Detallado de motor a vapor', zone: 'exterior', price: 60, minutes: 90 },
   // ---------- INTERIOR ----------
-  { id: 'aspirado', label: 'Aspirado de habitáculo', zone: 'interior', price: 15, minutes: 30 },
+  { id: 'aspirado', label: 'Aspirado profundo de habitáculo', zone: 'interior', price: 20, minutes: 30 },
+  { id: 'maletero', label: 'Extra aspirado de maletero', zone: 'interior', price: 15, minutes: 15 },
   { id: 'puertas', label: 'Limpieza de puertas', zone: 'interior', price: 10, minutes: 20 },
-  { id: 'plasticos-int', label: 'Acond. plásticos interiores', zone: 'interior', price: 15, minutes: 25 },
+  { id: 'plasticos-int', label: 'Acond. plásticos interiores', zone: 'interior', price: 10, minutes: 25 },
   { id: 'vapor', label: 'Desinfección con vapor', zone: 'interior', price: 20, minutes: 40 },
   { id: 'asientos-tela', label: 'Asientos de tela (todos)', zone: 'interior', price: 79, minutes: 90 },
   { id: 'asientos-cuero', label: 'Limpieza y cuidado del cuero (todos)', zone: 'interior', price: 89, minutes: 100 },
