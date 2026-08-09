@@ -95,7 +95,7 @@ export const CATEGORIES: Category[] = [
         badge: 'La preferida',
         fromPrice: '189€',
         description:
-          'La experiencia completa: todo lo del Boutique más tapicería en profundidad, cuidado del cuero y lavado de motor.',
+          'La experiencia completa: todo lo del Boutique más tapicería en profundidad y limpieza de motor.',
         tagline: 'La sensación de estreno, sin salir de casa.',
       },
     ],
@@ -143,7 +143,7 @@ export const CATEGORIES: Category[] = [
         badge: 'Más completo',
         fromPrice: '119€',
         description:
-          'Todo lo del Interior más la tapicería en profundidad y el cuidado completo del cuero de todos los asientos.',
+          'Todo lo del Interior más la tapicería en profundidad y cuidado completo del cuero.',
         tagline: 'Un interior de estreno.',
       },
     ],
