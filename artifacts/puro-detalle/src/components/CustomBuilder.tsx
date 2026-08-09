@@ -147,9 +147,6 @@ function ServiceToggle({
         <span className={`block text-sm md:text-base font-medium ${on ? 'text-[#4FC3FF]' : 'text-[#5B7A78]'}`}>
           {svc.price !== null ? `${svc.price} €` : 'a confirmar'}
         </span>
-        {svc.minutes !== null && (
-          <span className="block text-[10px] text-[#5F7A93]">≈ {formatMinutes(svc.minutes)}</span>
-        )}
       </span>
     </button>
   );
