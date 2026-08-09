@@ -16,3 +16,5 @@ Rule: in this project the `glass`, `glass-blue`, `glass-silver`, `glass-popular`
 - e2e note: computed-style assertions right after a click can read mid-transition values (cards use `transition-all duration-300`); wait ~450ms before asserting a reset.
 
 - Page background: `index.html` has an unlayered inline `html, body { background-color }` that beats the `@layer base` body rule for plain colors (gradient images still showed through). Change the bg in BOTH places. (jul 2026: final decision is uniform #B7C5D2 bg, no gradient, no hero orbs — user went back and forth and settled on uniform.)
+
+**Focus rings (ago 2026):** las utilidades `focus-visible:outline-*` no se aplicaron en los toggles del cotizador (outline computado 0px) aunque sí en otros botones; la regla plana `.focus-ring-cyan:focus-visible { outline: 2px solid #4fc3ff }` en index.css lo arregla siempre. Preferir clases planas para focos en componentes nuevos.

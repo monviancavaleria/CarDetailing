@@ -18,3 +18,5 @@ Rule: standing palette: former navy letters, script italics, blue prices and "Re
 
 ## Filtrado por categoría en #tarifas (UX deliberada)
 "Más información" filters the plan matrix + price table to that package's category; the "Ver los 4 paquetes" chip resets. User wanted the section less overloaded — keep this behavior.
+
+**Precios oferta (ago 2026):** la web usa los datos de src/data/services.ts (única fuente). En las infografías del usuario había dos versiones de "Servicios Extra": se adoptó la mayoritaria (tela 25/45/79 €, cuero 30/50/89 €, con motor 35/60 €); la otra (30/50/80, 35/60/100) se descartó. Los precios/tiempos del cotizador personalizado son provisionales y se editan en CUSTOM_SERVICES.

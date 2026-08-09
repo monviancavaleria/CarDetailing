@@ -166,6 +166,13 @@
   outline: none;
 }
 
+/* Anillo de foco cian para el panel oscuro del cotizador (regla plana:
+   gana a las utilidades bajo cascade layers) */
+.focus-ring-cyan:focus-visible {
+  outline: 2px solid #4fc3ff;
+  outline-offset: 2px;
+}
+
 .glass-outlined {
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
