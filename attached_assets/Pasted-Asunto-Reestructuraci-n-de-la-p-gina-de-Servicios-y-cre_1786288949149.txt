@@ -1,0 +1,51 @@
+Asunto: Reestructuración de la página de "Servicios" y creación de Cotizador Interactivo 3D para Puro Detalle
+
+Hola,
+
+Estamos en proceso de actualizar la página web de Puro Detalle (nuestro servicio de detallado de vehículos a domicilio). Necesito reestructurar la sección de "Servicios" para organizar mejor nuestra oferta actual y, lo más importante, desarrollar una nueva funcionalidad de "Servicio Personalizado" interactiva.
+
+A continuación, detallo los requerimientos técnicos y visuales para el proyecto:
+
+1. Reestructuración de la Sección de Servicios (Paquetes Cerrados)
+Necesitamos reorganizar la presentación de nuestros servicios predefinidos para que el cliente pueda elegir fácilmente según el nivel de profundidad que busca. La página debe mostrar claramente estas tres categorías principales (te adjunto las imágenes de referencia con los precios y servicios incluidos para que extraigas los textos):
+
+Mantenimiento: Básico vs. Profundo.
+
+Detallado Completo: Boutique (Exterior e interior sin asientos) vs. Platinum (La experiencia completa con asientos).
+
+Detallado Interior: Interior (Sin asientos) vs. Interior Integral (Con asientos).
+
+Nota de diseño: Debemos incluir las tablas de tarifas según el tamaño del coche (S, M, L, XL) y los "Servicios Extra" (Motor y Asientos de Tela/Cuero) de forma clara y visualmente atractiva, similar a las infografías adjuntas.
+
+2. Nueva Funcionalidad: "Creador de Servicio Personalizado"
+Esta es la función principal a desarrollar. Quiero que los usuarios que no deseen un paquete cerrado puedan armar su propio servicio a medida con una experiencia visual de alto nivel.
+
+Elemento Visual Principal (Coche 3D):
+
+Al entrar en esta sección, el usuario debe ver un modelo 3D de un coche, preferiblemente en estilo wireframe (líneas finas y elegantes) o un render minimalista que encaje con nuestros colores corporativos.
+
+El modelo debe servir como guía visual. Idealmente, que se ilumine o resalte la zona interior o exterior según lo que el usuario esté configurando.
+
+Interfaz de Selección (UI/UX):
+
+La interfaz debe dividirse en dos pestañas o categorías principales: INTERIOR y EXTERIOR.
+
+Dentro de cada categoría, el usuario verá una lista de los servicios individuales que ofrecemos (por ejemplo, en exterior: Lavado técnico a mano, Limpieza de llantas, Sellado pintura SiO2, Lavado de motor, etc. En interior: Aspirado, Limpieza de plásticos, Desinfección con vapor, Limpieza de cuero, etc.).
+
+El usuario podrá seleccionar o deseleccionar cada ítem mediante checkboxes o botones tipo toggle.
+
+Cálculo Dinámico de Precio y Tiempo:
+
+Necesitamos que la web tenga una barra fijada (sticky bar) en la parte inferior o en un lateral que muestre un Precio Total Estimado y un Tiempo Total Estimado.
+
+Cada vez que el usuario marque o desmarque un servicio, ambos valores deben actualizarse automáticamente en tiempo real.
+
+IMPORTANTE: Actualmente los precios individuales y los tiempos exactos por servicio no están definidos. Por favor, deja la lógica de programación hecha utilizando variables o placeholders (ej. precio = X, tiempo = Y) para que yo pueda introducir los valores definitivos más adelante en el backend o panel de control.
+
+Llamada a la Acción (CTA):
+
+Al finalizar su selección, debe haber un botón claro de "Reservar este servicio" o "Solicitar cita", que envíe la configuración exacta que el cliente ha elegido a nuestro WhatsApp o formulario de contacto.
+
+Responsive: Toda esta experiencia interactiva debe estar perfectamente adaptada para funcionar de manera fluida en dispositivos móviles (donde probablemente recibamos la mayor parte del tráfico).
+
+Por favor, revisa esta estructura y los archivos adjuntos. Cuéntame cómo plantearías el desarrollo de la parte interactiva 3D y qué plazos manejaríamos para implementar esta reestructuración.
