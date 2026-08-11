@@ -342,7 +342,7 @@ export default function TarifasSection({
           transition={{ delay: 0.15 }}
           className="font-script italic text-2xl md:text-3xl text-[#4FA9DE] mt-3"
         >
-          Tapicería &middot; Asientos &middot; Motor
+          Tapicería &middot; Asientos
         </motion.p>
       </div>
 
@@ -394,7 +394,15 @@ export default function TarifasSection({
       </motion.div>
 
       {/* Motor */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+      <motion.h4
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-xl md:text-2xl font-serif uppercase tracking-wider text-foreground text-center mt-12"
+      >
+        Motor
+      </motion.h4>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         {MOTOR_EXTRA.map((extra, i) => (
           <motion.div
             key={extra.name}
