@@ -32,7 +32,7 @@ const extras = [
 
 type TabId = 'mapa' | 'extras' | 'reviews' | 'conocenos';
 
-const tabs: { id: TabId; label: string; icon: React.ElementType }[] = [
+const tabs: { id: TabId; label: string; icon: React.ComponentType<{ className?: string; strokeWidth?: number }> }[] = [
   { id: 'mapa', label: 'Mapa de nuestro servicio', icon: MapPin },
   { id: 'extras', label: 'Extras a la carta', icon: ListPlus },
   { id: 'reviews', label: 'Nuestras reviews', icon: Star },

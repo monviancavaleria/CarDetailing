@@ -19,7 +19,20 @@ function Home() {
   // Paquete cuya columna se resalta en la sección de tarifas.
   const [infoPkg, setInfoPkg] = React.useState<string | null>(null);
   // Pestaña activa (categoría o cotizador): única fuente de verdad.
-  const [infoCat, setInfoCat] = React.useState<ServiceTabId>('completo');
+  // #personalizado en la URL abre directamente el cotizador (enlace compartible).
+  const [infoCat, setInfoCat] = React.useState<ServiceTabId>(() =>
+    typeof window !== 'undefined' && window.location.hash === '#personalizado'
+      ? 'personalizado'
+      : 'completo'
+  );
+
+  // El elemento #personalizado se monta después de la carga, así que el
+  // scroll nativo del hash no llega: lo hacemos manualmente.
+  React.useEffect(() => {
+    if (window.location.hash === '#personalizado') {
+      document.getElementById('personalizado')?.scrollIntoView({ block: 'center' });
+    }
+  }, []);
 
   const handleMoreInfo = (id: string, cat: CategoryId) => {
     setInfoPkg(id);

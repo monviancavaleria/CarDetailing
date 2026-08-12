@@ -1,6 +1,10 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, MessageCircle, Sparkles } from 'lucide-react';
+
+// Carga perezosa: three.js y la escena 3D solo se descargan cuando
+// el usuario abre la pestaña del cotizador, no en el arranque de la web.
+const HoloCar3D = React.lazy(() => import('./HoloCar3D'));
 import {
   CUSTOM_SERVICES,
   SIZE_SURCHARGE,
@@ -20,93 +24,6 @@ import {
  */
 
 type Zone = 'exterior' | 'interior';
-
-const CYAN = '#4FC3FF';
-const DIM = '#274B66';
-
-/* ---------------- Coche wireframe (vista lateral, deportivo) ---------------- */
-
-function WireframeCar({ zone }: { zone: Zone }) {
-  const ext = zone === 'exterior';
-  const bodyStroke = ext ? CYAN : DIM;
-  const bodyGlow = ext ? 'drop-shadow(0 0 6px rgba(79,195,255,0.55))' : 'none';
-  const intStroke = ext ? DIM : CYAN;
-  const intGlow = ext ? 'none' : 'drop-shadow(0 0 6px rgba(79,195,255,0.55))';
-
-  return (
-    <svg
-      viewBox="0 0 640 270"
-      role="img"
-      aria-label={`Plano técnico del coche, ${ext ? 'exterior' : 'interior'} resaltado`}
-      className="w-full h-auto select-none"
-    >
-      {/* Suelo */}
-      <line x1="16" y1="242" x2="624" y2="242" stroke={DIM} strokeWidth="1" strokeDasharray="2 8" />
-
-      {/* ---------- Carrocería ---------- */}
-      <g
-        fill="none"
-        stroke={bodyStroke}
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        style={{ filter: bodyGlow, transition: 'stroke 0.5s' }}
-      >
-        {/* Silueta */}
-        <path d="M 28 186 L 26 172 Q 26 158 44 154 L 98 146 Q 152 138 198 134 L 258 96 Q 270 87 286 85 L 372 83 Q 392 83 408 93 L 470 130 Q 522 138 566 148 Q 596 155 598 170 L 596 184 L 552 190 A 46 46 0 0 0 460 192 L 218 192 A 46 46 0 0 0 126 190 L 28 186 Z" />
-        {/* Faro delantero y piloto trasero */}
-        <path d="M 34 160 L 74 154 L 70 166 L 36 170 Z" strokeWidth="1.6" />
-        <path d="M 596 162 L 570 156 L 572 168 L 594 172 Z" strokeWidth="1.6" />
-        {/* Línea de carácter lateral */}
-        <path d="M 90 168 Q 300 158 560 168" strokeWidth="1.4" opacity="0.75" />
-        {/* Falda lateral */}
-        <path d="M 226 200 L 452 200" strokeWidth="1.6" />
-        {/* Retrovisor */}
-        <path d="M 262 104 L 250 98 L 246 106 L 258 112 Z" strokeWidth="1.6" />
-        {/* Puerta y tirador */}
-        <path d="M 300 132 L 296 190" strokeWidth="1.4" opacity="0.85" />
-        <path d="M 312 142 L 336 141" strokeWidth="2.4" />
-        {/* Cristales laterales */}
-        <path d="M 270 100 L 292 92 L 368 90 L 398 100 L 438 128 L 302 130 Z" strokeWidth="1.6" opacity="0.9" />
-        <path d="M 344 90 L 346 129" strokeWidth="1.2" opacity="0.7" />
-        {/* Ruedas */}
-        <circle cx="172" cy="194" r="42" />
-        <circle cx="172" cy="194" r="24" strokeWidth="1.6" />
-        <circle cx="506" cy="194" r="42" />
-        <circle cx="506" cy="194" r="24" strokeWidth="1.6" />
-        {/* Radios */}
-        <g strokeWidth="1.2" opacity="0.85">
-          <path d="M 172 172 L 172 216 M 150 194 L 194 194 M 157 179 L 187 209 M 187 179 L 157 209" />
-          <path d="M 506 172 L 506 216 M 484 194 L 528 194 M 491 179 L 521 209 M 521 179 L 491 209" />
-        </g>
-      </g>
-
-      {/* ---------- Interior (vista seccionada) ---------- */}
-      <g
-        fill="none"
-        stroke={intStroke}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        style={{ filter: intGlow, transition: 'stroke 0.5s' }}
-      >
-        {/* Salpicadero */}
-        <path d="M 268 118 Q 282 122 286 138 L 288 160" />
-        {/* Volante */}
-        <circle cx="304" cy="134" r="9" strokeWidth="1.6" />
-        <path d="M 304 125 L 304 143 M 295 134 L 313 134" strokeWidth="1" opacity="0.8" />
-        {/* Asiento delantero: reposacabezas, respaldo y base */}
-        <path d="M 352 106 q 9 -3 10 6 q 1 8 -8 9" strokeWidth="1.6" />
-        <path d="M 354 122 Q 348 148 352 164 L 384 166 Q 390 166 392 172" />
-        {/* Asiento trasero */}
-        <path d="M 414 112 q 9 -3 10 6 q 1 8 -8 9" strokeWidth="1.6" />
-        <path d="M 416 128 Q 410 150 414 164 L 444 168 Q 452 170 452 176" />
-        {/* Suelo del habitáculo */}
-        <path d="M 288 176 L 452 178" strokeWidth="1.4" strokeDasharray="5 5" opacity="0.9" />
-      </g>
-    </svg>
-  );
-}
 
 /* ---------------- Toggle de servicio ---------------- */
 
@@ -311,7 +228,11 @@ export default function CustomBuilder({ embedded = false }: { embedded?: boolean
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center pb-8">
               {/* Coche */}
               <div>
-                <WireframeCar zone={zone} />
+                <React.Suspense
+                  fallback={<div className="w-full h-[260px] sm:h-[320px] lg:h-[360px]" aria-hidden />}
+                >
+                  <HoloCar3D size={size} selectedServices={selected} zone={zone} />
+                </React.Suspense>
                 <p className="text-center text-[11px] tracking-[0.25em] uppercase font-sans text-[#5F7A93] mt-2">
                   {zone === 'exterior' ? 'Vista exterior' : 'Vista del habitáculo'}
                 </p>
