@@ -398,7 +398,7 @@ export default function TarifasSection({
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-xl md:text-2xl font-serif uppercase tracking-wider text-foreground text-center mt-12"
+        className="font-script italic text-2xl md:text-3xl text-[#4FA9DE] text-center mt-12"
       >
         Motor
       </motion.h4>
