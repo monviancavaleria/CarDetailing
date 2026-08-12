@@ -3,7 +3,7 @@ name: WebGL / coche holográfico del cotizador
 description: El coche 3D WebGL fue rechazado y sustituido por ilustraciones x-ray + halos; limitaciones WebGL del entorno
 ---
 
-- **DECISIÓN (ago 2026): nada de 3D procedural.** El usuario rechazó el coche R3F ("muy robótico"); se sustituyó por 4 ilustraciones AI estilo radiografía (src/assets/holo/) + halos de neón posicionados en % (HoloCarXray). three/* desinstalado. No reintroducir WebGL sin que lo pida.
+- **DECISIÓN (ago 2026, revisada): 3D + fallback.** El usuario primero rechazó el 3D procedural v1 ("robótico"), luego pidió 3D de nuevo con 5 requisitos (tono único, siluetas fieles, glow de malla completa, giro 360, cámara al habitáculo en INTERIOR). Estado actual: HoloCar3D v2 (perfiles curvos con pasos de rueda) si hay WebGL + HoloCarXray (ilustraciones AI de src/assets/holo/) como fallback y error boundary. Mantener ambos.
 - Los halos por pieza usan mapas de % (BASE_SPOTS + OVERRIDES por tamaño); las 4 imágenes comparten encuadre 3/4 frontal-izquierdo, por eso un mapa común funciona.
 
 - **Ningún navegador del agente tiene WebGL** (ni el tester e2e ni el de screenshots): la escena R3F siempre cae al fallback. La validación visual del 3D solo puede hacerla el usuario en su navegador (tarea de proyecto abierta).
