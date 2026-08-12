@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Clock, MessageCircle, Sparkles } from 'lucide-react';
+import { Check, MessageCircle, Sparkles } from 'lucide-react';
 import {
   CUSTOM_SERVICES,
   SIZE_SURCHARGE,
@@ -23,14 +23,6 @@ type Zone = 'exterior' | 'interior';
 
 const CYAN = '#4FC3FF';
 const DIM = '#274B66';
-
-function formatMinutes(total: number) {
-  const h = Math.floor(total / 60);
-  const m = total % 60;
-  if (h === 0) return `${m} min`;
-  if (m === 0) return `${h} h`;
-  return `${h} h ${m.toString().padStart(2, '0')} min`;
-}
 
 /* ---------------- Coche wireframe (vista lateral, deportivo) ---------------- */
 
@@ -181,7 +173,6 @@ export default function CustomBuilder({ embedded = false }: { embedded?: boolean
   // Suplemento global por tamaño: solo se aplica si hay algún servicio elegido.
   const surcharge = chosen.length > 0 ? SIZE_SURCHARGE[size] : { price: 0, minutes: 0 };
   const totalPrice = chosen.reduce((sum, s) => sum + (s.price ?? 0), 0) + surcharge.price;
-  const totalMinutes = chosen.reduce((sum, s) => sum + (s.minutes ?? 0), 0) + surcharge.minutes;
   const hasPending = chosen.some((s) => s.price === null);
 
   const waLink = () => {
@@ -191,8 +182,7 @@ export default function CustomBuilder({ embedded = false }: { embedded?: boolean
     }
     const msg =
       `Buen día, me gustaría cotizar este servicio personalizado (vehículo tamaño ${size}):\n\n${lines.join('\n')}\n\n` +
-      `Precio estimado: ${totalPrice} €${hasPending ? ' + servicios a confirmar' : ''}\n` +
-      `Tiempo estimado: ${formatMinutes(totalMinutes)}\n\n¿Me confirmáis presupuesto y disponibilidad?`;
+      `Precio estimado: ${totalPrice} €${hasPending ? ' + servicios a confirmar' : ''}\n\n¿Me confirmáis presupuesto y disponibilidad?`;
     return `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
   };
 
@@ -267,8 +257,7 @@ export default function CustomBuilder({ embedded = false }: { embedded?: boolean
               </div>
               <span className="text-xs font-sans text-[#5F7A93]">
                 {SIZE_INFO[size].desc}
-                {SIZE_SURCHARGE[size].price > 0 &&
-                  ` · Suplemento: +${SIZE_SURCHARGE[size].price} € y +${formatMinutes(SIZE_SURCHARGE[size].minutes)}`}
+                {SIZE_SURCHARGE[size].price > 0 && ` · Suplemento: +${SIZE_SURCHARGE[size].price} €`}
               </span>
             </div>
 
@@ -369,16 +358,6 @@ export default function CustomBuilder({ embedded = false }: { embedded?: boolean
                       Suplemento por tamaño {size}: +{surcharge.price} €
                     </span>
                   )}
-                </div>
-                <div className="hidden sm:block w-px h-10 bg-[#1D3247]" />
-                <div>
-                  <span className="block text-[10px] tracking-[0.2em] uppercase font-sans text-[#5F7A93]">
-                    Tiempo estimado
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 text-lg md:text-xl font-light text-white">
-                    <Clock className="w-4 h-4 text-[#96DCF6]" />
-                    {totalMinutes > 0 ? `≈ ${formatMinutes(totalMinutes)}` : '—'}
-                  </span>
                 </div>
               </div>
 

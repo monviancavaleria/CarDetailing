@@ -6,7 +6,6 @@ import {
   Car,
   CarFront,
   Check,
-  Clock,
   Home,
   MessageCircle,
   Plus,
@@ -99,10 +98,6 @@ function PkgHeader({ tier, kind, highlighted }: { tier: Tier; kind: Category['ki
       {tier.note && (
         <span className="text-[10px] text-muted-foreground font-sans italic">{tier.note}</span>
       )}
-      <span className="inline-flex items-center gap-1 text-[10px] text-muted-foreground font-sans">
-        <Clock className="w-3 h-3 text-[#96DCF6]" />
-        {tier.duration}
-      </span>
     </div>
   );
 }
@@ -416,10 +411,6 @@ export default function TarifasSection({
             <h4 className="font-serif uppercase tracking-wider text-lg md:text-xl text-[#4FA9DE]">
               {extra.name}
             </h4>
-            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-sans mt-1">
-              <Clock className="w-3 h-3 text-[#96DCF6]" />
-              {extra.duration}
-            </span>
             <p className="text-sm text-muted-foreground font-sans mt-3 mb-4 max-w-sm">{extra.description}</p>
             <span className="text-3xl font-light text-[#4FA9DE] mt-auto">{extra.price}</span>
           </motion.div>
