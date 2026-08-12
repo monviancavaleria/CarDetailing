@@ -168,6 +168,21 @@
 
 /* Anillo de foco cian para el panel oscuro del cotizador (regla plana:
    gana a las utilidades bajo cascade layers) */
+/* Halos del coche holográfico del cotizador: pulso suave */
+@keyframes holo-pulse {
+  0%, 100% { filter: brightness(1); transform: scale(1); }
+  50% { filter: brightness(1.35); transform: scale(1.06); }
+}
+.holo-glow--on {
+  animation: holo-pulse 2.4s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .holo-glow--on {
+    animation: none;
+  }
+}
+
 .focus-ring-cyan:focus-visible {
   outline: 2px solid #4fc3ff;
   outline-offset: 2px;

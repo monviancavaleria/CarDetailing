@@ -2,9 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, MessageCircle, Sparkles } from 'lucide-react';
 
-// Carga perezosa: three.js y la escena 3D solo se descargan cuando
-// el usuario abre la pestaña del cotizador, no en el arranque de la web.
-const HoloCar3D = React.lazy(() => import('./HoloCar3D'));
+import HoloCarXray from './HoloCarXray';
 import {
   CUSTOM_SERVICES,
   SIZE_SURCHARGE,
@@ -228,11 +226,7 @@ export default function CustomBuilder({ embedded = false }: { embedded?: boolean
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center pb-8">
               {/* Coche */}
               <div>
-                <React.Suspense
-                  fallback={<div className="w-full h-[260px] sm:h-[320px] lg:h-[360px]" aria-hidden />}
-                >
-                  <HoloCar3D size={size} selectedServices={selected} zone={zone} />
-                </React.Suspense>
+                <HoloCarXray size={size} selectedServices={selected} zone={zone} />
                 <p className="text-center text-[11px] tracking-[0.25em] uppercase font-sans text-[#5F7A93] mt-2">
                   {zone === 'exterior' ? 'Vista exterior' : 'Vista del habitáculo'}
                 </p>
