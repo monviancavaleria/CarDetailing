@@ -8,20 +8,19 @@ type OrbitControlsImpl = React.ComponentRef<typeof OrbitControls>;
 import { SERVICE_PARTS, type PartId } from './HoloCarXray';
 
 /**
- * Escena 3D del cotizador (v2).
- * - Material y tono ÚNICOS para los cuatro tamaños (mismo azul neón
- *   semitransparente en S, M, L y XL).
- * - Siluetas fieles por categoría: S compacto <4,20 m · M sedán 4,20–4,60 m
- *   · L SUV 4,60–4,90 m · XL SUV grande/furgoneta >4,90 m, con pasos de
- *   rueda, perfiles curvos y proporciones reales.
- * - Al seleccionar un servicio se ilumina LA MALLA COMPLETA de la pieza
- *   (las cuatro ruedas enteras, el bloque motor, los asientos…), no un
- *   punto de luz.
- * - OrbitControls: clic + arrastrar para girar 360°.
- * - Pestaña INTERIOR: la cámara entra suavemente al habitáculo.
+ * Escena 3D del cotizador (v3).
+ * UN ÚNICO modelo base premium estilo holograma/rayos X para las cuatro
+ * tallas: mismo material oscuro semitransparente, mismos contornos y el
+ * mismo nivel de detalle interno (motor con cilindros, chasis, suspensión,
+ * asientos, salpicadero). Cada talla NO es un coche distinto: es el mismo
+ * modelo ajustado geométricamente con proporciones (longitud, altura de
+ * techo, caída trasera, capó…) según su categoría real:
+ *   S compacto · M sedán · L SUV · XL furgoneta/SUV grande.
+ * Interacciones: glow de malla completa por servicio, OrbitControls 360º
+ * y transición de cámara al habitáculo en la pestaña INTERIOR.
  */
 
-/* ---------------- Tono único (tomado del modelo L) ---------------- */
+/* ---------------- Tono único premium ---------------- */
 
 const TONE = {
   body: '#0D2133',
@@ -31,29 +30,60 @@ const TONE = {
   edgeActive: '#8FE3FF',
 };
 
-/* ---------------- Especificaciones por tamaño ---------------- */
-
-type CarType = 'hatch' | 'sedan' | 'suv' | 'van';
+/* ---------------- Proporciones por talla (mismo modelo base) ---------------- */
 
 type CarSpec = {
-  type: CarType;
   length: number; // metros
   width: number;
   height: number;
   wheelR: number;
-  frontAxle: number; // x normalizado 0(frontal)–1(trasera)
+  frontAxle: number; // x normalizado 0(morro)–1(trasera)
   rearAxle: number;
+  // Parámetros de proporción del ÚNICO perfil base:
+  noseH: number; //   altura del morro (0–1 de height)
+  hoodEndX: number; //   dónde termina el capó
+  hoodH: number; //   altura del capó
+  windshieldTopX: number; //   base superior del parabrisas
+  roofH: number; //   altura del techo (0–1)
+  roofEndX: number; //   dónde empieza a caer el techo
+  rearDeckX: number; //   fin de la caída (luneta)
+  rearDeckH: number; //   altura del maletero/portón
+  tailH: number; //   altura del corte trasero
   seatRows: number[]; // x normalizado de cada fila
   dashX: number;
   trunkX: number;
-  cabinEyeX: number; // posición de la cámara interior (x normalizado)
+  cabinEyeX: number; // cámara interior (x normalizado)
 };
 
 const SPECS: Record<SizeId, CarSpec> = {
-  S: { type: 'hatch', length: 4.0, width: 1.74, height: 1.48, wheelR: 0.3, frontAxle: 0.17, rearAxle: 0.83, seatRows: [0.5, 0.72], dashX: 0.4, trunkX: 0.9, cabinEyeX: 0.62 },
-  M: { type: 'sedan', length: 4.5, width: 1.84, height: 1.44, wheelR: 0.32, frontAxle: 0.16, rearAxle: 0.8, seatRows: [0.46, 0.66], dashX: 0.37, trunkX: 0.9, cabinEyeX: 0.58 },
-  L: { type: 'suv', length: 4.75, width: 1.93, height: 1.72, wheelR: 0.37, frontAxle: 0.17, rearAxle: 0.8, seatRows: [0.44, 0.63, 0.79], dashX: 0.35, trunkX: 0.89, cabinEyeX: 0.56 },
-  XL: { type: 'van', length: 5.1, width: 1.97, height: 1.92, wheelR: 0.36, frontAxle: 0.15, rearAxle: 0.82, seatRows: [0.34, 0.54, 0.74], dashX: 0.26, trunkX: 0.9, cabinEyeX: 0.5 },
+  // S · compacto <4,20 m: capó corto, techo que cae pronto, portón casi vertical
+  S: {
+    length: 4.0, width: 1.74, height: 1.48, wheelR: 0.3, frontAxle: 0.17, rearAxle: 0.83,
+    noseH: 0.44, hoodEndX: 0.32, hoodH: 0.52, windshieldTopX: 0.5, roofH: 1.0,
+    roofEndX: 0.72, rearDeckX: 0.93, rearDeckH: 0.58, tailH: 0.5,
+    seatRows: [0.5, 0.72], dashX: 0.4, trunkX: 0.88, cabinEyeX: 0.62,
+  },
+  // M · sedán 4,20–4,60 m: capó largo, techo bajo, maletero escalonado
+  M: {
+    length: 4.5, width: 1.84, height: 1.44, wheelR: 0.32, frontAxle: 0.16, rearAxle: 0.8,
+    noseH: 0.42, hoodEndX: 0.34, hoodH: 0.5, windshieldTopX: 0.5, roofH: 0.98,
+    roofEndX: 0.66, rearDeckX: 0.84, rearDeckH: 0.52, tailH: 0.46,
+    seatRows: [0.46, 0.66], dashX: 0.37, trunkX: 0.9, cabinEyeX: 0.58,
+  },
+  // L · SUV 4,60–4,90 m: capó alto, techo largo, portón vertical
+  L: {
+    length: 4.75, width: 1.93, height: 1.72, wheelR: 0.37, frontAxle: 0.17, rearAxle: 0.8,
+    noseH: 0.5, hoodEndX: 0.3, hoodH: 0.58, windshieldTopX: 0.46, roofH: 1.0,
+    roofEndX: 0.86, rearDeckX: 0.97, rearDeckH: 0.6, tailH: 0.54,
+    seatRows: [0.44, 0.63, 0.79], dashX: 0.35, trunkX: 0.89, cabinEyeX: 0.56,
+  },
+  // XL · furgoneta/SUV grande >4,90 m: morro corto, caja alta y larga
+  XL: {
+    length: 5.1, width: 1.97, height: 1.92, wheelR: 0.36, frontAxle: 0.15, rearAxle: 0.82,
+    noseH: 0.54, hoodEndX: 0.18, hoodH: 0.62, windshieldTopX: 0.3, roofH: 1.0,
+    roofEndX: 0.92, rearDeckX: 0.99, rearDeckH: 0.62, tailH: 0.55,
+    seatRows: [0.34, 0.54, 0.74], dashX: 0.26, trunkX: 0.9, cabinEyeX: 0.5,
+  },
 };
 
 /* ---------------- Material holográfico compartido ---------------- */
@@ -119,57 +149,38 @@ function HoloMesh({
   );
 }
 
-/* ---------------- Geometría: perfil lateral con pasos de rueda ---------------- */
+/* ---------------- Perfil ÚNICO parametrizado (mismo modelo base) ---------------- */
 
 function buildBodyShape(spec: CarSpec): THREE.Shape {
-  const { length: L, height: H, wheelR, frontAxle, rearAxle, type } = spec;
+  const { length: L, height: H, wheelR, frontAxle, rearAxle } = spec;
   const X = (n: number) => n * L - L / 2;
   const Y = (n: number) => n * H;
   const s = new THREE.Shape();
   const y0 = Y(0.12); // bajos
   const archR = wheelR * 1.18;
 
-  // Silueta superior: del morro (izq) a la trasera (der)
-  if (type === 'hatch') {
-    s.moveTo(X(0), y0 + 0.06);
-    s.quadraticCurveTo(X(0), Y(0.4), X(0.05), Y(0.44));
-    s.quadraticCurveTo(X(0.2), Y(0.5), X(0.34), Y(0.52)); // capó
-    s.quadraticCurveTo(X(0.42), Y(0.54), X(0.5), Y(0.92)); // parabrisas
-    s.quadraticCurveTo(X(0.56), Y(1.0), X(0.66), Y(1.0)); // techo
-    s.lineTo(X(0.82), Y(0.97));
-    s.quadraticCurveTo(X(0.94), Y(0.9), X(0.97), Y(0.52)); // portón
-    s.quadraticCurveTo(X(1), Y(0.46), X(1), y0 + 0.06);
-  } else if (type === 'sedan') {
-    s.moveTo(X(0), y0 + 0.06);
-    s.quadraticCurveTo(X(0), Y(0.38), X(0.05), Y(0.42));
-    s.quadraticCurveTo(X(0.2), Y(0.47), X(0.33), Y(0.49)); // capó largo
-    s.quadraticCurveTo(X(0.4), Y(0.51), X(0.48), Y(0.9)); // parabrisas
-    s.quadraticCurveTo(X(0.54), Y(0.97), X(0.63), Y(0.97)); // techo
-    s.quadraticCurveTo(X(0.74), Y(0.95), X(0.84), Y(0.56)); // luneta
-    s.quadraticCurveTo(X(0.95), Y(0.52), X(0.99), Y(0.48)); // maletero
-    s.quadraticCurveTo(X(1), Y(0.44), X(1), y0 + 0.06);
-  } else if (type === 'suv') {
-    s.moveTo(X(0), y0 + 0.06);
-    s.quadraticCurveTo(X(0), Y(0.44), X(0.05), Y(0.5));
-    s.quadraticCurveTo(X(0.18), Y(0.56), X(0.3), Y(0.58)); // capó alto
-    s.quadraticCurveTo(X(0.37), Y(0.6), X(0.45), Y(0.95)); // parabrisas
-    s.quadraticCurveTo(X(0.5), Y(1.0), X(0.6), Y(1.0)); // techo largo
-    s.lineTo(X(0.9), Y(0.96));
-    s.quadraticCurveTo(X(0.98), Y(0.92), X(0.99), Y(0.56)); // portón vertical
-    s.quadraticCurveTo(X(1), Y(0.5), X(1), y0 + 0.06);
-  } else {
-    // van: morro corto y caja alta
-    s.moveTo(X(0), y0 + 0.06);
-    s.quadraticCurveTo(X(0), Y(0.46), X(0.04), Y(0.54));
-    s.quadraticCurveTo(X(0.1), Y(0.6), X(0.16), Y(0.62)); // capó corto
-    s.quadraticCurveTo(X(0.2), Y(0.66), X(0.27), Y(0.96)); // parabrisas tendido
-    s.quadraticCurveTo(X(0.3), Y(1.0), X(0.4), Y(1.0)); // techo plano largo
-    s.lineTo(X(0.94), Y(1.0));
-    s.quadraticCurveTo(X(0.995), Y(0.97), X(1), Y(0.55)); // trasera vertical
-    s.lineTo(X(1), y0 + 0.06);
-  }
+  // Una única silueta premium: morro → capó → parabrisas → techo → luneta → cola.
+  // Las tallas solo mueven estos puntos de control.
+  s.moveTo(X(0), y0 + 0.06);
+  s.quadraticCurveTo(X(0), Y(spec.noseH * 0.9), X(0.045), Y(spec.noseH)); // morro redondeado
+  s.quadraticCurveTo(X(spec.hoodEndX * 0.55), Y(spec.hoodH + 0.02), X(spec.hoodEndX), Y(spec.hoodH)); // capó
+  s.quadraticCurveTo(
+    X(spec.hoodEndX + (spec.windshieldTopX - spec.hoodEndX) * 0.35),
+    Y(spec.hoodH + 0.04),
+    X(spec.windshieldTopX),
+    Y(spec.roofH * 0.93)
+  ); // parabrisas inclinado
+  s.quadraticCurveTo(X(spec.windshieldTopX + 0.06), Y(spec.roofH), X(spec.windshieldTopX + 0.14), Y(spec.roofH)); // unión techo
+  s.lineTo(X(spec.roofEndX), Y(spec.roofH * 0.985)); // techo
+  s.quadraticCurveTo(
+    X(spec.roofEndX + (spec.rearDeckX - spec.roofEndX) * 0.6),
+    Y(spec.roofH * 0.9),
+    X(spec.rearDeckX),
+    Y(spec.rearDeckH)
+  ); // luneta / portón
+  s.quadraticCurveTo(X(1), Y(spec.tailH), X(1), y0 + 0.06); // cola
 
-  // Bajos, con arcos sobre las ruedas (de atrás hacia delante)
+  // Bajos con pasos de rueda
   const rearX = X(rearAxle);
   const frontX = X(frontAxle);
   s.lineTo(rearX + archR, y0);
@@ -182,18 +193,17 @@ function buildBodyShape(spec: CarSpec): THREE.Shape {
 }
 
 function buildGlassShape(spec: CarSpec): THREE.Shape {
-  const { length: L, height: H, type } = spec;
+  const { length: L, height: H } = spec;
   const X = (n: number) => n * L - L / 2;
   const Y = (n: number) => n * H;
   const s = new THREE.Shape();
-  const pts: [number, number][] =
-    type === 'hatch'
-      ? [ [0.38, 0.56], [0.51, 0.89], [0.66, 0.95], [0.81, 0.92], [0.93, 0.56] ]
-      : type === 'sedan'
-        ? [ [0.36, 0.53], [0.49, 0.87], [0.63, 0.92], [0.73, 0.9], [0.83, 0.56] ]
-        : type === 'suv'
-          ? [ [0.33, 0.62], [0.46, 0.92], [0.6, 0.95], [0.88, 0.91], [0.96, 0.62] ]
-          : [ [0.2, 0.66], [0.28, 0.92], [0.4, 0.95], [0.92, 0.95], [0.97, 0.66] ];
+  const pts: [number, number][] = [
+    [spec.hoodEndX + 0.04, spec.hoodH + 0.04],
+    [spec.windshieldTopX + 0.02, spec.roofH * 0.9],
+    [spec.windshieldTopX + 0.15, spec.roofH * 0.94],
+    [spec.roofEndX - 0.02, spec.roofH * 0.92],
+    [Math.min(spec.rearDeckX - 0.02, 0.97), spec.rearDeckH + 0.06],
+  ];
   pts.forEach(([px, py], i) => (i === 0 ? s.moveTo(X(px), Y(py)) : s.lineTo(X(px), Y(py))));
   s.closePath();
   return s;
@@ -212,16 +222,18 @@ function extrude(shape: THREE.Shape, width: number) {
   return geo;
 }
 
-/* ---------------- Rueda completa (neumático + llanta + radios) ---------------- */
+/* ---------------- Rueda completa (neumático + llanta de 5 radios + freno) ---------------- */
 
 function Wheel({ spec, x, side, active }: { spec: CarSpec; x: number; side: 1 | -1; active: boolean }) {
   const geos = React.useMemo(() => {
     const r = spec.wheelR;
     return {
-      tire: new THREE.TorusGeometry(r * 0.82, r * 0.26, 14, 36),
-      rim: new THREE.CylinderGeometry(r * 0.56, r * 0.56, r * 0.34, 20),
-      hub: new THREE.CylinderGeometry(r * 0.12, r * 0.12, r * 0.4, 10),
-      spoke: new THREE.BoxGeometry(r * 0.14, r * 1.0, r * 0.1),
+      tire: new THREE.TorusGeometry(r * 0.82, r * 0.26, 16, 48),
+      rimRing: new THREE.TorusGeometry(r * 0.56, r * 0.045, 10, 36),
+      hub: new THREE.CylinderGeometry(r * 0.12, r * 0.12, r * 0.4, 12),
+      spoke: new THREE.BoxGeometry(r * 0.11, r * 1.06, r * 0.08),
+      disc: new THREE.CylinderGeometry(r * 0.4, r * 0.4, r * 0.05, 24),
+      spring: new THREE.TorusGeometry(r * 0.22, r * 0.05, 8, 20),
     };
   }, [spec]);
   React.useEffect(() => () => Object.values(geos).forEach((g) => g.dispose()), [geos]);
@@ -229,23 +241,79 @@ function Wheel({ spec, x, side, active }: { spec: CarSpec; x: number; side: 1 | 
   return (
     <group position={[x, spec.wheelR, z]}>
       <HoloMesh geometry={geos.tire} active={active} baseOpacity={0.25} />
-      <HoloMesh geometry={geos.rim} active={active} baseOpacity={0.28} rotation={[Math.PI / 2, 0, 0]} showEdges={false} />
+      <HoloMesh geometry={geos.rimRing} active={active} baseOpacity={0.35} showEdges={false} />
       <HoloMesh geometry={geos.hub} active={active} baseOpacity={0.4} rotation={[Math.PI / 2, 0, 0]} showEdges={false} />
-      {[0, 1, 2].map((i) => (
+      <HoloMesh geometry={geos.disc} active={active} baseOpacity={0.2} rotation={[Math.PI / 2, 0, 0]} showEdges={false} />
+      {[0, 1, 2, 3, 4].map((i) => (
         <HoloMesh
           key={i}
           geometry={geos.spoke}
           active={active}
           baseOpacity={0.32}
           showEdges={false}
-          rotation={[0, 0, (i * Math.PI) / 3]}
+          rotation={[0, 0, (i * Math.PI * 2) / 5]}
+        />
+      ))}
+      {/* Muelle de suspensión sobre la rueda */}
+      {[0, 1, 2].map((i) => (
+        <HoloMesh
+          key={`sp${i}`}
+          geometry={geos.spring}
+          active={active}
+          baseOpacity={0.24}
+          showEdges={false}
+          rotation={[Math.PI / 2, 0, 0]}
+          position={[0, spec.wheelR * (0.9 + i * 0.28), -side * spec.wheelR * 0.35]}
         />
       ))}
     </group>
   );
 }
 
-/* ---------------- Modelo completo ---------------- */
+/* ---------------- Motor detallado (bloque + cilindros + admisión) ---------------- */
+
+function Engine({ spec, active }: { spec: CarSpec; active: boolean }) {
+  const L = spec.length;
+  const geos = React.useMemo(
+    () => ({
+      block: new THREE.BoxGeometry(L * 0.15, spec.height * 0.2, spec.width * 0.46),
+      cyl: new THREE.CylinderGeometry(0.05, 0.05, spec.height * 0.14, 10),
+      intake: new THREE.CylinderGeometry(0.045, 0.045, spec.width * 0.4, 10),
+      battery: new THREE.BoxGeometry(L * 0.05, spec.height * 0.08, spec.width * 0.14),
+    }),
+    [spec, L]
+  );
+  React.useEffect(() => () => Object.values(geos).forEach((g) => g.dispose()), [geos]);
+  const X = (n: number) => n * L - L / 2;
+  const cx = X(spec.frontAxle + 0.02);
+  const cy = spec.height * 0.32;
+  return (
+    <group>
+      <HoloMesh geometry={geos.block} active={active} baseOpacity={0.26} position={[cx, cy, 0]} />
+      {[-1.5, -0.5, 0.5, 1.5].map((i) => (
+        <HoloMesh
+          key={i}
+          geometry={geos.cyl}
+          active={active}
+          baseOpacity={0.34}
+          showEdges={false}
+          position={[cx + i * L * 0.032, cy + spec.height * 0.15, 0]}
+        />
+      ))}
+      <HoloMesh
+        geometry={geos.intake}
+        active={active}
+        baseOpacity={0.3}
+        showEdges={false}
+        rotation={[Math.PI / 2, 0, 0]}
+        position={[cx - L * 0.06, cy + spec.height * 0.1, 0]}
+      />
+      <HoloMesh geometry={geos.battery} active={active} baseOpacity={0.3} position={[cx + L * 0.09, cy + spec.height * 0.06, spec.width * 0.28]} />
+    </group>
+  );
+}
+
+/* ---------------- Modelo completo (base única para todas las tallas) ---------------- */
 
 function CarModel({ size, activeParts, xray }: { size: SizeId; activeParts: Set<PartId>; xray: boolean }) {
   const spec = SPECS[size];
@@ -260,7 +328,7 @@ function CarModel({ size, activeParts, xray }: { size: SizeId; activeParts: Set<
       door: box(L * 0.3, spec.height * 0.32, 0.02),
       bumperF: box(0.16, spec.height * 0.18, spec.width * 0.94),
       bumperR: box(0.16, spec.height * 0.18, spec.width * 0.94),
-      engine: box(L * 0.17, spec.height * 0.24, spec.width * 0.52),
+      headlight: box(0.06, spec.height * 0.07, spec.width * 0.2),
       seatBase: box(L * 0.1, 0.12, spec.width * 0.3),
       seatBack: box(L * 0.04, spec.height * 0.26, spec.width * 0.3),
       bench: box(L * 0.1, 0.12, spec.width * 0.68),
@@ -268,6 +336,9 @@ function CarModel({ size, activeParts, xray }: { size: SizeId; activeParts: Set<
       dash: box(L * 0.05, spec.height * 0.16, spec.width * 0.76),
       wheelSteer: new THREE.TorusGeometry(0.17, 0.025, 8, 20),
       floor: box(L * 0.5, 0.04, spec.width * 0.78),
+      rail: box(L * 0.82, 0.05, 0.06),
+      crossmember: box(0.06, 0.05, spec.width * 0.66),
+      exhaust: new THREE.CylinderGeometry(0.035, 0.035, L * 0.45, 8),
       trunk: box(L * 0.14, spec.height * 0.22, spec.width * 0.66),
     };
   }, [spec, L]);
@@ -292,7 +363,46 @@ function CarModel({ size, activeParts, xray }: { size: SizeId; activeParts: Set<
       ))}
       <HoloMesh geometry={geos.bumperF} active={on('trim')} baseOpacity={0.22} position={[X(0.01), spec.height * 0.2, 0]} />
       <HoloMesh geometry={geos.bumperR} active={on('trim')} baseOpacity={0.22} position={[X(0.99), spec.height * 0.2, 0]} />
-      <HoloMesh geometry={geos.engine} active={on('engine')} baseOpacity={0.26} position={[X(spec.frontAxle + 0.02), spec.height * 0.32, 0]} />
+      {([1, -1] as const).map((side) => (
+        <HoloMesh
+          key={`hl${side}`}
+          geometry={geos.headlight}
+          active={on('trim')}
+          baseOpacity={0.34}
+          showEdges={false}
+          position={[X(0.015), spec.height * spec.noseH * 0.82, spec.width * 0.3 * side]}
+        />
+      ))}
+      <Engine spec={spec} active={on('engine')} />
+      {/* Chasis: largueros + travesaños + escape */}
+      {([1, -1] as const).map((side) => (
+        <HoloMesh
+          key={`rail${side}`}
+          geometry={geos.rail}
+          active={on('floor')}
+          baseOpacity={0.22}
+          showEdges={false}
+          position={[X(0.5), spec.height * 0.1, spec.width * 0.3 * side]}
+        />
+      ))}
+      {[0.3, 0.5, 0.7].map((n) => (
+        <HoloMesh
+          key={`cross${n}`}
+          geometry={geos.crossmember}
+          active={on('floor')}
+          baseOpacity={0.22}
+          showEdges={false}
+          position={[X(n), spec.height * 0.1, 0]}
+        />
+      ))}
+      <HoloMesh
+        geometry={geos.exhaust}
+        active={on('floor')}
+        baseOpacity={0.24}
+        showEdges={false}
+        rotation={[0, 0, Math.PI / 2]}
+        position={[X(0.72), spec.height * 0.08, -spec.width * 0.18]}
+      />
       <HoloMesh geometry={geos.floor} active={on('floor')} baseOpacity={0.24} position={[X(0.6), spec.height * 0.16, 0]} />
       <HoloMesh geometry={geos.dash} active={on('dashboard')} baseOpacity={0.26} position={[X(spec.dashX), spec.height * 0.44, 0]} />
       <HoloMesh
