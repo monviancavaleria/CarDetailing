@@ -209,58 +209,16 @@ function buildGlassShape(spec: CarSpec): THREE.Shape {
   return s;
 }
 
-function extrude(shape: THREE.Shape, width: number, steps = 1) {
+function extrude(shape: THREE.Shape, width: number) {
   const geo = new THREE.ExtrudeGeometry(shape, {
     depth: width,
-    steps,
     bevelEnabled: true,
     bevelThickness: 0.05,
     bevelSize: 0.05,
     bevelSegments: 3,
-    curveSegments: 24,
+    curveSegments: 16,
   });
   geo.translate(0, 0, -width / 2);
-  return geo;
-}
-
-/**
- * Esculpe la extrusión plana para dar volumen real de coche:
- * - "tumblehome": la cabina se estrecha hacia el techo (sección redondeada)
- * - hombros redondeados bajo la línea de cintura
- * - morro y cola más estrechos en planta (el coche no es un ladrillo)
- */
-/** Factor de estrechamiento lateral (0–1) en un punto (nx 0–1, y en metros). */
-function taperFactor(spec: CarSpec, nx: number, y: number) {
-  const H = spec.height;
-  const yBelt = spec.hoodH * H;
-  const yTop = spec.roofH * H;
-  const dNose = Math.pow(Math.max(0, 1 - nx / 0.16), 2);
-  const dTail = Math.pow(Math.max(0, (nx - 0.86) / 0.14), 2);
-  let f = 1 - 0.16 * dNose - 0.12 * dTail;
-  if (y > yBelt) {
-    const k = Math.min((y - yBelt) / Math.max(yTop - yBelt, 0.001), 1);
-    f *= 1 - 0.26 * Math.pow(k, 1.35);
-  } else {
-    const k = 1 - y / Math.max(yBelt, 0.001);
-    f *= 1 - 0.05 * k * k;
-  }
-  return f;
-}
-
-function sculptBody(geo: THREE.BufferGeometry, spec: CarSpec) {
-  const pos = geo.getAttribute('position') as THREE.BufferAttribute;
-  const L = spec.length;
-  const halfW = spec.width / 2 + 0.05; // incluye bisel
-  for (let i = 0; i < pos.count; i++) {
-    const x = pos.getX(i);
-    const y = pos.getY(i);
-    const z = pos.getZ(i);
-    const nx = Math.min(Math.max((x + L / 2) / L, 0), 1); // 0 morro – 1 cola
-    const f = taperFactor(spec, nx, y);
-    pos.setZ(i, THREE.MathUtils.clamp(z * f, -halfW, halfW));
-  }
-  pos.needsUpdate = true;
-  geo.computeVertexNormals();
   return geo;
 }
 
@@ -365,13 +323,8 @@ function CarModel({ size, activeParts, xray }: { size: SizeId; activeParts: Set<
   const geos = React.useMemo(() => {
     const box = (w: number, h: number, d: number) => new THREE.BoxGeometry(w, h, d);
     return {
-      body: sculptBody(extrude(buildBodyShape(spec), spec.width), spec),
-      glass: sculptBody(extrude(buildGlassShape(spec), spec.width * 0.9), spec),
-      mirror: box(L * 0.025, spec.height * 0.045, 0.09),
-      mirrorArm: box(L * 0.012, 0.02, 0.07),
-      grilleBar: box(0.03, 0.02, spec.width * 0.4),
-      taillight: box(0.05, spec.height * 0.05, spec.width * 0.16),
-      handle: box(L * 0.035, 0.02, 0.015),
+      body: extrude(buildBodyShape(spec), spec.width),
+      glass: extrude(buildGlassShape(spec), spec.width * 0.86),
       door: box(L * 0.3, spec.height * 0.32, 0.02),
       bumperF: box(0.16, spec.height * 0.18, spec.width * 0.94),
       bumperR: box(0.16, spec.height * 0.18, spec.width * 0.94),
@@ -420,65 +373,6 @@ function CarModel({ size, activeParts, xray }: { size: SizeId; activeParts: Set<
           position={[X(0.015), spec.height * spec.noseH * 0.82, spec.width * 0.3 * side]}
         />
       ))}
-      {/* Detalles exteriores: retrovisores, parrilla, pilotos y tiradores */}
-      {([1, -1] as const).map((side) => {
-        // Semianchura real de la carrocería esculpida en el punto de anclaje
-        const mirY = spec.height * (spec.hoodH + 0.08);
-        const halfW = (spec.width / 2) * taperFactor(spec, spec.hoodEndX + 0.045, mirY);
-        return (
-          <group key={`mir${side}`}>
-            <HoloMesh
-              geometry={geos.mirror}
-              active={on('trim')}
-              baseOpacity={0.3}
-              position={[X(spec.hoodEndX + 0.045), mirY + spec.height * 0.02, (halfW + 0.09) * side]}
-            />
-            <HoloMesh
-              geometry={geos.mirrorArm}
-              active={on('trim')}
-              baseOpacity={0.26}
-              showEdges={false}
-              position={[X(spec.hoodEndX + 0.045), mirY, (halfW + 0.03) * side]}
-            />
-          </group>
-        );
-      })}
-      {[0, 1, 2].map((i) => (
-        <HoloMesh
-          key={`gr${i}`}
-          geometry={geos.grilleBar}
-          active={on('trim')}
-          baseOpacity={0.3}
-          showEdges={false}
-          position={[X(0.005), spec.height * (spec.noseH * 0.55 + i * 0.05), 0]}
-        />
-      ))}
-      {([1, -1] as const).map((side) => (
-        <HoloMesh
-          key={`tl${side}`}
-          geometry={geos.taillight}
-          active={on('trim')}
-          baseOpacity={0.32}
-          showEdges={false}
-          position={[X(0.99), spec.height * spec.tailH * 0.9, spec.width * 0.32 * side]}
-        />
-      ))}
-      {([1, -1] as const).map((side) =>
-        [0.44, 0.66].map((n) => {
-          const hy = spec.height * (spec.hoodH + 0.02);
-          const halfW = (spec.width / 2) * taperFactor(spec, n, hy);
-          return (
-            <HoloMesh
-              key={`hd${side}${n}`}
-              geometry={geos.handle}
-              active={on('doors')}
-              baseOpacity={0.32}
-              showEdges={false}
-              position={[X(n), hy, (halfW + 0.055) * side]}
-            />
-          );
-        })
-      )}
       <Engine spec={spec} active={on('engine')} />
       {/* Chasis: largueros + travesaños + escape */}
       {([1, -1] as const).map((side) => (
