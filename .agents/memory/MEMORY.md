@@ -8,5 +8,5 @@
 - [Decorative card selection](decorative-card-selection.md) — wash/glow select on package cards is pointer-only by user choice; don't re-add aria-pressed buttons unasked.
 - [User color picks](decorative-card-selection.md) — palette (jul 2026): letters #4FA9DE (user asked to boost vs truck-gray bg), icons stay #96DCF6; earlier full darken was rejected — change only what they name.
 - [Monorepo db/api quirks](monorepo-db-api.md) — after touching lib/db exports run `tsc -b` in api-server or typecheck lies; push schema from lib/db; restart api workflow for new routes.
-- [Coche holográfico del cotizador](webgl-3d-cotizador.md) — DEFINITIVO: solo ilustraciones AI x-ray (HoloCarXray); el 3D procedural se rechazó dos veces por "genérico". No reintroducir WebGL.
+- [Coche holográfico del cotizador](webgl-3d-cotizador.md) — usuario oscila entre 3D e ilustraciones; estado actual: 3D v3 (modelo base paramétrico) + fallback HoloCarXray. Confirmar antes de borrar cualquiera de los dos.
 - [E2E color checks](e2e-verification.md) — give the tester the exact element + computed property upfront; generic SVG sampling hits decorative icons and yields false failures.
