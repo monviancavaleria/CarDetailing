@@ -3,34 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check, MessageCircle, Sparkles } from 'lucide-react';
 
 import HoloCarXray from './HoloCarXray';
-
-// Escena 3D con carga perezosa: three.js solo se descarga al abrir el
-// cotizador y únicamente si el navegador soporta WebGL; si no, se
-// muestran las ilustraciones estáticas como respaldo.
-const HoloCar3D = React.lazy(() => import('./HoloCar3D'));
-
-function webglAvailable(): boolean {
-  try {
-    const c = document.createElement('canvas');
-    return !!(c.getContext('webgl2') || c.getContext('webgl'));
-  } catch {
-    return false;
-  }
-}
-
-/** Si el renderer 3D falla en tiempo de ejecución, caemos a las ilustraciones. */
-class Car3DBoundary extends React.Component<
-  { fallback: React.ReactNode; children: React.ReactNode },
-  { failed: boolean }
-> {
-  state = { failed: false };
-  static getDerivedStateFromError() {
-    return { failed: true };
-  }
-  render() {
-    return this.state.failed ? this.props.fallback : this.props.children;
-  }
-}
 import {
   CUSTOM_SERVICES,
   SIZE_SURCHARGE,
@@ -254,23 +226,9 @@ export default function CustomBuilder({ embedded = false }: { embedded?: boolean
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center pb-8">
               {/* Coche */}
               <div>
-                {webglAvailable() ? (
-                  <Car3DBoundary
-                    fallback={<HoloCarXray size={size} selectedServices={selected} zone={zone} />}
-                  >
-                    <React.Suspense
-                      fallback={<div className="w-full h-[280px] sm:h-[340px] lg:h-[380px]" aria-hidden />}
-                    >
-                      <HoloCar3D size={size} selectedServices={selected} zone={zone} />
-                    </React.Suspense>
-                  </Car3DBoundary>
-                ) : (
-                  <HoloCarXray size={size} selectedServices={selected} zone={zone} />
-                )}
+                <HoloCarXray size={size} selectedServices={selected} zone={zone} />
                 <p className="text-center text-[11px] tracking-[0.25em] uppercase font-sans text-[#5F7A93] mt-2">
-                  {zone === 'exterior'
-                    ? 'Vista exterior · Arrastra para girar el coche'
-                    : 'Vista del habitáculo'}
+                  {zone === 'exterior' ? 'Vista exterior' : 'Vista del habitáculo'}
                 </p>
               </div>
 
