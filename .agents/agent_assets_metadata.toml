@@ -1,0 +1,9 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "tU2w2QMhVVXuW3jwEmdTt"
+uri = "file://attached_assets/export/puro-detalle-proyecto.zip"
+type = "unspecified"
+title = "Código del proyecto (ZIP)"
+description = "Todo el código de Puro Detalle, sin dependencias ni archivos temporales (33 MB)."
